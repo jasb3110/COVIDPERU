@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Covid how have spreaded on Peru
 
 You can use the [editor on GitHub](https://github.com/jasb3110/COVIDPERU/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
