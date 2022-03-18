@@ -1,2 +1,2 @@
 # COVIDPERU
-COVIDPERU is project which have goal to analyze COVID´s dataset on Peru. the data have 
+COVIDPERU is project which have goal to analyze COVID´s dataset on Peru.
