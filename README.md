@@ -3,7 +3,7 @@ The COVIDPERU is project which have goal to analyze COVID´s data set on Peru. B
 
 # To clean, delete NAs and order
 
-First, the data has a lot of error and/or discordance. Because it had cleared of mistakes and order it. So that, it showed a script in R how to edit and improve it.
+First, the data has a lot of error and/or discordance. Because it had cleared of mistakes and order it. So that, it showed a script in R how to edit and improve it. I show you  how to do it in this link: https://jasb3110.github.io/COVIDPERU/
 
 # To explore data set
 
