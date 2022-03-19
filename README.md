@@ -14,4 +14,4 @@ After that data include date since 6/06/2020 to 21/02/2022(Column 1), COVID posi
 
 Finally, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. 
 
-
+Bon appetit!!!
