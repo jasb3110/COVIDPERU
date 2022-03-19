@@ -27,8 +27,8 @@ library("data.table")
 library("pracma")´
 
 #Leyendo la data
-`m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)´#fallecidos segun SINADEF
-`mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)´#Personas reportadas como muertos por COVID
+m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF
+mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Personas reportadas como muertos por COVID
 
 #limpiando y ordenando la data de muertos sinadef
 m=as.data.frame(m)
@@ -176,6 +176,8 @@ hombres=as.data.frame(count(y2,c("date","dia","meses","años")))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")`
+
+
 
 
 **Bold** and _Italic_ and `Code` text
