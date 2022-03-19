@@ -1,5 +1,5 @@
 # COVIDPERU
-The COVIDPERU is project which have goal to analyze COVID´s data set on Peru. Before that whole information have downloaded  Peruvian government´s source. 
+The COVIDPERU is project which have goal to analyze COVID´s data set on Peru. Before that whole information have downloaded Peruvian government´s source. 
 
 # To clean, delete NAs and order
 
@@ -12,6 +12,6 @@ After that data include date since 6/06/2020 to 21/02/2022(Column 1), COVID posi
 
 # To Multivariate Analysis on to R
 
-Finally, I would show principal outcomes.Principal component analysis, cluster and ordicluster. 
+Finally, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. 
 
 
