@@ -12,6 +12,6 @@ After that data include date since 6/06/2020 to 21/02/2022(Column 1), COVID posi
 
 # To Multivariate Analysis on to R
 
-Finally, I would show principal outcomes.
+Finally, I would show principal outcomes.Principal component analysis, cluster and ordicluster. 
 
 
