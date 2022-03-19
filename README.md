@@ -1,7 +1,7 @@
 # COVIDPERU
 The COVIDPERU is project which have goal to analyze COVID´s data set on Peru. Before that whole information have downloaded  Peruvian government´s source. 
 
-# To clean and delete NAs
+# To clean, delete NAs and order
 
 First, the data has a lot of error and/or discordance. Because it had cleared of mistakes and order it. So that, it showed a script in R how to edit and improve it.
 
