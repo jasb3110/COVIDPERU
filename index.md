@@ -1,14 +1,12 @@
 ## Covid how have spreaded on Peru
 
-First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to 2022. COVID-19 had come throgh a man who came to Italia on 21th febrary, 2020. In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 febrary of 2020. After, He showed that first syntoms of COVID-19 (2).
+First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come throgh a man who came to Italia on 21th febrary, 2020. In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 febrary of 2020. After, He showed that first syntoms of COVID-19 (2).
 
 ## to clean dataset
 
 When Covid-19 had started to spread on Peru. Peru government institutes were not systemic criteria to order reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which would have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
 
-Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/).
-
-
+Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
 You can use the [editor on GitHub](https://github.com/jasb3110/COVIDPERU/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
