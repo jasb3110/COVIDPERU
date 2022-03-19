@@ -9,8 +9,8 @@ Therefore, the first challenge was delete or omit different mistakes (Na, null v
 I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
 
 ```markdown
-Syntax highlighted code block
-setwd("~/covid19/")#directorio donde se guarda los archivos .csv
+R programing to start
+`setwd("~/covid19/")#directorio donde se guarda los archivos .csv
 require("janitor")#paquetes que se deben instalar
 require("dplyr")
 require("plyr")
@@ -177,18 +177,8 @@ mujeres$fechas=paste(mujeres$dia,"-",mujeres$meses,"-",mujeres$años)
 hombres=as.data.frame(count(y2,c("date","dia","meses","años")))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
-todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
+todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")`
 
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
 
 **Bold** and _Italic_ and `Code` text
 
