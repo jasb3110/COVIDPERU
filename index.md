@@ -6,9 +6,7 @@ First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illnes
 
 When Covid-19 had started to spread on Peru. Peru government institutes were not systemic criteria to order reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which would have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
 
-
-
-Covid-19 have had many mistakes in different levels.
+Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/).
 
 
 
