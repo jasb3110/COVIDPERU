@@ -10,7 +10,7 @@ When Covid-19 had started to spread on Peru. The health government institutes we
 
 Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
-### R code
+#### R code
 
 I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
 
