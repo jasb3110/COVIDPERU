@@ -9,7 +9,7 @@ Therefore, the first challenge was delete or omit different mistakes (Na, null v
 I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
 
 ```markdown
-R programing to start
+#to start
 `setwd("~/covid19/")#directorio donde se guarda los archivos .csv
 require("janitor")#paquetes que se deben instalar
 require("dplyr")
@@ -24,16 +24,15 @@ library("transformr")
 library("ggplot2")
 library("gifski")
 library("data.table")
-library("pracma")
+library("pracma")´
 
 #Leyendo la data
-m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF
-mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Personas reportadas como muertos por COVID
+`m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)´#fallecidos segun SINADEF
+`mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)´#Personas reportadas como muertos por COVID
 
 #limpiando y ordenando la data de muertos sinadef
 m=as.data.frame(m)
 #dead=row_to_names(m,row_number = 2, remove_row = TRUE, remove_rows_above = TRUE)
-#
 dead=m
 rownames(dead)=NULL
 dead$NÂº=NULL
@@ -45,17 +44,16 @@ dead$`TIPO LUGAR`=NULL
 dead$INSTITUCION=NULL
 dead$NECROPSIA=NULL
 dead=as.data.frame(dead[,1:14])
-
-
 dead$dia=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%d"))
 dead$meses=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%m"))
 dead$años=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%Y"))
-
 dead$EDAD=as.numeric(dead$EDAD)
 dead$MES=as.numeric(dead$meses)
 dead=as.data.frame(dead)
 order=unique(sort(dead$FECHA))
+
 dead$date=rep(NA,length(dead$FECHA))
+
 for(i in 1:length(unique(sort(dead$FECHA)))){
   dead$date[which(dead$FECHA==order[i])]=i
 }
