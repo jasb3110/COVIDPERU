@@ -10,8 +10,8 @@ First, the data has a lot of error and/or discordance. Because it had cleared of
 Second, it could be necessary to explore the data and visualize time series, boxplots and histograms.
 After that data include date since 6/06/2020 to 21/02/2022(Column 1), COVID positive rate (Column 2), COVID death index which estimated of excess historical (SINADEF-column 6), free UCI bed in percent(Column 10) and vaccinated people which have 1 to 5 doses (Column 12 to 16).
 
-# to Multivariate Analysis on (MA) to R
+# To Multivariate Analysis on to R
 
-Finally, I would show principal outcome.
+Finally, I would show principal outcomes.
 
 
