@@ -317,7 +317,7 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 #############################################################################################################################################################
 ```
-It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now
+It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.mujeres.png?raw=true)
