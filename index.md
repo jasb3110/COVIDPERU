@@ -208,10 +208,11 @@ points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
 ############################################################################################################################################################
 ```
-It show that exploratory plot of dataset. Sorry, there are many spanish labels in plot. in the first view it seems to be clean and sort.
+It show that exploratory plot of dataset. Sorry, there are many spanish labels in plot. then first view it seems to be clean and sort.
 
 ![alt text](http://github.com/jasb3110/COVIDPERU/blob/To-introduce-COVID-19-project/exploratory%20plot.png?raw=true)
 
+Next, it is getting to clean and sort of COVID´s death data. Bellow attached lines scripts.
 
 ```markdown
 
