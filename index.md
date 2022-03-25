@@ -26,6 +26,7 @@ library("ggplot2")
 library("gifski")
 library("data.table")
 library("pracma")
+require("ggplot2")
 
 #to read database
 m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF/ total death in Peru per day
@@ -214,33 +215,31 @@ It show that exploratory plot of dataset. first view it seems to be clean and so
 
 Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
 
-```markdown
+```markdown 
 
-# Mortadad natural durante el COVID19 
+# COVID-19´s death during to spread pandemic
 
-"04 - 3 - 2020" #fecha inicio
+"04 - 3 - 2020" #begining date
 todos=todos[which(todos$años>=2019),]
 ini=which(todos$dia==04&todos$meses==3&todos$años==2020)
 fin=length(todos$fechas)
 
-fin-ini#promedio de los muertos durante covid
+fin-ini# COVID-19´s death average 
 media_covid=mean(todos$freq[ini:fin])
 std_covid=sd(todos$freq[ini:fin])
-100*std_covid/media_covid#coeficiente e variacion
+100*std_covid/media_covid #Coefficient of Variation in percent
 
-#Antes del covid
-iii=which(todos$dia==02&todos$meses==2&todos$años==2020)#02 - 2 - 2020 fecha inicio
-fff=which(todos$dia==03&todos$meses==3&todos$años==2020)#03 - 3 - 2020" fecha inicio
+#total death before COVID-19 pandemic
+iii=which(todos$dia==02&todos$meses==2&todos$años==2020)#02 - 2 - 2020 begin
+fff=which(todos$dia==03&todos$meses==3&todos$años==2020)#03 - 3 - 2020 end 
 
-fff-iii#promedio de los muertos 30 dias antes del covid
+fff-iii# amount of death before 30 days to come COVID-19 in Peru (Pre-covid period time)
 media=mean(todos$freq[iii:fff])
 std=sd(todos$freq[iii:fff])
-100*std/media#coeficiente e variacion
+100*std/media #Coefficient of Variation in percent
+write.csv(cbind(media,std),"exceso.csv",sep=",",dec=".",col.names=TRUE)#save in .csv
 
-write.csv(cbind(media,std),"exceso.csv",sep=",",dec=".",col.names=TRUE)
-
-
-#datos de la mortalidad natural en el Periodo del COVID restando el promedio de datos muertos sin covid (30 dias antes)
+#total of death during COVID is subtracting total death during pre-COVID
 m_encovid_medio=(todos$freq[ini:fin]-media)/std
 m_encovid_medio=m_encovid_medio+min(m_encovid_medio)*-1
 m_encovid_min=(todos$freq[ini:fin]-media-std*1.96)/std
@@ -251,14 +250,12 @@ m_encovid_max=m_encovid_max+min(m_encovid_max)*-1
 encovid=as.data.frame(cbind(as.Date(todos$fechas[ini:fin],format="%Y-%m-%d"),todos$dia[ini:fin],todos$meses[ini:fin],todos$años[ini:fin],m_encovid_medio,m_encovid_min,m_encovid_max))
 colnames(encovid)=c("fechas","dia","mes","año","m_encovid_medio","m_encovid_min","m_encovid_max") 
 
-# con ggplot por intervalo de a?os en meses en los a?os
-require("ggplot2")
-library("ggplot2")
+# to plot with ggplot2
 
 mes.abb=c("En","Fe","Ma","Ab","My","Jn","Jl","Au","Se","Oc","No","Di")
 names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12)),"-",mes.abb)# since 2019
 
-###Mujeres
+### women
 mujeres$nombre.mes=NULL
 for(i in 1:length(mujeres$date)){
   mujeres$nombre.mes[i]=mes.abb[mujeres$meses[i]]
@@ -278,7 +275,7 @@ fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$freq)) + geom_
 ggsave("fallecidos.mujeres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.muj)
 
-###Hombres
+### Men
 hombres$nombre.mes=NULL
 for(i in 1:length(hombres$date)){
   hombres$nombre.mes[i]=mes.abb[hombres$meses[i]]
@@ -298,7 +295,7 @@ fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$freq)) + geom_
 ggsave("fallecidos.hombres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.hom)
 
-###Todos
+### merged ( men + women)
 todos$nombre.mes=NULL
 for(i in 1:length(todos$date)){
   todos$nombre.mes[i]=mes.abb[todos$meses[i]]
