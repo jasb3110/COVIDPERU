@@ -212,7 +212,7 @@ It show that exploratory plot of dataset.
 
 Try this markdown:
 
-![alt text](http://github.com/jasb3110/COVIDPERU/blob/To-introduce-COVID-19-project/exploratory%20plot.png)
+![alt text](http://github.com/jasb3110/COVIDPERU/blob/To-introduce-COVID-19-project/exploratory%20plot.png?raw=true)
 
 
 ```markdown
