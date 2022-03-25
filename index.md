@@ -10,7 +10,7 @@ I´m R native programmer so that it too easily to proceed to clean of dataset wi
 
 ```markdown
 #to start
-`setwd("~/covid19/")#directorio donde se guarda los archivos .csv
+setwd("~/covid19/")#directorio donde se guarda los archivos .csv
 require("janitor")#paquetes que se deben instalar
 require("dplyr")
 require("plyr")
@@ -24,7 +24,7 @@ library("transformr")
 library("ggplot2")
 library("gifski")
 library("data.table")
-library("pracma")´
+library("pracma")
 
 #Leyendo la data
 m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF
@@ -176,8 +176,6 @@ hombres=as.data.frame(count(y2,c("date","dia","meses","años")))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")`
-
-
 
 
 **Bold** and _Italic_ and `Code` text
