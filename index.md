@@ -316,6 +316,17 @@ fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$freq)) + geom_boxp
 ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 
+```
+It show that exploratory plot of dataset. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/exploratory%20plot.png?raw=true)
+
+Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
+
+
+
+```markdown
+
 
 
 **Bold** and _Italic_ and `Code` text
@@ -330,6 +341,11 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
 
 
 ```
+
+
+
+
+
 
 ## References
 1. Rodriguez-Morales, A. J., Gallego, V., Escalera-Antezana, J. P., Mendez, C. A., Zambrano, L. I., Franco-Paredes, C., … Cimerman, S. (2020). COVID-19 in Latin America: The implications of the first confirmed case in Brazil
