@@ -212,7 +212,7 @@ It show that exploratory plot of dataset. Sorry, there are many spanish labels i
 
 ![alt text](http://github.com/jasb3110/COVIDPERU/blob/To-introduce-COVID-19-project/exploratory%20plot.png?raw=true)
 
-Next, it is getting to clean and sort of COVID´s death data. Bellow attached lines scripts.
+Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
 
 ```markdown
 
