@@ -6,9 +6,10 @@ When Covid-19 had started to spread on Peru. The health government institutes we
 Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
 #### R code
-I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
+I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. Watch out, many columns have spanish names 
 
 ```markdown
+############################################################################################################################################################
 #to start
 setwd("~/covid19/")#directory
 require("janitor")# package should have installed
@@ -28,7 +29,7 @@ library("pracma")
 
 #to read database
 m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF/ total death in Peru per day
-mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Personas reportadas como muertos por COVID/COVID´s patient which passed away per day
+mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Personas reportadas como muertos por COVID / COVID´s patient which passed away per day
 
 #to clean and sort of SINADEF´data
 m=as.data.frame(m)
@@ -84,7 +85,7 @@ e7
 e8
 e9
 
-MM=unique(dead$`MUERTE VIOLENTA`)
+MM=unique(dead$`MUERTE VIOLENTA`)# not natural death
 tt=dead[which(dead$`MUERTE VIOLENTA`==MM[1]|dead$`MUERTE VIOLENTA`==MM[2]|dead$`MUERTE VIOLENTA`==MM[3]|dead$`MUERTE VIOLENTA`==MM[9]),]
 
 #to delete mistakes dates and replace for NAs
@@ -114,24 +115,28 @@ tt$TIEMPO.EDAD[intersect(m1,me)]=TT[1]
 tt$TIEMPO.EDAD[intersect(m1,mi)]=TT[1]
 ss1=which(tt$`TIEMPO EDAD`==TT[7])
 tt$EDAD[ss1]=tt$EDAD[ss1]/(60*60*24*365)
+
 #for minutes
 m2=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[2])]>60)
 tt$`TIEMPO EDAD`[intersect(m2,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m2,mi)]=TT[1]
 ss2=which(tt$`TIEMPO EDAD`==TT[2])
 tt$EDAD[ss2]=tt$EDAD[ss2]/(60*24*365)
-#HORAS
+
+#for hours
 m3=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[5])]>24)
 tt$`TIEMPO EDAD`[intersect(m3,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m3,mi)]=TT[1]
 ss3=which(tt$`TIEMPO EDAD`==TT[5])
 tt$EDAD[ss3]=tt$EDAD[ss3]/(24*365)  
+
 #for days
 m4=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[4])]>31)
 tt$`TIEMPO EDAD`[intersect(m4,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m4,mi)]=TT[1]
 ss4=which(tt$`TIEMPO EDAD`==TT[4])
 tt$EDAD[ss4]=tt$EDAD[ss4]/(365) 
+
 #for moth 
 m5=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[3])]>12)
 tt$`TIEMPO EDAD`[intersect(m5,me)]=TT[1]
@@ -141,44 +146,32 @@ tt$EDAD[ss4]=tt$EDAD[ss4]/(12)
 #for years
 m6=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[1])]>123)
 tt$EDAD[m6]=NA
-
 #for "ignorados" and "sin registro" ( without specific names)
 m7=c(which(tt$`TIEMPO EDAD`==TT[6]|tt$`TIEMPO EDAD`==TT[8]|tt$`TIEMPO EDAD`==TT[9]))
 tt$`TIEMPO EDAD`[which(tt$EDAD[m7]>60)]=TT[1]
 tt$EDAD[which(tt$EDAD[m7]<60)]=NA
-
 tt$EDAD=as.numeric(tt$EDAD)
 tt$EDAD[which(tt$EDAD>=123)]=NA
 
 #sort of sexs and genre
 sinsexo=tt
 sinsexo$SEXO=NULL
-
 sinsexo$EDAD=trunc(sinsexo$EDAD*100)/100
-
 todo=as.data.frame(count(sinsexo,c("date","dia","meses","años","EDAD")))
-
 y1=tt[which(tt$SEXO=="FEMENINO"),]
 y1$SEXO=NULL
 y1$EDAD=trunc(y1$EDAD*100)/100
-
 muj=as.data.frame(count(y1,c("date","dia","meses","años","EDAD")))
-
 y2=tt[which(tt$SEXO=="MASCULINO"),]
 y2$SEXO=NULL
 y2$EDAD=trunc(y2$EDAD*100)/100
 hom=as.data.frame(count(y2,c("date","dia","meses","años","EDAD")))
-
 mujeres=as.data.frame(count(y1,c("date","dia","meses","años")))
 mujeres$fechas=paste(mujeres$dia,"-",mujeres$meses,"-",mujeres$años)
 hombres=as.data.frame(count(y2,c("date","dia","meses","años")))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
-
-#todos$freq[er.t]=todos$freq[er.t]/2
-#mujeres$freq[er.m]=mujeres$freq[er.m]/2
-#hombres$freq[er.h]=hombres$freq[er.h]/2
 
 #exploratory plots
 x11();plot.new();par(mfrow = c(4, 2))
@@ -213,8 +206,11 @@ points(d3,col=2,type="l",lwd=2)
 plot(d1, col="blue",lwd=4,main="Grafica densidad de la mortandad",ylim=c(0,max(cbind(d1$y,d2$y,d3$y))))
 points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
+############################################################################################################################################################
 ```
-JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+It show that exploratory plot of dataset.
+
+
 
 ```markdown
 
@@ -258,7 +254,7 @@ require("ggplot2")
 library("ggplot2")
 
 mes.abb=c("En","Fe","Ma","Ab","My","Jn","Jl","Au","Se","Oc","No","Di")
-names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12)),"-",mes.abb)# desde 2019
+names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12)),"-",mes.abb)# since 2019
 
 ###Mujeres
 mujeres$nombre.mes=NULL
