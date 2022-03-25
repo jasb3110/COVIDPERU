@@ -33,6 +33,7 @@ mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Per
 #limpiando y ordenando la data de muertos sinadef
 m=as.data.frame(m)
 #dead=row_to_names(m,row_number = 2, remove_row = TRUE, remove_rows_above = TRUE)
+#
 dead=m
 rownames(dead)=NULL
 dead$NÂº=NULL
@@ -43,17 +44,18 @@ dead$`TIPO SEGURO`=NULL
 dead$`TIPO LUGAR`=NULL
 dead$INSTITUCION=NULL
 dead$NECROPSIA=NULL
-dead=as.data.frame(dead[,1:14])
+dead=as.data.frame(dead[,1:15])
+
+
 dead$dia=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%d"))
 dead$meses=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%m"))
 dead$años=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%Y"))
+
 dead$EDAD=as.numeric(dead$EDAD)
 dead$MES=as.numeric(dead$meses)
 dead=as.data.frame(dead)
 order=unique(sort(dead$FECHA))
-
 dead$date=rep(NA,length(dead$FECHA))
-
 for(i in 1:length(unique(sort(dead$FECHA)))){
   dead$date[which(dead$FECHA==order[i])]=i
 }
@@ -175,7 +177,161 @@ mujeres$fechas=paste(mujeres$dia,"-",mujeres$meses,"-",mujeres$años)
 hombres=as.data.frame(count(y2,c("date","dia","meses","años")))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
-todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")`
+todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
+
+#errores nuevos
+#fecha.falla=c(paste0(rep(2020,12),"-",1:12,"-",rep(1,12)),paste0(2021,"-",1,"-",1))
+#fecha.falla2=c(paste0(rep(1,12)," - ",1:12," - ",rep(2020,12)),paste0(1," - ",1," - ",2021))
+#er.t=NULL
+#er.m=NULL
+#er.h=NULL
+#for(i in 1:length(fecha.falla)){
+#er.t[i]=which(todos$fechas==fecha.falla[i])
+#er.m[i]=which(mujeres$fechas==fecha.falla2[i])
+#er.h[i]=which(hombres$fechas==fecha.falla2[i])
+#}
+
+#todos$freq[er.t]=todos$freq[er.t]/2
+#mujeres$freq[er.m]=mujeres$freq[er.m]/2
+#hombres$freq[er.h]=hombres$freq[er.h]/2
+
+
+#plot exploratorio
+x11();plot.new();par(mfrow = c(4, 2))
+plot(mujeres$date,mujeres$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",mujeres$fechas[min(mujeres$date)]," hasta ",mujeres$fechas[max(mujeres$date)]),main = "Número de mujeres muertes")
+plot(hombres$date,hombres$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",hombres$fechas[min(hombres$date)]," hasta ",hombres$fechas[max(hombres$date)]),main = "Número de hombres muertes")
+plot(todos$date,todos$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",todos$fechas[min(todos$date)]," hasta ",todos$fechas[max(todos$date)]),main = "Número de muertes totales")
+plot(todos$date,todos$freq,type="l",col="gray50",ylab="Número de Muertos",xlab=paste0( "Díuas desde ",todos$fechas[min(todos$date)]," hasta ",todos$fechas[max(todos$date)]),main = "Número de muertes totales")
+points(mujeres$date,mujeres$freq,type="l",col="blue",ylab="Número de Muertos",xlab=paste0( "Días desde ",mujeres$fechas[min(mujeres$date)]," hasta ",mujeres$fechas[max(mujeres$date)]),main = "Número de mujeres muertes")
+points(hombres$date,hombres$freq,type="l",col="red",ylab="Número de Muertos",xlab=paste0( "Días desde ",hombres$fechas[min(hombres$date)]," hasta ",hombres$fechas[max(hombres$date)]),main = "Número de hombres muertes")
+
+interval=signif(log10(length(todo$EDAD))*3.3+1,)
+k=seq(from=0,to=150,by=interval)
+
+hist(na.contiguous(todo$EDAD),breaks = c(k),freq = FALSE,density =10,xlab=paste0("Edad de intervalos de ",interval," años"),main = "Histograma de la mortalidad total")
+d1=density(x = na.contiguous(todo$EDAD))
+points(d1,col=2,type="l",lwd=2)
+
+interval=signif(log10(length(hom$EDAD))*3.3+1,)
+k=seq(from=0,to=150,by=interval)
+
+hist(na.contiguous(hom$EDAD),breaks = c(k),freq = FALSE,density =15,xlab=paste0("Edad de intervalos de ",interval," años"),main = "Histograma de la mortalidad total masculina")
+d2=density(x = na.contiguous(hom$EDAD))
+points(d2,col=2,type="l",lwd=2)
+
+interval=signif(log10(length(muj$EDAD))*3.3+1,)
+k=seq(from=0,to=150,by=interval)
+
+hist(na.contiguous(muj$EDAD),breaks = c(k),freq = FALSE,density =20,xlab=paste0("Edad de intervalos de ",interval," años"),main = "Histograma de la mortalidad total femenina")
+d3=density(x =na.contiguous(muj$EDAD))
+points(d3,col=2,type="l",lwd=2)
+
+plot(d1, col="blue",lwd=4,main="Grafica densidad de la mortandad",ylim=c(0,max(cbind(d1$y,d2$y,d3$y))))
+points(d2, col="red", type="l",lwd=4)
+points(d3, col="gray70", type="l",lwd=4)
+
+# Mortadad natural durante el COVID19 
+
+"04 - 3 - 2020" #fecha inicio
+todos=todos[which(todos$años>=2019),]
+ini=which(todos$dia==04&todos$meses==3&todos$años==2020)
+fin=length(todos$fechas)
+
+fin-ini#promedio de los muertos durante covid
+media_covid=mean(todos$freq[ini:fin])
+std_covid=sd(todos$freq[ini:fin])
+100*std_covid/media_covid#coeficiente e variacion
+
+#Antes del covid
+iii=which(todos$dia==02&todos$meses==2&todos$años==2020)#02 - 2 - 2020 fecha inicio
+fff=which(todos$dia==03&todos$meses==3&todos$años==2020)#03 - 3 - 2020" fecha inicio
+
+fff-iii#promedio de los muertos 30 dias antes del covid
+media=mean(todos$freq[iii:fff])
+std=sd(todos$freq[iii:fff])
+100*std/media#coeficiente e variacion
+
+write.csv(cbind(media,std),"exceso.csv",sep=",",dec=".",col.names=TRUE)
+
+
+#datos de la mortalidad natural en el Periodo del COVID restando el promedio de datos muertos sin covid (30 dias antes)
+m_encovid_medio=(todos$freq[ini:fin]-media)/std
+m_encovid_medio=m_encovid_medio+min(m_encovid_medio)*-1
+m_encovid_min=(todos$freq[ini:fin]-media-std*1.96)/std
+m_encovid_min=m_encovid_min++min(m_encovid_min)*-1
+m_encovid_max=(todos$freq[ini:fin]-media+std*1.96)/std
+m_encovid_max=m_encovid_max+min(m_encovid_max)*-1
+
+encovid=as.data.frame(cbind(as.Date(todos$fechas[ini:fin],format="%Y-%m-%d"),todos$dia[ini:fin],todos$meses[ini:fin],todos$años[ini:fin],m_encovid_medio,m_encovid_min,m_encovid_max))
+colnames(encovid)=c("fechas","dia","mes","año","m_encovid_medio","m_encovid_min","m_encovid_max") 
+
+# con ggplot por intervalo de a?os en meses en los a?os
+require("ggplot2")
+library("ggplot2")
+
+mes.abb=c("En","Fe","Ma","Ab","My","Jn","Jl","Au","Se","Oc","No","Di")
+names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12)),"-",mes.abb)# desde 2019
+
+###Mujeres
+mujeres$nombre.mes=NULL
+for(i in 1:length(mujeres$date)){
+  mujeres$nombre.mes[i]=mes.abb[mujeres$meses[i]]
+}  
+
+mujeres$mes.año=paste0(as.numeric(mujeres$años)-2000,"-",mujeres$nombre.mes)
+mujeres$mes.año=factor(mujeres$mes.año , levels=c(names.mes))
+
+mujeres$monthYear = paste0((as.numeric(mujeres$años)-2000)+trunc((mujeres$meses-0.5)*100/12)/100)
+mujeres=mujeres[mujeres$años>=2019,]
+fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$freq)) + geom_boxplot()+labs(title="Diagrama de cajas mensuales de Mujeres fallecidas desde 2019 al 2022",
+                                                                                  x ="Meses desde 2019 al 2022", 
+                                                                                  y = "Número de mujeres muertas")+
+  theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("fallecidos.mujeres.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot = fall.muj)
+
+###Hombres
+hombres$nombre.mes=NULL
+for(i in 1:length(hombres$date)){
+  hombres$nombre.mes[i]=mes.abb[hombres$meses[i]]
+}  
+
+hombres$mes.año=paste0(as.numeric(hombres$años)-2000,"-",hombres$nombre.mes)
+hombres$mes.año=factor(hombres$mes.año , levels=c(names.mes))
+
+hombres$monthYear = paste0((as.numeric(hombres$años)-2000)+trunc((hombres$meses-0.5)*100/12)/100)
+hombres=hombres[hombres$años>=2019,]
+fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$freq)) + geom_boxplot()+labs(title="Diagrama de cajas mensuales de Varones fallecidos desde 2019 al 2022",
+                                                                                  x ="Meses desde 2019 al 2022", 
+                                                                                  y = "Número de Varones muertos")+
+  theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("fallecidos.hombres.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot = fall.hom)
+
+###Todos
+todos$nombre.mes=NULL
+for(i in 1:length(todos$date)){
+  todos$nombre.mes[i]=mes.abb[todos$meses[i]]
+}  
+
+todos$mes.año=paste0(as.numeric(todos$años)-2000,"-",todos$nombre.mes)
+todos$mes.año=factor(todos$mes.año , levels=c(names.mes))
+
+todos$monthYear = paste0((as.numeric(todos$años)-2000)+trunc((todos$meses-0.5)*100/12)/100)
+todos=todos[todos$años>=2019,]
+
+fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$freq)) + geom_boxplot()+labs(title="Diagrama de cajas mensuales de los fallecidos desde 2019 al 2022",
+                                                                                       x ="Meses desde 2019 al 2022", 
+                                                                                       y = "Número de Fallecidos")+
+  theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot = fall.todos)
 
 
 **Bold** and _Italic_ and `Code` text
