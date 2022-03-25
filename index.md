@@ -211,7 +211,7 @@ points(d3, col="gray70", type="l",lwd=4)
 ```
 It show that exploratory plot of dataset. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
 
-![alt text](http://github.com/jasb3110/COVIDPERU/blob/To-introduce-COVID-19-project/exploratory%20plot.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/exploratory%20plot.png?raw=true)
 
 Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
 
