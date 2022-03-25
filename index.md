@@ -10,8 +10,8 @@ I´m R native programmer so that it too easily to proceed to clean of dataset wi
 
 ```markdown
 #to start
-setwd("~/covid19/")#directorio donde se guarda los archivos .csv
-require("janitor")#paquetes que se deben instalar
+setwd("~/covid19/")#directory
+require("janitor")# package should have installed
 require("dplyr")
 require("plyr")
 library("janitor")
@@ -26,11 +26,11 @@ library("gifski")
 library("data.table")
 library("pracma")
 
-#Leyendo la data
-m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF
-mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Personas reportadas como muertos por COVID
+#to read database
+m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF/ total death in Peru per day
+mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Personas reportadas como muertos por COVID/COVID´s patient which passed away per day
 
-#limpiando y ordenando la data de muertos sinadef
+#to clean and sort of SINADEF´data
 m=as.data.frame(m)
 #dead=row_to_names(m,row_number = 2, remove_row = TRUE, remove_rows_above = TRUE)
 #
@@ -46,7 +46,6 @@ dead$INSTITUCION=NULL
 dead$NECROPSIA=NULL
 dead=as.data.frame(dead[,1:15])
 
-
 dead$dia=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%d"))
 dead$meses=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%m"))
 dead$años=as.numeric(format(as.Date(dead$FECHA,format="%Y-%m-%d"), format = "%Y"))
@@ -60,7 +59,7 @@ for(i in 1:length(unique(sort(dead$FECHA)))){
   dead$date[which(dead$FECHA==order[i])]=i
 }
 dead=as.data.frame(dead)
-#errores en la data de fechas
+#to find out mistakes in dates
 #para dias e1|e2|e3 = 0
 e1=sum(is.na(dead$dia))
 e2=sum(which(dead$dia>31))
@@ -68,7 +67,7 @@ e3=sum(which(dead$dia<1))
 e1
 e2
 e3
-#para meses
+#for month
 #para dias e4|e5|e6 = 0
 e4=sum(is.na(dead$meses))
 e5=sum(which(dead$meses>12))
@@ -76,7 +75,7 @@ e6=sum(which(dead$meses<1))
 e4
 e5
 e6
-#para años
+#for years
 #para dias e7|e8|e9 = 0
 e7=sum(is.na(dead$años))
 e8=sum(which(dead$años>2022))
@@ -88,9 +87,8 @@ e9
 MM=unique(dead$`MUERTE VIOLENTA`)
 tt=dead[which(dead$`MUERTE VIOLENTA`==MM[1]|dead$`MUERTE VIOLENTA`==MM[2]|dead$`MUERTE VIOLENTA`==MM[3]|dead$`MUERTE VIOLENTA`==MM[9]),]
 
-#Limpiando errores
-#se asume que hay un solo error por columna de datos
-
+#to delete mistakes dates and replace for NAs
+#my assumption is it had an error each column
 TT=unique(tt$`TIEMPO EDAD`)
 EC=unique(tt$`ESTADO CIVIL`)
 NI=unique(tt$`NIVEL DE INSTRUCCIÃ“N`)
@@ -110,13 +108,13 @@ mi=c(which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[2]&tt$EDAD>17),
      which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[9]&tt$EDAD>21),
      which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[11]&tt$EDAD>17))
 
-#Segundos
+#for secunds
 m1=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[7])]>60)
 tt$TIEMPO.EDAD[intersect(m1,me)]=TT[1]
 tt$TIEMPO.EDAD[intersect(m1,mi)]=TT[1]
 ss1=which(tt$`TIEMPO EDAD`==TT[7])
 tt$EDAD[ss1]=tt$EDAD[ss1]/(60*60*24*365)
-#minutos
+#for minutes
 m2=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[2])]>60)
 tt$`TIEMPO EDAD`[intersect(m2,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m2,mi)]=TT[1]
@@ -128,23 +126,23 @@ tt$`TIEMPO EDAD`[intersect(m3,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m3,mi)]=TT[1]
 ss3=which(tt$`TIEMPO EDAD`==TT[5])
 tt$EDAD[ss3]=tt$EDAD[ss3]/(24*365)  
-#dias
+#for days
 m4=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[4])]>31)
 tt$`TIEMPO EDAD`[intersect(m4,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m4,mi)]=TT[1]
 ss4=which(tt$`TIEMPO EDAD`==TT[4])
 tt$EDAD[ss4]=tt$EDAD[ss4]/(365) 
-#MESES
+#for moth 
 m5=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[3])]>12)
 tt$`TIEMPO EDAD`[intersect(m5,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m5,mi)]=TT[1]
 ss4=which(tt$`TIEMPO EDAD`==TT[3])
 tt$EDAD[ss4]=tt$EDAD[ss4]/(12) 
-#A?OS
+#for years
 m6=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[1])]>123)
 tt$EDAD[m6]=NA
 
-#ignorados y sin registro
+#for "ignorados" and "sin registro" ( without specific names)
 m7=c(which(tt$`TIEMPO EDAD`==TT[6]|tt$`TIEMPO EDAD`==TT[8]|tt$`TIEMPO EDAD`==TT[9]))
 tt$`TIEMPO EDAD`[which(tt$EDAD[m7]>60)]=TT[1]
 tt$EDAD[which(tt$EDAD[m7]<60)]=NA
@@ -152,14 +150,13 @@ tt$EDAD[which(tt$EDAD[m7]<60)]=NA
 tt$EDAD=as.numeric(tt$EDAD)
 tt$EDAD[which(tt$EDAD>=123)]=NA
 
-#ordenando por sexos y edades
+#sort of sexs and genre
 sinsexo=tt
 sinsexo$SEXO=NULL
 
 sinsexo$EDAD=trunc(sinsexo$EDAD*100)/100
 
 todo=as.data.frame(count(sinsexo,c("date","dia","meses","años","EDAD")))
-
 
 y1=tt[which(tt$SEXO=="FEMENINO"),]
 y1$SEXO=NULL
@@ -179,24 +176,11 @@ hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
 
-#errores nuevos
-#fecha.falla=c(paste0(rep(2020,12),"-",1:12,"-",rep(1,12)),paste0(2021,"-",1,"-",1))
-#fecha.falla2=c(paste0(rep(1,12)," - ",1:12," - ",rep(2020,12)),paste0(1," - ",1," - ",2021))
-#er.t=NULL
-#er.m=NULL
-#er.h=NULL
-#for(i in 1:length(fecha.falla)){
-#er.t[i]=which(todos$fechas==fecha.falla[i])
-#er.m[i]=which(mujeres$fechas==fecha.falla2[i])
-#er.h[i]=which(hombres$fechas==fecha.falla2[i])
-#}
-
 #todos$freq[er.t]=todos$freq[er.t]/2
 #mujeres$freq[er.m]=mujeres$freq[er.m]/2
 #hombres$freq[er.h]=hombres$freq[er.h]/2
 
-
-#plot exploratorio
+#exploratory plots
 x11();plot.new();par(mfrow = c(4, 2))
 plot(mujeres$date,mujeres$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",mujeres$fechas[min(mujeres$date)]," hasta ",mujeres$fechas[max(mujeres$date)]),main = "Número de mujeres muertes")
 plot(hombres$date,hombres$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",hombres$fechas[min(hombres$date)]," hasta ",hombres$fechas[max(hombres$date)]),main = "Número de hombres muertes")
@@ -229,6 +213,10 @@ points(d3,col=2,type="l",lwd=2)
 plot(d1, col="blue",lwd=4,main="Grafica densidad de la mortandad",ylim=c(0,max(cbind(d1$y,d2$y,d3$y))))
 points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
+```
+JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
+
+```markdown
 
 # Mortadad natural durante el COVID19 
 
@@ -334,9 +322,18 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 
 
+
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
+
+
+
+
+
+
+
+
 ```
 
 ## References
