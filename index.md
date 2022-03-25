@@ -319,7 +319,9 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
 ```
 It show that exploratory plot of dataset. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/exploratory%20plot.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.hombres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.mujeres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.todo.png?raw=true)
 
 Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
 
