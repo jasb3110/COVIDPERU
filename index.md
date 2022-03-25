@@ -216,7 +216,7 @@ It show that exploratory plot of dataset. first view it seems to be clean and so
 Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
 
 ```markdown 
-
+############################################################################################################################################################
 # COVID-19´s death during to spread pandemic
 
 "04 - 3 - 2020" #begining date
@@ -315,14 +315,13 @@ fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$freq)) + geom_boxp
 
 ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
-
+#############################################################################################################################################################
 ```
-It show that death time series per genre. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
-here men death which cause for COVID-19 since 2019 to now
+It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.hombres.png?raw=true)
-here men death which cause for COVID-19 since 2019 to now
+Women´s  death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.mujeres.png?raw=true)
-here men death which cause for COVID-19 since 2019 to now
+People´s death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.todo.png?raw=true)
 
 Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
