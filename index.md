@@ -208,7 +208,7 @@ points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
 ############################################################################################################################################################
 ```
-It show that exploratory plot of dataset.
+It show that exploratory plot of dataset. https://github.com/jasb3110/COVIDPERU/blob/235decdf85f82cd8d02675e419b84dfed520df3c/exploratory%20plot.png
 
 
 
