@@ -317,10 +317,12 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 
 ```
-It show that exploratory plot of dataset. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
-
+It show that death time series per genre. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
+here men death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.hombres.png?raw=true)
+here men death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.mujeres.png?raw=true)
+here men death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/COVID-19-dataset/covid.todo.png?raw=true)
 
 Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
