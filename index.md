@@ -310,7 +310,7 @@ todos=todos[todos$años>=2019,]
 
 fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$n)) + geom_boxplot()+labs(title="Death´s people in boxplot since 2019 to 2022
 22 per month", 
-                                                                                  y = "Number of death´s men"",
+                                                                                  y = "Number of death´s people"",
                                                                                        x ="Dates since 2019 to 2022 per month", 
                                                                                        y = "Number of death´s people")+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
@@ -407,6 +407,7 @@ pro.plot2=provincias3%>%
   ggplot(aes(x=DATE,y=value,color=variable))+geom_line(lwd=0.2)+
   facet_wrap(~variable,scales="free_y",ncol=7)+ylab("Number of deaths")+xlab("Dates for each regions")+scale_x_date(date_breaks = "120 days",date_labels = "%d-%m-%Y")+
   guides(color=FALSE)+theme_bw()+
+  scale_y_continuous(breaks =scales::pretty_breaks(n = 4))+
   theme(axis.text.x=element_text(size=10,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=20,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=20,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
