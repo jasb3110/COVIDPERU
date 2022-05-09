@@ -267,9 +267,8 @@ mujeres$mes.año=factor(mujeres$mes.año , levels=c(names.mes))
 
 mujeres$monthYear = paste0((as.numeric(mujeres$años)-2000)+trunc((mujeres$meses-0.5)*100/12)/100)
 mujeres=mujeres[mujeres$años>=2019,]
-fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$n)) + geom_boxplot()+labs(title="Death´s women in boxplot since 2019 to 2022", 
-                                                                                  y = "Number of death´s men"",
-                                                                                  x ="Dates since 2019 to 2022 per month", 
+fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$n)) + geom_boxplot()+labs(title="Women´s deaths time serie from 2019 to 2022",
+                                                                                  x ="Months from 2019 to 2022", 
                                                                                   y = "Number of death´s women")+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
@@ -328,7 +327,103 @@ Women´s  death which cause for COVID-19 since 2019 to now
 People´s death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.todos.png?raw=true)
 
-Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
+Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
+
+```markdown 
+###########################################################################################################################################################
+#Sinadef´s death data
+library("tidyr")
+sinadef=fread("SINADEF - Data.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#fallecidos segun SINADEF
+ub=fread("TB_UBIGEOS.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#ubigeos reales
+ubi=as.data.frame(ub)
+ubi$dep=trunc(ubi$ubigeo_reniec/100)
+sinadef=as.data.frame(sinadef[,1:29])
+colnames(sinadef)[29]="Perú"
+fechas1=sinadef$DATE[1:366]
+fechas1.1=paste0(fechas1,"-","2020")
+fechas1.1=as.Date(fechas1.1,format="%d-%m-%Y")
+fechas2=sinadef$DATE[367:731]
+fechas2.1=paste0(fechas2,"-","2021")
+fechas3=sinadef$DATE[732:length(sinadef$DATE)]
+fechas3.1=paste0(fechas3,"-","2022")
+fechas2.1=as.Date(fechas2.1,format="%d-%m-%Y")
+fechas3.1=as.Date(fechas3.1,format="%d-%m-%Y")
+sinadef$fecha=as.Date(c(fechas1.1,fechas2.1,fechas3.1),format="%Y-%m-%d")
+sinadef$DATE=sinadef$fecha
+sinadef$fecha=NULL
+
+n.pro=c("DATE","Perú","AMAZONAS","ANCASH","APURIMAC",     
+        "AREQUIPA","AYACUCHO","CAJAMARCA",    
+        "CALLAO","CUSCO","EXTRANJERO",   
+        "HUANCAVELICA","HUANUCO","ICA",          
+        "JUNIN","LA LIBERTAD","LAMBAYEQUE",   
+        "LIMA","LORETO","MADRE DE DIOS",
+        "MOQUEGUA","PASCO","PIURA",        
+        "PUNO","SAN MARTIN","SIN REGISTRO", 
+        "TACNA","TUMBES","UCAYALI")
+
+ubigeo=unique(sinsexo$`COD# UBIGEO DOMICILIO`)
+depp=unique(sinsexo$`DEPARTAMENTO DOMICILIO`)
+vector=depp
+for( i in 3:length(n.pro)){
+vector[which(vector==n.pro[i])]=i
+vector=na.omit(vector)  
+}
+vdepp=1:length(depp)
+nn.ex=depp[vdepp[!vdepp %in% c(1:24,26,28:32)]]
+sinsexo$Dep=sinsexo$`DEPARTAMENTO DOMICILIO`
+
+sinsexo$`DEPARTAMENTO DOMICILIO`[which(sinsexo$`DEPARTAMENTO DOMICILIO`=="     ")]="SIN REGISTRO"
+sinsexo$`DEPARTAMENTO DOMICILIO`[which(sinsexo$`DEPARTAMENTO DOMICILIO`=="")]="SIN REGISTRO"
+sinsexo$`DEPARTAMENTO DOMICILIO`[which(sinsexo$`DEPARTAMENTO DOMICILIO`=="[NO DEFINIDO]")]="SIN REGISTRO"
+sinsexo$`DEPARTAMENTO DOMICILIO`[which(sinsexo$`DEPARTAMENTO DOMICILIO`=="")]="SIN REGISTRO" 
+
+for(i in 1:length(sinsexo$`DEPARTAMENTO DOMICILIO`)){
+if (sum(nn.ex==sinsexo$`DEPARTAMENTO DOMICILIO`[i])==0){
+  next()
+}else{
+  if (sum(which(nn.ex==sinsexo$`DEPARTAMENTO DOMICILIO`[i]))<4){  
+    sinsexo$Dep[i]="SIN REGISTRO"
+  }else{
+    sinsexo$Dep[i]="EXTRANJERO"  
+  }
+ }
+}
+
+prov.sinadef=as.data.frame(sinsexo%>%count(FECHA,Dep))
+unique(prov.sinadef$Dep)
+
+m.plot2=prov.sinadef
+colnames(m.plot2)=colnames(m.plot)
+m.plot2$variable[which(m.plot2$variable=="[NO DEFINIDO]")]="SIN REGISTRO"
+m.plot2$variable[which(m.plot2$variable=="")]="SIN REGISTRO"
+m.plot2$variable[which(m.plot2$variable=="     ")]="SIN REGISTRO"
+m.plot2$variable=factor(m.plot2$variable,levels=unique(prov.sinadef$Dep))
+provincias2=as.data.frame(m.plot2[which(m.plot2$variable!="SIN REGISTRO"&m.plot2$variable!="EXTRANJERO"),])
+#provincias2=as.data.frame(m.plot2)
+provincias3=provincias2[min(which(provincias2$DATE=="2020-03-01")):length(provincias2$DATE),]
+
+pro.plot2=provincias3%>%
+  ggplot(aes(x=DATE,y=value,color=variable))+geom_line(lwd=0.2)+
+  facet_wrap(~variable,scales="free_y",ncol=7)+ylab("Number of deaths")+xlab("Dates for each regions")+scale_x_date(date_breaks = "120 days",date_labels = "%d-%m-%Y")+
+  guides(color=FALSE)+theme_bw()+
+  theme(axis.text.x=element_text(size=10,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=20,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=20,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
+       height = 268,unit="mm",plot = pro.plot2)
+############################################################################################################################################################     
+```
+It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.todos.png?raw=true)
+
+Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
+
+
+
+
+
 
 
 
