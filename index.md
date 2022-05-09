@@ -226,8 +226,8 @@ ini=which(todos$dia==04&todos$meses==3&todos$años==2020)
 fin=length(todos$fechas)
 
 fin-ini# COVID-19´s death average 
-media_covid=mean(todos$freq[ini:fin])
-std_covid=sd(todos$freq[ini:fin])
+media_covid=mean(todos$n[ini:fin])
+std_covid=sd(todos$n[ini:fin])
 100*std_covid/media_covid #Coefficient of Variation in percent
 
 #total death before COVID-19 pandemic
@@ -235,17 +235,17 @@ iii=which(todos$dia==02&todos$meses==2&todos$años==2020)#02 - 2 - 2020 begin
 fff=which(todos$dia==03&todos$meses==3&todos$años==2020)#03 - 3 - 2020 end 
 
 fff-iii# amount of death before 30 days to come COVID-19 in Peru (Pre-covid period time)
-media=mean(todos$freq[iii:fff])
-std=sd(todos$freq[iii:fff])
+media=mean(todos$n[iii:fff])
+std=sd(todos$n[iii:fff])
 100*std/media #Coefficient of Variation in percent
 write.csv(cbind(media,std),"exceso.csv",sep=",",dec=".",col.names=TRUE)#save in .csv
 
 #total of death during COVID is subtracting total death during pre-COVID
-m_encovid_medio=(todos$freq[ini:fin]-media)/std
+m_encovid_medio=(todos$n[ini:fin]-media)/std
 m_encovid_medio=m_encovid_medio+min(m_encovid_medio)*-1
-m_encovid_min=(todos$freq[ini:fin]-media-std*1.96)/std
+m_encovid_min=(todos$n[ini:fin]-media-std*1.96)/std
 m_encovid_min=m_encovid_min++min(m_encovid_min)*-1
-m_encovid_max=(todos$freq[ini:fin]-media+std*1.96)/std
+m_encovid_max=(todos$n[ini:fin]-media+std*1.96)/std
 m_encovid_max=m_encovid_max+min(m_encovid_max)*-1
 
 encovid=as.data.frame(cbind(as.Date(todos$fechas[ini:fin],format="%Y-%m-%d"),todos$dia[ini:fin],todos$meses[ini:fin],todos$años[ini:fin],m_encovid_medio,m_encovid_min,m_encovid_max))
@@ -267,9 +267,10 @@ mujeres$mes.año=factor(mujeres$mes.año , levels=c(names.mes))
 
 mujeres$monthYear = paste0((as.numeric(mujeres$años)-2000)+trunc((mujeres$meses-0.5)*100/12)/100)
 mujeres=mujeres[mujeres$años>=2019,]
-fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$freq)) + geom_boxplot()+labs(title="Diagrama de cajas mensuales de Mujeres fallecidas desde 2019 al 2022",
-                                                                                  x ="Meses desde 2019 al 2022", 
-                                                                                  y = "Número de mujeres muertas")+
+fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$n)) + geom_boxplot()+labs(title="Death´s women in boxplot since 2019 to 2022", 
+                                                                                  y = "Number of death´s men"",
+                                                                                  x ="Dates since 2019 to 2022 per month", 
+                                                                                  y = "Number of death´s women")+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -287,9 +288,9 @@ hombres$mes.año=factor(hombres$mes.año , levels=c(names.mes))
 
 hombres$monthYear = paste0((as.numeric(hombres$años)-2000)+trunc((hombres$meses-0.5)*100/12)/100)
 hombres=hombres[hombres$años>=2019,]
-fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$freq)) + geom_boxplot()+labs(title="Diagrama de cajas mensuales de Varones fallecidos desde 2019 al 2022",
-                                                                                  x ="Meses desde 2019 al 2022", 
-                                                                                  y = "Número de Varones muertos")+
+fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$n)) + geom_boxplot()+labs(title="Death´s men in boxplot since 2019 to 2022",
+                                                                                  x ="Dates since 2019 to 2022 per month", 
+                                                                                  y = "Number of death´s men")+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -308,9 +309,11 @@ todos$mes.año=factor(todos$mes.año , levels=c(names.mes))
 todos$monthYear = paste0((as.numeric(todos$años)-2000)+trunc((todos$meses-0.5)*100/12)/100)
 todos=todos[todos$años>=2019,]
 
-fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$freq)) + geom_boxplot()+labs(title="Diagrama de cajas mensuales de los fallecidos desde 2019 al 2022",
-                                                                                       x ="Meses desde 2019 al 2022", 
-                                                                                       y = "Número de Fallecidos")+
+fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$n)) + geom_boxplot()+labs(title="Death´s people in boxplot since 2019 to 2022
+22 per month", 
+                                                                                  y = "Number of death´s men"",
+                                                                                       x ="Dates since 2019 to 2022 per month", 
+                                                                                       y = "Number of death´s people")+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
