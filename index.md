@@ -158,55 +158,56 @@ tt$EDAD[which(tt$EDAD>=123)]=NA
 sinsexo=tt
 sinsexo$SEXO=NULL
 sinsexo$EDAD=trunc(sinsexo$EDAD*100)/100
-todo=as.data.frame(count(sinsexo,c("date","dia","meses","años","EDAD")))
+todo=as.data.frame(sinsexo%>%count(date,dia,meses,años,EDAD))
 y1=tt[which(tt$SEXO=="FEMENINO"),]
 y1$SEXO=NULL
 y1$EDAD=trunc(y1$EDAD*100)/100
-muj=as.data.frame(count(y1,c("date","dia","meses","años","EDAD")))
+muj=as.data.frame(y1%>%count(date,dia,meses,años,EDAD))
 y2=tt[which(tt$SEXO=="MASCULINO"),]
 y2$SEXO=NULL
 y2$EDAD=trunc(y2$EDAD*100)/100
-hom=as.data.frame(count(y2,c("date","dia","meses","años","EDAD")))
-mujeres=as.data.frame(count(y1,c("date","dia","meses","años")))
+hom=as.data.frame(y2%>%count(date,dia,meses,años,EDAD))
+mujeres=as.data.frame(y1%>%count(date,dia,meses,años))
 mujeres$fechas=paste(mujeres$dia,"-",mujeres$meses,"-",mujeres$años)
-hombres=as.data.frame(count(y2,c("date","dia","meses","años")))
+hombres=as.data.frame(y2%>%count(date,dia,meses,años))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
-todos=as.data.frame(count(sinsexo,c("date","dia","meses","años")))
+todos=as.data.frame(sinsexo%>%count(date,dia,meses,años))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
 
-#exploratory plots
-x11();plot.new();par(mfrow = c(4, 2))
-plot(mujeres$date,mujeres$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",mujeres$fechas[min(mujeres$date)]," hasta ",mujeres$fechas[max(mujeres$date)]),main = "Número de mujeres muertes")
-plot(hombres$date,hombres$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",hombres$fechas[min(hombres$date)]," hasta ",hombres$fechas[max(hombres$date)]),main = "Número de hombres muertes")
-plot(todos$date,todos$freq,type="l",ylab="Número de Muertos",xlab=paste0( "Días desde ",todos$fechas[min(todos$date)]," hasta ",todos$fechas[max(todos$date)]),main = "Número de muertes totales")
-plot(todos$date,todos$freq,type="l",col="gray50",ylab="Número de Muertos",xlab=paste0( "Díuas desde ",todos$fechas[min(todos$date)]," hasta ",todos$fechas[max(todos$date)]),main = "Número de muertes totales")
-points(mujeres$date,mujeres$freq,type="l",col="blue",ylab="Número de Muertos",xlab=paste0( "Días desde ",mujeres$fechas[min(mujeres$date)]," hasta ",mujeres$fechas[max(mujeres$date)]),main = "Número de mujeres muertes")
-points(hombres$date,hombres$freq,type="l",col="red",ylab="Número de Muertos",xlab=paste0( "Días desde ",hombres$fechas[min(hombres$date)]," hasta ",hombres$fechas[max(hombres$date)]),main = "Número de hombres muertes")
+#plot exploratory
+png("exploratory.plot.png", width = 500, height = 318, units = 'mm', res =1200)
+
+plot.new();par(mfrow = c(4, 2))
+plot(mujeres$date,mujeres$n,type="l",ylab="Number of deaths",xlab=paste0("Days from ",mujeres$fechas[min(mujeres$date)]," to ",mujeres$fechas[max(mujeres$date)]),main = "Number of Women deaths")
+plot(hombres$date,hombres$n,type="l",ylab="Number of deaths",xlab=paste0("Days from ",hombres$fechas[min(hombres$date)]," to ",hombres$fechas[max(hombres$date)]),main = "Number of men deaths")
+plot(todos$date,todos$n,type="l",ylab="Number of deaths",xlab=paste0("Days from  ",todos$fechas[min(todos$date)]," to ",todos$fechas[max(todos$date)]),main = "Number of total deathss")
+plot(todos$date,todos$n,type="l",col="gray50",ylab="Number of deathss",xlab=paste0("Days from ",todos$fechas[min(todos$date)]," to ",todos$fechas[max(todos$date)]),main = "Number of total deaths")
+points(mujeres$date,mujeres$n,type="l",col="blue",ylab="Number of deaths",xlab=paste0("Days from ",mujeres$fechas[min(mujeres$date)]," to ",mujeres$fechas[max(mujeres$date)]),main = "Number of total deaths")
+points(hombres$date,hombres$n,type="l",col="red",ylab="Number of deaths",xlab=paste0("Days from ",hombres$fechas[min(hombres$date)]," to ",hombres$fechas[max(hombres$date)]),main = "Number of total deaths")
 
 interval=signif(log10(length(todo$EDAD))*3.3+1,)
 k=seq(from=0,to=150,by=interval)
 
-hist(na.contiguous(todo$EDAD),breaks = c(k),freq = FALSE,density =10,xlab=paste0("Edad de intervalos de ",interval," años"),main = "Histograma de la mortalidad total")
+hist(na.contiguous(todo$EDAD),breaks = c(k),freq = FALSE,density =10,xlab=paste0("Age´s range each ",interval," years"),main = "Histogram of total deaths")
 d1=density(x = na.contiguous(todo$EDAD))
 points(d1,col=2,type="l",lwd=2)
 
 interval=signif(log10(length(hom$EDAD))*3.3+1,)
 k=seq(from=0,to=150,by=interval)
-
-hist(na.contiguous(hom$EDAD),breaks = c(k),freq = FALSE,density =15,xlab=paste0("Edad de intervalos de ",interval," años"),main = "Histograma de la mortalidad total masculina")
+hist(na.contiguous(hom$EDAD),breaks = c(k),freq = FALSE,density =15,xlab=paste0("Age´s range each ",interval," years"),main = "Histogram of total men´s deaths")
 d2=density(x = na.contiguous(hom$EDAD))
 points(d2,col=2,type="l",lwd=2)
 
 interval=signif(log10(length(muj$EDAD))*3.3+1,)
 k=seq(from=0,to=150,by=interval)
-
-hist(na.contiguous(muj$EDAD),breaks = c(k),freq = FALSE,density =20,xlab=paste0("Edad de intervalos de ",interval," años"),main = "Histograma de la mortalidad total femenina")
+hist(na.contiguous(muj$EDAD),breaks = c(k),freq = FALSE,density =20,xlab=paste0("Age´s range each ",interval," years"),main = "Histogram of total women´s deaths")
 d3=density(x =na.contiguous(muj$EDAD))
 points(d3,col=2,type="l",lwd=2)
 
-plot(d1, col="blue",lwd=4,main="Grafica densidad de la mortandad",ylim=c(0,max(cbind(d1$y,d2$y,d3$y))))
+plot(d1, col="blue",lwd=4,main="deaths density",ylim=c(0,max(cbind(d1$y,d2$y,d3$y))))
 points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
+dev.off()
 ############################################################################################################################################################
 ```
 It show that exploratory plot of dataset. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
