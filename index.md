@@ -416,7 +416,7 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
 ```
 It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.todos.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/4645aecfc038e25f651fe9c67524e23a28572766/fallecidos.provincias2.png?raw=true)
 
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
 
