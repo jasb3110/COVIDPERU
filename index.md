@@ -419,7 +419,8 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
        height = 268,unit="mm",plot = pro.plot2)
 ############################################################################################################################################################     
 ```
-It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. in first view, whole regions shows that evidence three waves. but each region shows its particular patterns of trendency.  Lima region was recorded the most number of death. this aspect could be explained the Lima region is the densely populated of the country and where dayly reports were more reliable and accurate than others regions.
+It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
+In my view, whole regions shows that evidence three waves. but each region shows its particular patterns of trendency.  Lima region was recorded the most number of death. this aspect could be explained the Lima region is the densely populated of the country and where dayly reports were more reliable and accurate than others regions.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/4645aecfc038e25f651fe9c67524e23a28572766/fallecidos.provincias2.png?raw=true)
 
