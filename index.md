@@ -210,11 +210,11 @@ points(d3, col="gray70", type="l",lwd=4)
 dev.off()
 ############################################################################################################################################################
 ```
-It show that exploratory plot of dataset. first view it seems to be clean and sort that you can looking down eigth pictures. Sorry, there are many spanish labels in plot.
+It show that exploratory plot of SINADEF´s dataset. first view it seems to be clean and sort that you can looking down eigth pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/exploratory.plot.png?raw=true)
 
-Next, it is getting to clean and sort of COVID´s death data. Bellow I attached lines scripts.
+Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. My assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I ploted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
 
 ```markdown 
 ############################################################################################################################################################
@@ -324,8 +324,13 @@ It show that numbers of death in timeseries per genre. here you can see men´s d
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.mujeres.png?raw=true)
+
+In first view, number of death men is major than number of death women. therefore, COVID-19 have detrimental effect on Men a lot. 
 People´s death which cause for COVID-19 since 2019 to now
+
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.todos.png?raw=true)
+
+In three wave of COVID-19, numbers of death people 
 
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
 
