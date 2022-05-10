@@ -14,4 +14,6 @@ After that data include date since 6/06/2020 to 09/05/2022 (Column 1), COVID pos
 
 Finally, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. You will able to look it all in this link: https://jasb3110.github.io/COVIDPERU/
 
+Finally, I have updated main outcomes each week, usually sunday.
+
 Bon appetit!!!
