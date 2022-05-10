@@ -330,8 +330,7 @@ People´s death which cause for COVID-19 since 2019 to now
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.todos.png?raw=true)
 
-In three wave of COVID-19, numbers of death people 
-
+In three wave of COVID-19 on Peru, the most of number death people probably relation with COVID-19 are: May to August in 2020 (first wave), February to April in 2021 (Second wave) and January to February 2022 (Third wave). Second wave was more lethal than others waves around 1250 death.
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
 
 ```markdown 
@@ -420,7 +419,7 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
        height = 268,unit="mm",plot = pro.plot2)
 ############################################################################################################################################################     
 ```
-It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
+It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. in first view, whole regions shows that evidence three waves. but each region shows its particular patterns of trendency.  Lima region was recorded the most number of death. this aspect could be explained the Lima region is the densely populated of the country and where dayly reports were more reliable and accurate than others regions.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/4645aecfc038e25f651fe9c67524e23a28572766/fallecidos.provincias2.png?raw=true)
 
