@@ -3,7 +3,7 @@
     "path": "D:/Pepe/2022/Github/COVIDPERU/index.md",
     "project_path": "index.md",
     "type": "markdown",
-    "hash": "3088224639",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1652270169508.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "441,37",
-        "scrollLine": "435"
+        "cursorPosition": "549,0",
+        "scrollLine": "485"
     },
     "folds": "",
-    "lastKnownWriteTime": 1652271759,
+    "lastKnownWriteTime": 1652272018,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1652271759649,
+    "last_content_update": 1652272018,
     "read_only": false,
     "read_only_alternatives": []
 }
