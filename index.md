@@ -526,7 +526,7 @@ covid.muj=ggplot(data=covidmuj, aes(x=covidmuj$FECHA, y=covidmuj$freq, group=cov
 ggsave("covid.mujeres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = covid.muj)
 
-# todo
+# all people
 
 covid.todo=ggplot(data=sinsexocovid, aes(x=sinsexocovid$FECHA, y=sinsexocovid$freq, group=sinsexocovid$METODODX))+
   scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
