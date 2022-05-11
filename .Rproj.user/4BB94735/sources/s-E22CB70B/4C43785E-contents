@@ -5,7 +5,7 @@ First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illnes
 When Covid-19 had started to spread on Peru. The health government institutes were not systemic criteria to order COVID-19 reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which could have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
 Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
-#### R code
+## R code
 I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. Watch out, many columns have spanish names 
 
 ```markdown
@@ -425,7 +425,7 @@ In my view, whole regions shows that evidence three waves. but each region shows
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/4645aecfc038e25f651fe9c67524e23a28572766/fallecidos.provincias2.png?raw=true)
 
-Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
+Next, it is getting to clean and sort of positive COVID´s test dataset. Bellow I attached lines scripts.
 
 ```markdown
 #To clean and sort of COVID test
@@ -497,7 +497,7 @@ covidhom$METODODX=factor(covidhom$METODODX,levels=unique(covidhom$METODODX))
 covidmuj$METODODX=factor(covidmuj$METODODX,levels=unique(covidmuj$METODODX))
 sinsexocovid$METODODX=factor(sinsexocovid$METODODX,levels=unique(sinsexocovid$METODODX))
 
-#hombres
+#for men
 covid.hom=ggplot(data=covidhom, aes(x=covidhom$FECHA, y=covidhom$freq, group=covidhom$METODODX))+
   scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
   geom_line(aes(colour=covidhom$METODODX))+
@@ -511,7 +511,7 @@ covid.hom=ggplot(data=covidhom, aes(x=covidhom$FECHA, y=covidhom$freq, group=cov
 ggsave("covid.hombres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = covid.hom)
 
-#mujeres
+#for women
 
 covid.muj=ggplot(data=covidmuj, aes(x=covidmuj$FECHA, y=covidmuj$freq, group=covidmuj$METODODX))+
   scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
@@ -542,7 +542,7 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 
 
 ```
-I show that...
+In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.hombres.png?raw=true)
@@ -553,12 +553,218 @@ I show that...
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.todo.png?raw=true)
 
+Next, it is getting to clean and sort  dataset of COVID´s death. Bellow I attached lines scripts.
+
+```markdown
+
+#Covid mortality 
+#Buscando Nas
+mm1=sum(is.na(mcovid$FECHA_FALLECIMIENTO))
+mm2=sum(is.na(mcovid$EDAD_DECLARADA))
+mm3=sum(is.na(mcovid$SEXO))
+mm4=sum(is.na(mcovid$FECHA_NAC))#falta datos de fechas nacimientos
+mm5=sum(is.na(mcovid$DEPARTAMENTO))
+mm6=sum(is.na(mcovid$PROVINCIA))
+mm7=sum(is.na(mcovid$DISTRITO))
+mm1
+mm2
+mm3
+mm4
+mm5
+mm6
+mm7
+
+mm8=sum(mcovid$FECHA_FALLECIMIENTO=="")
+mm9=sum(mcovid$EDAD_DECLARADA=="")
+mm10=sum(mcovid$SEXO=="")
+mm11=sum(mcovid$FECHA_NAC=="")#falta datos
+mm12=sum(mcovid$DEPARTAMENTO=="")
+mm13=sum(mcovid$PROVINCIA=="")#falta datos
+mm14=sum(mcovid$DISTRITO=="")#falta datos
+mm8
+mm9
+mm10
+mm11
+mm12
+mm13#falta de datos de provincia
+mm14#falta de datos de distritos
+
+mcovid$FECHA_FALLECIMIENTO=as.character(mcovid$FECHA_FALLECIMIENTO)
+mcovid$dia=as.numeric(format(as.Date(mcovid$FECHA_FALLECIMIENTO,format="%Y%m%d"), format = "%d"))
+mcovid$meses=as.numeric(format(as.Date(mcovid$FECHA_FALLECIMIENTO,format="%Y%m%d"), format = "%m"))
+mcovid$años=as.numeric(format(as.Date(mcovid$FECHA_FALLECIMIENTO,format="%Y%m%d"), format = "%Y"))
+
+mcovid$fechas=paste0(mcovid$años,"-",mcovid$meses,"-",mcovid$dia)
+mcovid$fechas2=paste0(mcovid$dia,"-",mcovid$meses,"-",mcovid$años)
+mcovid$EDAD_DECLARADA=as.numeric(mcovid$EDAD_DECLARADA)
+covid=as.data.frame(mcovid)
+
+#Delete Nas and  null values
+muertos_covid_total=as.data.frame(mcovid%>%count(FECHA_FALLECIMIENTO
+                                                 ,EDAD_DECLARADA
+                                                 ,SEXO               
+                                                 ,DEPARTAMENTO
+                                                 ,dia
+                                                 ,meses
+                                                 ,años))
+
+
+ord=unique(sort(mcovid$fechas))
+mcovid$date=rep(NA,length(mcovid$FECHA_FALLECIMIENTO))
+for(i in 1:length(ord)){
+  mcovid$date[which(mcovid$fechas==ord[i])]=i
+}
+mcovid=as.data.frame(mcovid)
+
+mcovid$fechas2=as.Date(mcovid$fechas2,format="%d-%m-%Y")
+muertos_covid_total=as.data.frame(mcovid%>%count(fechas2,dia,meses,años))
+encovid=as.data.frame(encovid)
+
+plot(todos$fechas,todos$n,col="blue",ylim=c(0,1100))
+points(muertos_covid_total$fechas2,muertos_covid_total$n,col="red")
+
+write.csv(todos,"todos.csv",sep=",",dec=".",col.names=TRUE)
+
+#to create data of COVID death and excess of death which likely due to COVID-19 illness.
+
+
+deathsextra=as.data.frame(rbind(cbind(1:length(muertos_covid_total$n),encovid$m_encovid_medio[1:length(muertos_covid_total$n)],"Excess of normalized natural deaths"),
+                               cbind(1:length(muertos_covid_total$n),muertos_covid_total$n,"COVID-19´s deaths")))
+
+colnames(deathsextra)=c("Dias con el COVID","Número de muertos","Estimador")
+
+deathsextra$`Dias con el COVID`=as.numeric(deathsextra$`Dias con el COVID`)
+deathsextra$`Número de muertos`=as.numeric(deathsextra$`Número de muertos`)
+deathsextra$Estimador=factor(deathsextra$Estimador,levels = unique(deathsextra$Estimador))
+deathsextra$fecha=as.Date(muertos_covid_total$fechas2,format="%Y-%m-%d")
+
+fall.serie=ggplot(data =deathsextra, aes(x = deathsextra$fecha, y =deathsextra$`Número de muertos`,group=deathsextra$Estimador))+
+  geom_line(aes(color=deathsextra$Estimador))+
+  scale_x_date(date_breaks = "60 days",date_labels = "%d-%m-%Y")+
+  labs(colour="",title="Deaths time series since 16th march of 2020 to now",
+       x ="Dates to begin Covid-19 epidemic", 
+       y = "Number of deaths")+
+  theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("serie.tiempo.fallecidosvsexcesodemuertos.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =fall.serie)
+
+#Relationship with covid death and excess of death
+
+encovid$mes=as.numeric(encovid$mes)
+encovid$año=as.numeric(encovid$año)
+encovid$fecha=as.Date(paste0(encovid$año,"-",encovid$mes,"-",encovid$dia),format="%Y-%m-%d")
+muertos_covid_total$fechas2=as.Date(muertos_covid_total$fechas2,format="%Y-%m-%d")
+
+relation=as.data.frame(cbind(1:(length(muertos_covid_total$n)-1),
+                             encovid$m_encovid_medio[which(encovid$fecha==muertos_covid_total$fechas2[2]):which(encovid$fecha==muertos_covid_total$fechas2[length(muertos_covid_total$fechas2)-7])],
+                             muertos_covid_total$n[1:(length(muertos_covid_total$n)-1)]))
+mes.abb=c("January","February","March","April","May","June","July","Agost","September","Octuber","November","December")
+
+relation$mes=NULL
+for(i in 1:(length(muertos_covid_total$n)-1)){
+  relation$mes[i]=mes.abb[muertos_covid_total$meses[i]]
+}  
+
+colnames(relation)=c("Días","Exceso de muertos normalizada durante 2020 al 2022", "Muertos por COVID-19","mes")
+relation$mes=factor(relation$mes,levels=mes.abb)
+cor.test(relation$`Exceso de muertos normalizada durante 2020`,relation$`Muertos por COVID-19`,method = "spearman")#con desfase de un dia 
+
+qqnorm(relation$`Muertos por COVID-19`,type="o")+qqline(relation$`Muertos por COVID-19`,col="red")
+qqnorm(relation$`Exceso de muertos normalizada durante 2020`,type="o")+qqline(relation$`Exceso de muertos normalizada durante 2020`,col="red")
+
+library(bestNormalize)
+bestNormalize(relation$`Exceso de muertos normalizada durante 2020`)
+relation$exceso.nor=predict(orderNorm(relation$`Exceso de muertos normalizada durante 2020`))
+
+bestNormalize(relation$`Muertos por COVID-19`)
+relation$muertos.nor=predict(orderNorm(relation$`Muertos por COVID-19`))
+relation=as.data.frame(na.omit(relation))
+
+write.csv(relation,"relation.csv",sep=",",dec=".",col.names=TRUE)
+reg=lm(relation$exceso.nor~relation$muertos.nor,data = relation)
+
+
+relation$fechas=as.Date("3-3-2020",format="%d-%m-%Y")+relation$Días-1
+
+relation$fechas=as.Date(relation$fechas,format="%d-%m-%Y")
+
+require(ggplot2)
+ggplotRegression <- function (fit) {
+  Label=paste("y =",round(fit$coef[[1]],3),"+",
+              round(fit$coef[[2]], 3),"x",
+              "  R2 = ", round(summary(fit)$r.squared, 2),
+              "  n =",length(fit$fitted.values),
+              "  p-value =",round(summary(fit)$coef[2,4],4))
+  
+  ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+    geom_point() +
+    stat_smooth(method = "lm",se=TRUE,col="black") +
+    annotate(geom = 'text', x =-1, y =3, label = Label, parse=FALSE)
+}
+p=ggplotRegression(reg)+
+  geom_point(aes(fill=relation$mes), shape = 21, alpha = 0.99,size=3)+
+  scale_color_viridis(discrete = TRUE, option = "C",direction = -1)+
+  scale_fill_viridis(discrete = TRUE,direction = -1)+
+  theme_gray()+
+  labs(colour="",title="Covid-19´s deaths vs Excess of deaths during pandemic",
+       x ="Number of normalized Covid-19´s deaths", 
+       y = "Excess of normalized deaths")+
+  theme(axis.text=element_text(size=14,colour = "black",face="bold"),
+        axis.title=element_text(size=16,face="bold"),
+        title = element_text(size=18,colour = "black",face="bold"),
+        legend.text = element_text(color = "black", size = 14,face="bold"),
+        legend.title=element_blank()
+  )
+ggsave("regresion.png", dpi = 600,   width = 275,
+       height = 175,unit="mm",plot =p)
+
+#Animation!!!XD
+
+p2=ggplot(relation,aes(x = relation$muertos.nor, y = relation$exceso.nor))+
+  geom_point(aes(fill=relation$mes), shape = 21, alpha = 0.99,size=3)+
+  scale_color_viridis(discrete = TRUE, option = "C",direction = -1)+
+  scale_fill_viridis(discrete = TRUE,direction = -1)+
+  theme_gray()+labs(colour="",
+                    x ="Number of normalized Covid-19´s deaths", 
+                    y = "Excess of normalized deaths")+
+  theme(axis.text=element_text(size=14,colour = "black",face="bold"),
+        axis.title=element_text(size=16,face="bold"),
+        title = element_text(size=18,colour = "black",face="bold"),
+        legend.text = element_text(color = "black", size = 14,face="bold"),
+        legend.title=element_blank())+
+  transition_time(relation$fechas)+
+  shadow_mark(alpha = 0.3, size = 4)+
+  labs(title = "Covid-19´s deaths vs Excess of deaths during pandemic on {frame_time}")+
+  shadow_wake(wake_length = 0.1, alpha = 0.99)
+
+animate(p2, fps = 15, duration =25,renderer = gifski_renderer("regresion.gif"),height=630,width=1000)
+
+#correlation muertos covid y exceso de muertos hasta 17 de diciembre
+rho=cor.test(relation$muertos.nor,relation$exceso.nor,method = "spearman")$estimate#con desfase 1 dia esta es la correcta
+signif(rho,2)
+
+#to calculate a underestime
+muertosreportados=sum(muertos_covid_total$n[1:length(muertos_covid_total$fechas)])
+muertostotales=sum(todos$n[(ini+3):fin])
+muertostotales
+
+estimado_muertos_reales=round(muertostotales*rho-muertosreportados,digits=0)
+estimado_muertos_reales
+infectados_totales_virtuales=trunc(100*muertostotales*rho/2.3)
+infectados_totales_virtuales
+subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion 
+subestimacion#subestimacion en porcentaj
+```
+
+
+
 
 
 
 
 ```markdown
-
 **Bold** and _Italic_ and `Code` text
 
 [Link](url) and ![Image](src)
