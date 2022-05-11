@@ -771,12 +771,6 @@ subestimacion#subestimacion en porcentaj
 [Link](url) and ![Image](src)
 
 
-
-
-
-
-
-
 ```
 
 
