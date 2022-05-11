@@ -545,13 +545,13 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 I show that...
 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/ff93b0325576aa837548696788debc9a169613db/covid.hombres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.hombres.png?raw=true)
 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/ff93b0325576aa837548696788debc9a169613db/covid.mujeres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.mujeres.png?raw=true)
 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/ff93b0325576aa837548696788debc9a169613db/covid.todo.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.todo.png?raw=true)
 
 
 
