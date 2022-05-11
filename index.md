@@ -429,8 +429,7 @@ Next, it is getting to clean and sort of SINADEF´s death data by regions. Bello
 
 ```markdown
 #To clean and sort of COVID test
-covid=fread("positivos_covid.csv",sep=";",dec=".",header=TRUE,fill=TRUE)#Personas con diagnostico COVID
-#cprueba=fread("TB_F100_SICOVID.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#Personas con diagnostico COVID
+covid=fread("positivos_covid.csv",sep=";",dec=".",header=TRUE,fill=TRUE)#People with diagnosis of COVID-19 illness
 
 covid$id_persona=NULL
 covid$FECHA_RESULTADO=as.character(covid$FECHA_RESULTADO)
@@ -439,8 +438,8 @@ covid$FECHA_RESULTADO=as.Date(covid$FECHA_RESULTADO,format ="%Y%m%d")
 covid19=as.data.frame(covid%>%count(FECHA_CORTE,DEPARTAMENTO,PROVINCIA,DISTRITO,METODODX,EDAD,SEXO,FECHA_RESULTADO,UBIGEO))
 
 #dealy days each method
-desfase_PCR=5#dias que hay que que restar PCR
-desfase_PR=8#dias que hay que restar PR
+desfase_PCR=5#delay day of PCR test
+desfase_PR=8#delay day of serological test
 covid19$fecha=rep(NA,length(covid19$FECHA_RESULTADO))
 covid19$fecha[which(covid19$METODODX=="PCR")]=as.Date(covid19$FECHA_RESULTADO[which(covid19$METODODX=="PCR")]-desfase_PCR)
 covid19$fecha[which(covid19$METODODX=="PR")]=as.Date(covid19$FECHA_RESULTADO[which(covid19$METODODX=="PR")]-desfase_PCR)
