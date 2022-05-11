@@ -427,7 +427,102 @@ In my view, whole regions shows that evidence three waves. but each region shows
 
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
 
+```markdown
+#To clean and sort of COVID test
+covid=fread("positivos_covid.csv",sep=";",dec=".",header=TRUE,fill=TRUE)#Personas con diagnostico COVID
+#cprueba=fread("TB_F100_SICOVID.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#Personas con diagnostico COVID
 
+covid$id_persona=NULL
+covid$FECHA_RESULTADO=as.character(covid$FECHA_RESULTADO)
+covid$FECHA_RESULTADO=as.Date(covid$FECHA_RESULTADO,format ="%Y%m%d")
+
+covid19=as.data.frame(covid%>%count(FECHA_CORTE,DEPARTAMENTO,PROVINCIA,DISTRITO,METODODX,EDAD,SEXO,FECHA_RESULTADO,UBIGEO))
+
+#dias de desfase por metodo
+desfase_PCR=5#dias que hay que que restar PCR
+desfase_PR=8#dias que hay que restar PR
+covid19$fecha=rep(NA,length(covid19$FECHA_RESULTADO))
+covid19$fecha[which(covid19$METODODX=="PCR")]=as.Date(covid19$FECHA_RESULTADO[which(covid19$METODODX=="PCR")]-desfase_PCR)
+covid19$fecha[which(covid19$METODODX=="PR")]=as.Date(covid19$FECHA_RESULTADO[which(covid19$METODODX=="PR")]-desfase_PCR)
+covid19$fecha[which(covid19$METODODX=="AG")]=as.Date(covid19$FECHA_RESULTADO[which(covid19$METODODX=="AG")]-desfase_PCR)
+
+sinsexocovid=covid19[,c(2:6,7,8,10,11)]
+covidmuj=covid19[covid19$SEXO=="FEMENINO",]
+covidmuj$SEXO=NULL
+covidhom=covid19[covid19$SEXO=="MASCULINO",]
+covidhom$SEXO=NULL
+
+#whole Peru
+#fechas del eje del X 
+unique(covid19$FECHA_RESULTADO[which(covid19$fecha==min(covid19$fecha,na.rm = TRUE))])
+unique(covid19$FECHA_RESULTADO[which(covid19$fecha==max(covid19$fecha,na.rm = TRUE))])
+
+covidhom$FECHA_RESULTADO=as.Date(covidhom$FECHA_RESULTADO,format="%Y-%m-%d")
+covidmuj$FECHA_RESULTADO=as.Date(covidmuj$FECHA_RESULTADO,format="%Y-%m-%d")
+sinsexocovid$FECHA_RESULTADO=as.Date(sinsexocovid$FECHA_RESULTADO,format="%Y-%m-%d")
+
+#Men
+
+chom=as.data.frame(covidhom%>%count(METODODX,EDAD,fecha,FECHA_RESULTADO))
+ch=as.data.frame(chom%>%count(fecha,METODODX,FECHA_RESULTADO))
+ch$METODODX[which(ch$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADO_ANTIGENO")]="ANT"
+ch$METODODX[which(ch$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADOS PR")]="PR"
+ch$METODODX=factor(ch$METODODX,levels=unique(ch$METODODX))
+
+covid.hom=ggplot(data=ch, aes(x=ch$FECHA_RESULTADO, y=ch$n, group=ch$METODODX))+
+  scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
+  geom_line(aes(color=ch$METODODX))+
+  theme(legend.position="top")+
+  labs(colour="",title="Covid-19 positive´s men time serie",
+       x ="Date", 
+       y = "Number of Covid-19 positives")+
+  theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("covid.hombres.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot = covid.hom)
+
+#Women
+cmuj=as.data.frame(covidmuj%>%count(METODODX,EDAD,fecha,FECHA_RESULTADO))
+cm=as.data.frame(cmuj%>%count(fecha,METODODX,FECHA_RESULTADO))
+cm$METODODX[which(cm$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADO_ANTIGENO")]="ANT"
+cm$METODODX[which(cm$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADOS PR")]="PR"
+cm$METODODX=factor(cm$METODODX,levels=unique(cm$METODODX))
+
+covid.muj=ggplot(data=cm, aes(x=cm$FECHA_RESULTADO, y=cm$n, group=cm$METODODX))+
+  scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
+  geom_line(aes(color=cm$METODODX))+
+  theme(legend.position="top")+
+  labs(colour="",title="Covid-19 positive´s women time serie",
+       x ="Dates", 
+       y = "Number of Covid-19 positives")+  
+  theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("covid.mujeres.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot = covid.muj)
+
+# all people
+ctod=as.data.frame(sinsexocovid%>%count(METODODX,EDAD,FECHA_RESULTADO))
+tod=as.data.frame(ctod%>%count(METODODX,FECHA_RESULTADO))
+
+tod$METODODX[which(tod$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADO_ANTIGENO")]="ANT"
+tod$METODODX[which(tod$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADOS PR")]="PR"
+tod$METODODX=factor(tod$METODODX,levels=unique(tod$METODODX))
+
+covid.todo=ggplot(data=tod, aes(x=tod$FECHA_RESULTADO, y=tod$n, group=tod$METODODX))+
+  scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
+  geom_line(aes(color=tod$METODODX))+
+  labs(colour="",title="Covid-19 positive´s people time serie",
+       x ="Dates", 
+       y = "Number of Covid-19 positives")+
+  theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"), axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("covid.todo.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot = covid.todo)
+
+```
 
 
 
@@ -435,8 +530,6 @@ Next, it is getting to clean and sort of SINADEF´s death data by regions. Bello
 
 
 ```markdown
-
-
 
 **Bold** and _Italic_ and `Code` text
 
