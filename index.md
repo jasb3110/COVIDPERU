@@ -6,7 +6,7 @@ When Covid-19 had started to spread on Peru. The health government institutes we
 Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
 ## R code
-I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. Watch out, many columns have spanish names 
+I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
 
 ```markdown
 ############################################################################################################################################################
@@ -210,7 +210,7 @@ points(d3, col="gray70", type="l",lwd=4)
 dev.off()
 ############################################################################################################################################################
 ```
-It show that exploratory plot of SINADEF´s dataset. first view it seems to be clean and sort that you can looking down eigth pictures. 
+It show that exploratory plot of SINADEF´s dataset (register of deaths). first view it seems to be clean and sort that you can looking down eigth pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/exploratory.plot.png?raw=true)
 
@@ -553,7 +553,7 @@ In this pictures are showed that number of people who had been had positive covi
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.todo.png?raw=true)
 
-Next, it is getting to clean and sort  dataset of COVID´s death. Bellow I attached lines scripts.
+Next, it is getting to clean and sort  dataset of COVID´s death acording to Peruvian health ministery. Bellow I attached lines scripts.
 
 ```markdown
 
