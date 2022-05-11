@@ -558,7 +558,7 @@ Next, it is getting to clean and sort  dataset of COVID´s death. Bellow I attac
 ```markdown
 
 #Covid mortality 
-#Buscando Nas
+#to search NA values
 mm1=sum(is.na(mcovid$FECHA_FALLECIMIENTO))
 mm2=sum(is.na(mcovid$EDAD_DECLARADA))
 mm3=sum(is.na(mcovid$SEXO))
