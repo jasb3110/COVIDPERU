@@ -438,7 +438,7 @@ covid$FECHA_RESULTADO=as.Date(covid$FECHA_RESULTADO,format ="%Y%m%d")
 
 covid19=as.data.frame(covid%>%count(FECHA_CORTE,DEPARTAMENTO,PROVINCIA,DISTRITO,METODODX,EDAD,SEXO,FECHA_RESULTADO,UBIGEO))
 
-#dias de desfase por metodo
+#dealy days each method
 desfase_PCR=5#dias que hay que que restar PCR
 desfase_PR=8#dias que hay que restar PR
 covid19$fecha=rep(NA,length(covid19$FECHA_RESULTADO))
@@ -462,7 +462,6 @@ covidmuj$FECHA_RESULTADO=as.Date(covidmuj$FECHA_RESULTADO,format="%Y-%m-%d")
 sinsexocovid$FECHA_RESULTADO=as.Date(sinsexocovid$FECHA_RESULTADO,format="%Y-%m-%d")
 
 #Men
-
 chom=as.data.frame(covidhom%>%count(METODODX,EDAD,fecha,FECHA_RESULTADO))
 ch=as.data.frame(chom%>%count(fecha,METODODX,FECHA_RESULTADO))
 ch$METODODX[which(ch$METODODX=="CONFIRMADOS COVID-19 28.07.2021.xlsx/CONFIRMADO_ANTIGENO")]="ANT"
@@ -523,8 +522,16 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = covid.todo)
 
 ```
+I show that...
 
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/ff93b0325576aa837548696788debc9a169613db/covid.hombres.png?raw=true)
+
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/ff93b0325576aa837548696788debc9a169613db/covid.mujeres.png?raw=true)
+
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/ff93b0325576aa837548696788debc9a169613db/covid.todo.png?raw=true)
 
 
 
