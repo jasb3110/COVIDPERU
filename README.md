@@ -12,8 +12,10 @@ After that data include date since 6/06/2020 to 09/05/2022 (Column 1), COVID pos
 
 # To Multivariate Analysis on to R
 
-Finally, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. You will able to look it all in this link: https://jasb3110.github.io/COVIDPERU/
+Third, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. You will able to look it all in this link: https://jasb3110.github.io/COVIDPERU/
 
-Finally, I have updated main outcomes each week, usually sunday.
+# to analyze COVID-19 effect on Peru
+
+Finally, I compare two models how to spread COVID-19 pandemic on Peru during 2020 to 2022. I have updated main outcomes each week, usually sunday.
 
 Bon appetit!!!
