@@ -755,7 +755,7 @@ estimado_muertos_reales
 infectados_totales_virtuales=trunc(100*muertostotales*rho/2.3)
 infectados_totales_virtuales
 subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion 
-subestimacion#subestimacion en porcentaj
+subestimacion# underestimate
 ```
 
 
