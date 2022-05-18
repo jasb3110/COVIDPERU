@@ -469,7 +469,6 @@ covid19$FECHA[which(covid19$METODODX=="PR")]=as.character(covid19$fecha[which(co
 covid19$FECHA[which(covid19$METODODX=="AG")]=as.character(covid19$fecha[which(covid19$METODODX=="AG")]-desfase_PA)
 covid19$FECHA=as.Date(covid19$FECHA,format="%Y-%m-%d")
 
-
 covid4=covid3
 covid4$SEXO=NULL
 covid19r=as.data.frame(covid4%>%count(colnames(covid4)))
@@ -479,7 +478,6 @@ covid19r$FECHA[which(covid19r$METODODX=="PCR")]=as.character(covid19r$fecha[whic
 covid19r$FECHA[which(covid19r$METODODX=="PR")]=as.character(covid19r$fecha[which(covid19r$METODODX=="PR")]-desfase_PR)
 covid19r$FECHA[which(covid19r$METODODX=="AG")]=as.character(covid19r$fecha[which(covid19r$METODODX=="AG")]-desfase_PA)
 covid19r$FECHA=as.Date(covid19r$FECHA,format="%Y-%m-%d")
-
 
 sinsexocovid=covid19r
 covidmuj=covid19[covid19$SEXO=="FEMENINO",]
@@ -627,7 +625,6 @@ write.csv(todos,"todos.csv",sep=",",dec=".",col.names=TRUE)
 
 #to create data of COVID death and excess of death which likely due to COVID-19 illness.
 
-
 deathsextra=as.data.frame(rbind(cbind(1:length(muertos_covid_total$n),encovid$m_encovid_medio[1:length(muertos_covid_total$n)],"Excess of normalized natural deaths"),
                                cbind(1:length(muertos_covid_total$n),muertos_covid_total$n,"COVID-19´s deaths")))
 
@@ -720,7 +717,7 @@ p=ggplotRegression(reg)+
 ggsave("regresion.png", dpi = 600,   width = 275,
        height = 175,unit="mm",plot =p)
 
-#Animation!!!XD
+#Animation
 
 p2=ggplot(relation,aes(x = relation$muertos.nor, y = relation$exceso.nor))+
   geom_point(aes(fill=relation$mes), shape = 21, alpha = 0.99,size=3)+
@@ -742,7 +739,7 @@ p2=ggplot(relation,aes(x = relation$muertos.nor, y = relation$exceso.nor))+
 animate(p2, fps = 15, duration =25,renderer = gifski_renderer("regresion.gif"),height=630,width=1000)
 
 #correlation muertos covid y exceso de muertos hasta 17 de diciembre
-rho=cor.test(relation$muertos.nor,relation$exceso.nor,method = "spearman")$estimate#con desfase 1 dia esta es la correcta
+rho=cor.test(relation$muertos.nor,relation$exceso.nor,method = "spearman")$estimate
 signif(rho,2)
 
 #to calculate a underestime
