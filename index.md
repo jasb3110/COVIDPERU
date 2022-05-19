@@ -769,12 +769,13 @@ The big deal of Peru was how to estimate positivity rate (%), when there isn´t 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/relacion.positivas.positivas+negativas.molecular.png?raw=true)
 
-In this picture, the most higthlight is three sharp of curve of molecular positivity of COVID´s in percent. Obviously, third wave  
-
+In this picture, the most highlight is three sharp of curve of molecular positivity of COVID´s in percent (>20%). but, after third peak was recorded, the positivity rate had been decreased sharply. it could be due to synergy effect of vaccination on Peruvian people and wide spreading of COVID virus. bellow, attached a script.
 
 ```markdown
 ################################################################################
 #INS dataset of molecular tests
+
+#for 2020, data set by month
 
 ma=read.delim("pm_mar_2020.csv",sep=",",dec=".",header=TRUE)#marzo
 ab=read.delim("pm_apr_2020.csv",sep=",",dec=".",header=TRUE)#abril
@@ -881,7 +882,7 @@ p.m.t3=as.data.frame(cbind(p.m3$FECHATOMAMUESTRA,p.m3$TIPO_MUESTRA,p.m3$RESULTAD
                            p.m3$PROVINCIA_PACIENTE,p.m3$DEPARTAMENTO_MUESTRA,p.m3$PROVINCIA_MUESTRA,
                            p.m3$dia,p.m3$mes,p.m3$año))
 
-#############
+#
 diciem=fread("pm14Enero2022.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
 
 p.m=diciem
@@ -913,8 +914,7 @@ p.m.t4=as.data.frame(cbind(p.m4$FECHATOMAMUESTRA,p.m4$TIPO_MUESTRA,p.m4$RESULTAD
                            p.m4$PROVINCIA_PACIENTE,p.m4$DEPARTAMENTO_MUESTRA,p.m4$PROVINCIA_MUESTRA,
                            p.m4$dia,p.m4$mes,p.m4$año))
 
-#############################
-
+#
 enero=fread("pm19Abr2022.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
 
 p.m=enero
@@ -941,8 +941,7 @@ p.m.t5=as.data.frame(cbind(p.m5$FECHATOMAMUESTRA,p.m5$TIPO_MUESTRA,p.m5$RESULTAD
                            p.m5$Edad,p.m5$Sexo,p.m5$Institucion,p.m5$DEPARTAMENTO_PACIENTE,
                            p.m5$PROVINCIA_PACIENTE,p.m5$DEPARTAMENTO_MUESTRA,p.m5$PROVINCIA_MUESTRA,
                            p.m5$dia,p.m5$mes,p.m5$año))
-##########
-
+#
 names.pm=c("fecha","tipomuestra",
            "RESULTADO","edad",   
            "sexo","Institucion",      
@@ -1053,7 +1052,12 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
 
 ```
 
-I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results. Bellow 
+##OPENCOVIDPERU data set
+I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references).
+
+
+
+
 
 
 
@@ -1061,7 +1065,7 @@ I really appreciate a supporting of OPENCOVIDPERU for sharing your data source w
 
 
 ```markdown
-#OPENCOVIDPERU dataset
+#OPENCOVIDPERU data set
 defase=read.delim("DESFASE CIFRAS - MAIN.csv",sep=",",dec=".")#fallecidos segun SINADEF
 pruebas=read.delim("PRUEBAS - Data Peru.csv",sep=",",dec=".")
 uci=read.delim("UCI HOSP SUSALUD - UCI Beds.csv",sep=",",dec=".")
@@ -1514,6 +1518,8 @@ sum(pos$`total de pruebas`[3:(length(data.esfuerzo$fecha)+2)]>data.esfuerzo$n)#d
 write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
 ```
+
+## free bed of Intensive care unit 
 ABCDE
 
 
@@ -1615,7 +1621,7 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =cama)
 
 ```
-
+###Vaccinatation in progress
 ABCDE
 
 
@@ -1691,6 +1697,8 @@ write.csv(vacunados,"vacunados.csv",sep=",",dec=".",col.names=TRUE)
 1. Rodriguez-Morales, A. J., Gallego, V., Escalera-Antezana, J. P., Mendez, C. A., Zambrano, L. I., Franco-Paredes, C., … Cimerman, S. (2020). COVID-19 in Latin America: The implications of the first confirmed case in Brazil
 
 2. [La Republica-Coronavirus en Perú: Testimonio del paciente cero tras su recuperación](https://larepublica.pe/sociedad/2020/04/13/coronavirus-en-peru-testimonio-del-paciente-cero-tras-su-recuperacion-mdga/)
+
+3.[OPENCOVIDPERU data set](https://www.tagacat.com/covid/links)
 
 # Support or Contact
 
