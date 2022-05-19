@@ -212,7 +212,7 @@ dev.off()
 ```
 It show that exploratory plot of SINADEF´s dataset (register of deaths). first view it seems to be clean and sort that you can looking down eigth pictures. 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/exploratory.plot.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/exploratory.plot.png?raw=true)
 
 Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. My assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I ploted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
 
@@ -321,14 +321,14 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
 #############################################################################################################################################################
 ```
 It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.hombres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.mujeres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.mujeres.png?raw=true)
 
 In first view, number of death men is major than number of death women. therefore, COVID-19 have detrimental effect on Men a lot. 
 People´s death which cause for COVID-19 since 2019 to now
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/439ae71be1a16eefe1662a2ae45b18a5916d3de8/fallecidos.todos.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.todos.png?raw=true)
 
 In three wave of COVID-19 on Peru, the most of number death people probably relation with COVID-19 are: May to August in 2020 (first wave), February to April in 2021 (Second wave) and January to February 2022 (Third wave). Second wave was more lethal than others waves around 1250 death.
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
@@ -428,6 +428,7 @@ In my view, whole regions shows that evidence three waves. but each region shows
 Next, it is getting to clean and sort of positive COVID´s test dataset. Bellow I attached lines scripts.
 
 ```markdown
+################################################################################
 #To clean and sort of COVID test
 covid=fread("positivos_covid.csv",sep=";",dec=".",header=TRUE,fill=TRUE)#people who have diagnosis positive COVID-19 test
 
@@ -538,23 +539,20 @@ covid.todo=ggplot(data=sinsexocovid, aes(x=sinsexocovid$FECHA, y=sinsexocovid$fr
 ggsave("covid.todo.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = covid.todo)
 
-
+###############################################################################
 ```
 In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.hombres.png?raw=true)
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.hombres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.mujeres.png?raw=true)
 
-
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.mujeres.png?raw=true)
-
-
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/7c8ecb6b70ce24da37f05fa6da689bfdac0dc8ef/covid.todo.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.todo.png?raw=true)
 
 Next, it is getting to clean and sort  dataset of COVID´s death acording to Peruvian health ministery. Bellow I attached lines scripts.
 
 ```markdown
-
+################################################################################
 #Covid mortality 
 #to search NA values
 mm1=sum(is.na(mcovid$FECHA_FALLECIMIENTO))
@@ -753,13 +751,15 @@ infectados_totales_virtuales=trunc(100*muertostotales*rho/2.3)
 infectados_totales_virtuales
 subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion 
 subestimacion# underestimate
+################################################################################
 ```
+The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now. 
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/relacion.positivas.positivas+negativas.molecular.png?raw=true)
 
-
-ABCDE
 
 ```markdown
+################################################################################
 #INS dataset of molecular tests
 
 ma=read.delim("pm_mar_2020.csv",sep=",",dec=".",header=TRUE)#marzo
@@ -927,8 +927,7 @@ p.m.t5=as.data.frame(cbind(p.m5$FECHATOMAMUESTRA,p.m5$TIPO_MUESTRA,p.m5$RESULTAD
                            p.m5$Edad,p.m5$Sexo,p.m5$Institucion,p.m5$DEPARTAMENTO_PACIENTE,
                            p.m5$PROVINCIA_PACIENTE,p.m5$DEPARTAMENTO_MUESTRA,p.m5$PROVINCIA_MUESTRA,
                            p.m5$dia,p.m5$mes,p.m5$año))
-
-############
+##########
 
 names.pm=c("fecha","tipomuestra",
            "RESULTADO","edad",   
@@ -1040,8 +1039,11 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
 
 ```
 
+I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results. Bellow 
 
-ABCDE
+
+
+
 
 
 ```markdown
