@@ -47,8 +47,6 @@ m=as.data.frame(m)
 dead=m
 rownames(dead)=NULL
 dead$NÂº=NULL
-#dead$TIEMPO.EDAD=NULL
-#dead$`COD# UBIGEO DOMICILIO`=NULL
 dead$`TIPO SEGURO`=NULL
 
 dead$`TIPO LUGAR`=NULL
@@ -71,7 +69,7 @@ for(i in 1:length(unique(sort(dead$FECHA)))){
 dead=as.data.frame(dead)
 
 #to find out mistakes in dates
-#for days e1|e2|e3 = 0
+#delete outliers or distort numbers for days
 e1=sum(is.na(dead$dia))
 e2=sum(which(dead$dia>31))
 e3=sum(which(dead$dia<1))
@@ -79,8 +77,7 @@ e1
 e2
 e3
 
-#for month
-#para dias e4|e5|e6 = 0
+#delete outliers or distort numbers for moths
 e4=sum(is.na(dead$meses))
 e5=sum(which(dead$meses>12))
 e6=sum(which(dead$meses<1))
@@ -88,7 +85,7 @@ e4
 e5
 e6
 
-#for years
+#delete outliers or distort numbers for years
 #para dias e7|e8|e9 = 0
 e7=sum(is.na(dead$años))
 e8=sum(which(dead$años>2022))
@@ -97,7 +94,7 @@ e7
 e8
 e9
 
-MM=unique(dead$`MUERTE VIOLENTA`)# not natural death
+MM=unique(dead$`MUERTE VIOLENTA`)# non-natural deaths
 tt=dead[which(dead$`MUERTE VIOLENTA`==MM[1]|dead$`MUERTE VIOLENTA`==MM[2]|dead$`MUERTE VIOLENTA`==MM[3]|dead$`MUERTE VIOLENTA`==MM[9]),]
 
 #to delete mistakes dates and replace for NAs
@@ -149,7 +146,7 @@ tt$`TIEMPO EDAD`[intersect(m4,mi)]=TT[1]
 ss4=which(tt$`TIEMPO EDAD`==TT[4])
 tt$EDAD[ss4]=tt$EDAD[ss4]/(365) 
 
-#for moth 
+#for month 
 m5=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[3])]>12)
 tt$`TIEMPO EDAD`[intersect(m5,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m5,mi)]=TT[1]
@@ -159,7 +156,7 @@ tt$EDAD[ss4]=tt$EDAD[ss4]/(12)
 m6=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[1])]>123)
 tt$EDAD[m6]=NA
 
-#for "ignorados" and "sin registro" ( without specific names)
+#for "ignorados" and "sin registro" (without specific names)
 m7=c(which(tt$`TIEMPO EDAD`==TT[6]|tt$`TIEMPO EDAD`==TT[8]|tt$`TIEMPO EDAD`==TT[9]))
 tt$`TIEMPO EDAD`[which(tt$EDAD[m7]>60)]=TT[1]
 tt$EDAD[which(tt$EDAD[m7]<60)]=NA
@@ -186,7 +183,7 @@ hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
 todos=as.data.frame(sinsexo%>%count(date,dia,meses,años))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
 
-#plot exploratory
+#to plot exploratory picture
 png("exploratory.plot.png", width = 500, height = 318, units = 'mm', res =1200)
 
 plot.new();par(mfrow = c(4, 2))
@@ -223,11 +220,11 @@ dev.off()
 ################################################################################
 ```
 ## Exploratory plot 
-It show that exploratory plot of SINADEF´s dataset (death´s register). first view it seems to be clean and sort that you can looking down eigth pictures. 
+It show that exploratory plot of SINADEF´s data set (death´s register). first view it seems to be clean and sort that you can looking down eight pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/exploratory.plot.png?raw=true)
 
-Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. The assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I ploted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
+Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. The assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I plotted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
 
 ```markdown 
 ################################################################################
@@ -1688,16 +1685,6 @@ write.csv(vacunados,"vacunados.csv",sep=",",dec=".",col.names=TRUE)
 
 ```
 
-
-
-
-```markdown
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-
-
-```
 
 
 
