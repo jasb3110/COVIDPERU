@@ -415,7 +415,7 @@ m.plot2$variable[which(m.plot2$variable=="")]="SIN REGISTRO"
 m.plot2$variable[which(m.plot2$variable=="     ")]="SIN REGISTRO"
 m.plot2$variable=factor(m.plot2$variable,levels=unique(prov.sinadef$Dep))
 provincias2=as.data.frame(m.plot2[which(m.plot2$variable!="SIN REGISTRO"&m.plot2$variable!="EXTRANJERO"),])
-#provincias2=as.data.frame(m.plot2)
+
 provincias3=provincias2[min(which(provincias2$DATE=="2020-03-01")):length(provincias2$DATE),]
 
 pro.plot2=provincias3%>%
@@ -764,10 +764,12 @@ estimado_muertos_reales
 subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion subestimacion# underestimate in percent
 ################################################################################
 ```
-##Molecular positivity of COVID´s people on Peru
+##Molecular positivity of COVID´s in percent on Peru
 The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/relacion.positivas.positivas+negativas.molecular.png?raw=true)
+
+In this picture, the most higthlight is three sharp of curve of molecular positivity of COVID´s in percent. Obviously, third wave  
 
 
 ```markdown
