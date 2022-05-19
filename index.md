@@ -219,7 +219,7 @@ It show that exploratory plot of SINADEF´s dataset (death´s register). first v
 Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. The assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I ploted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
 
 ```markdown 
-############################################################################################################################################################
+################################################################################
 # COVID-19´s death during to spread pandemic
 
 "04 - 3 - 2020" #begining date
@@ -320,7 +320,7 @@ fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$n)) + geom_boxplot
 
 ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
-#############################################################################################################################################################
+################################################################################
 ```
 It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.hombres.png?raw=true)
@@ -336,7 +336,7 @@ In three wave of COVID-19 on Peru, the most of number death people probably rela
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
 
 ```markdown 
-###########################################################################################################################################################
+################################################################################
 #Sinadef´s death data
 library("tidyr")
 sinadef=fread("SINADEF - Data.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#fallecidos segun SINADEF
@@ -419,7 +419,7 @@ pro.plot2=provincias3%>%
 
 ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
        height = 268,unit="mm",plot = pro.plot2)
-############################################################################################################################################################     
+################################################################################   
 ```
 It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
 
