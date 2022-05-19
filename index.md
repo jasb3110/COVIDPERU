@@ -2,14 +2,18 @@
 
 - [Introdution](#introduction)
 - [to clean dataset](#to-clean-dataset)
-- [R code](#R-code) 
+- [R code](#R-code)
+  - [Exploratory plot](#exploratory-plot)
+  - [R code](#R-code)
+  - [R code](#R-code)
+  - [R code](#R-code)
 
 # Introdution
 First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [(1)](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [(2)](#references).
 
 # to clean dataset
 When Covid-19 had started to spread on Peru. The health government institutes were not systemic criteria to order COVID-19 reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which could have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
-Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources link: [datos abiertos](https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
+Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources,link: [datos abiertos](https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
 # R code
 I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
@@ -218,6 +222,7 @@ points(d3, col="gray70", type="l",lwd=4)
 dev.off()
 ################################################################################
 ```
+## Exploratory plot 
 It show that exploratory plot of SINADEF´s dataset (death´s register). first view it seems to be clean and sort that you can looking down eigth pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/exploratory.plot.png?raw=true)
@@ -264,7 +269,7 @@ colnames(encovid)=c("fechas","dia","mes","año","m_encovid_medio","m_encovid_min
 mes.abb=c("En","Fe","Ma","Ab","My","Jn","Jl","Au","Se","Oc","No","Di")
 names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12)),"-",mes.abb)# since 2019
 
-### women
+#women
 mujeres$nombre.mes=NULL
 for(i in 1:length(mujeres$date)){
   mujeres$nombre.mes[i]=mes.abb[mujeres$meses[i]]
@@ -328,6 +333,7 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 ################################################################################
 ```
+## SINADEF´s death on Peru
 It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
@@ -427,6 +433,8 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
        height = 268,unit="mm",plot = pro.plot2)
 ################################################################################   
 ```
+## SINADEF´s death by regions
+
 It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
 
 In my view, whole regions shows that evidence three waves. but each region shows its particular patterns of trendency.  Lima region was recorded the most number of death. this aspect could be explained the Lima region is the densely populated of the country and where dayly reports were more reliable and accurate than others regions.
@@ -549,6 +557,8 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 
 ###############################################################################
 ```
+## positive-COVID´s people
+
 In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.hombres.png?raw=true)
@@ -590,8 +600,8 @@ mm9
 mm10
 mm11
 mm12
-mm13#falta de datos de provincia
-mm14#falta de datos de distritos
+mm13#lack of data of provinces
+mm14#lack of data of ditrits
 
 mcovid$FECHA_FALLECIMIENTO=as.character(mcovid$FECHA_FALLECIMIENTO)
 mcovid$dia=as.numeric(format(as.Date(mcovid$FECHA_FALLECIMIENTO,format="%Y%m%d"), format = "%d"))
@@ -688,7 +698,6 @@ relation=as.data.frame(na.omit(relation))
 write.csv(relation,"relation.csv",sep=",",dec=".",col.names=TRUE)
 reg=lm(relation$exceso.nor~relation$muertos.nor,data = relation)
 
-
 relation$fechas=as.Date("3-3-2020",format="%d-%m-%Y")+relation$Días-1
 
 relation$fechas=as.Date(relation$fechas,format="%d-%m-%Y")
@@ -761,6 +770,7 @@ subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subest
 subestimacion# underestimate
 ################################################################################
 ```
+##Molecular positivity of COVID´s people on Peru
 The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/relacion.positivas.positivas+negativas.molecular.png?raw=true)
