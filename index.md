@@ -1,15 +1,15 @@
-## Introdution
-First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020. In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 febrary of 2020. After, He showed that first syntoms of COVID-19 (2).
+# Introdution
+First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 (1). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 (2).
 
-## to clean dataset
+# to clean dataset
 When Covid-19 had started to spread on Peru. The health government institutes were not systemic criteria to order COVID-19 reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which could have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
 Therefore, the first challenge was delete or omit different mistakes (Na, null values and outliers). whole of data were downloaded of Peruvian official sources (https://www.datosabiertos.gob.pe/). I would show you how to manage deep cleaning the data.
 
-## R code
+# R code
 I´m R native programmer so that it too easily to proceed to clean of dataset with this program. It could possible to use anothers programs. I suggest that you will able to use Python. 
 
 ```markdown
-############################################################################################################################################################
+################################################################################
 #to start
 setwd("~/covid19/")#directory
 require("janitor")# package should have installed
@@ -34,8 +34,6 @@ mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#Per
 
 #to clean and sort of SINADEF´data
 m=as.data.frame(m)
-#dead=row_to_names(m,row_number = 2, remove_row = TRUE, remove_rows_above = TRUE)
-#
 dead=m
 rownames(dead)=NULL
 dead$NÂº=NULL
@@ -61,14 +59,16 @@ for(i in 1:length(unique(sort(dead$FECHA)))){
   dead$date[which(dead$FECHA==order[i])]=i
 }
 dead=as.data.frame(dead)
+
 #to find out mistakes in dates
-#para dias e1|e2|e3 = 0
+#for days e1|e2|e3 = 0
 e1=sum(is.na(dead$dia))
 e2=sum(which(dead$dia>31))
 e3=sum(which(dead$dia<1))
 e1
 e2
 e3
+
 #for month
 #para dias e4|e5|e6 = 0
 e4=sum(is.na(dead$meses))
@@ -77,6 +77,7 @@ e6=sum(which(dead$meses<1))
 e4
 e5
 e6
+
 #for years
 #para dias e7|e8|e9 = 0
 e7=sum(is.na(dead$años))
@@ -147,6 +148,7 @@ tt$EDAD[ss4]=tt$EDAD[ss4]/(12)
 #for years
 m6=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[1])]>123)
 tt$EDAD[m6]=NA
+
 #for "ignorados" and "sin registro" ( without specific names)
 m7=c(which(tt$`TIEMPO EDAD`==TT[6]|tt$`TIEMPO EDAD`==TT[8]|tt$`TIEMPO EDAD`==TT[9]))
 tt$`TIEMPO EDAD`[which(tt$EDAD[m7]>60)]=TT[1]
@@ -208,13 +210,13 @@ plot(d1, col="blue",lwd=4,main="deaths density",ylim=c(0,max(cbind(d1$y,d2$y,d3$
 points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
 dev.off()
-############################################################################################################################################################
+################################################################################
 ```
-It show that exploratory plot of SINADEF´s dataset (register of deaths). first view it seems to be clean and sort that you can looking down eigth pictures. 
+It show that exploratory plot of SINADEF´s dataset (death´s register). first view it seems to be clean and sort that you can looking down eigth pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/exploratory.plot.png?raw=true)
 
-Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. My assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I ploted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
+Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. The assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I ploted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
 
 ```markdown 
 ############################################################################################################################################################
