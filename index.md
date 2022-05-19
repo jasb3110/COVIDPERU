@@ -3,8 +3,6 @@
 - [Introdution](#introduction)
 - [to clean dataset](#to-clean-dataset)
 - [R code](#R-code) 
-- [Small Title](#small-title) 
-
 
 # Introdution
 First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [(1)](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [(2)](#references).
