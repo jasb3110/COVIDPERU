@@ -219,7 +219,7 @@ points(d3, col="gray70", type="l",lwd=4)
 dev.off()
 ################################################################################
 ```
-## Exploratory plot 
+## Exploratory picture
 It show that exploratory plot of SINADEF´s data set (death´s register). first view it seems to be clean and sort that you can looking down eight pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/exploratory.plot.png?raw=true)
@@ -286,7 +286,7 @@ fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$n)) + geom_box
 ggsave("fallecidos.mujeres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.muj)
 
-### Men
+# Men
 hombres$nombre.mes=NULL
 for(i in 1:length(hombres$date)){
   hombres$nombre.mes[i]=mes.abb[hombres$meses[i]]
@@ -306,7 +306,7 @@ fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$n)) + geom_box
 ggsave("fallecidos.hombres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.hom)
 
-### merged ( men + women)
+#to merged (men + women)
 todos$nombre.mes=NULL
 for(i in 1:length(todos$date)){
   todos$nombre.mes[i]=mes.abb[todos$meses[i]]
@@ -346,7 +346,7 @@ Next, it is getting to clean and sort of SINADEF´s death data by regions. Bello
 
 ```markdown 
 ################################################################################
-#Sinadef´s death data
+#SINADEF´s death data
 library("tidyr")
 sinadef=fread("SINADEF - Data.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#fallecidos segun SINADEF
 ub=fread("TB_UBIGEOS.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#ubigeos reales
@@ -472,7 +472,7 @@ covid3$SEXO=factor(covid3$SEXO,levels=unique(covid3$SEXO))
 covid3$fecha=as.Date(paste0(covid3$años,"-",covid3$meses,"-",covid3$dia),format="%Y-%m-%d")
 covid19=as.data.frame(covid3%>%count(colnames(covid3)))
 
-#dias de desfase por metodo
+#delay days for each kind of tests
 desfase_PCR=2#delay days for PCR test
 desfase_PR=8#delay days for serological test
 desfase_PA=5#delay days for antigen test
@@ -538,7 +538,7 @@ covid.muj=ggplot(data=covidmuj, aes(x=covidmuj$FECHA, y=covidmuj$freq, group=cov
 ggsave("covid.mujeres.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = covid.muj)
 
-# all people
+#all people
 
 covid.todo=ggplot(data=sinsexocovid, aes(x=sinsexocovid$FECHA, y=sinsexocovid$freq, group=sinsexocovid$METODODX))+
   scale_x_date(date_breaks = "30 days",date_labels = "%d-%b")+
@@ -729,7 +729,7 @@ p=ggplotRegression(reg)+
 ggsave("regresion.png", dpi = 600,   width = 275,
        height = 175,unit="mm",plot =p)
 
-#Animation
+#Animation of relationship between of excess of deaths and COVID´s death
 
 p2=ggplot(relation,aes(x = relation$muertos.nor, y = relation$exceso.nor))+
   geom_point(aes(fill=relation$mes), shape = 21, alpha = 0.99,size=3)+
@@ -750,7 +750,7 @@ p2=ggplot(relation,aes(x = relation$muertos.nor, y = relation$exceso.nor))+
 
 animate(p2, fps = 15, duration =25,renderer = gifski_renderer("regresion.gif"),height=630,width=1000)
 
-#correlation muertos covid y exceso de muertos hasta 17 de diciembre
+#Spearman correlation between of excess of deaths and COVID´s death
 rho=cor.test(relation$muertos.nor,relation$exceso.nor,method = "spearman")$estimate
 signif(rho,2)
 
@@ -761,10 +761,7 @@ muertostotales
 
 estimado_muertos_reales=round(muertostotales*rho-muertosreportados,digits=0)
 estimado_muertos_reales
-infectados_totales_virtuales=trunc(100*muertostotales*rho/2.3)
-infectados_totales_virtuales
-subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion 
-subestimacion# underestimate
+subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion subestimacion# underestimate in percent
 ################################################################################
 ```
 ##Molecular positivity of COVID´s people on Peru
