@@ -1,5 +1,5 @@
 # Introdution
-First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [1](#References). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [2](#References).
+First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [References](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [References](#references).
 
 # to clean dataset
 When Covid-19 had started to spread on Peru. The health government institutes were not systemic criteria to order COVID-19 reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which could have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
