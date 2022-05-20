@@ -3,11 +3,11 @@
 - [Introdution](#introduction)
 - [to clean dataset](#to-clean-dataset)
 - [R code](#r-code)
-  - [Exploratory plot](#exploratory-plot)
+  - [Exploratory pictures](#exploratory-pictures)
   - [SINADEF´s death on Peru](#sinadef´s-death-on-peru)
   - [SINADEF´s death by regions](#sinadef´s-death-by-regions)
   - [Positive-COVID´s people](#positive-covid´s-people)
-  - [Molecular positivity of COVID´s in percent on Peru](#molecular-positivity-of-covid´s-in-percent-on-peru)
+  - [Molecular positivity of COVID´s in percent on Peru](#molecular-positivity-of-covid-s-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
   - [Free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
   - [Vaccinatation in progress](#vaccinatation-in-progress)
@@ -226,7 +226,7 @@ points(d3, col="gray70", type="l",lwd=4)
 dev.off()
 ################################################################################
 ```
-## Exploratory picture
+## Exploratory pictures
 It show that exploratory plot of SINADEF´s data set (death´s register). first view it seems to be clean and sort that you can looking down eight pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/exploratory.plot.png?raw=true)
