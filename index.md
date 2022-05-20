@@ -2,11 +2,15 @@
 
 - [Introdution](#introduction)
 - [to clean dataset](#to-clean-dataset)
-- [R code](#R-code)
   - [Exploratory plot](#exploratory-plot)
-  - [R code](#R-code)
-  - [R code](#R-code)
-  - [R code](#R-code)
+  - [SINADEF´s death on Peru](#SINADEF´s-death-on-Peru)
+  - [SINADEF´s death by regions](#SINADEF´s-death-by-regions)
+  - [positive-COVID´s people](#positive-COVID´s-people)
+  - [Molecular positivity of COVID´s in percent on Peru](#molecular-positivity-of-COVID´s-in-percent-on-Peru)
+  - [OPENCOVIDPERU data set](#OPENCOVIDPERU-data-set)
+  - [free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
+  - [Vaccinatation in progress](#vaccinatation-in-progress)
+- [Final ideas](#Final-ideas)
 
 # Introdution
 First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [(1)](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [(2)](#references).
@@ -1631,7 +1635,7 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =cama)
 
 ```
-###Vaccinatation in progress
+##Vaccinatation in progress
 ABCDE
 
 
@@ -1699,7 +1703,7 @@ if(v.peru$Dosis[i]=="3"){
 write.csv(vacunados,"vacunados.csv",sep=",",dec=".",col.names=TRUE)
 
 ```
-
+#Final ideas
 
 
 
