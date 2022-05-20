@@ -571,9 +571,11 @@ According to Spearman correlation test reported that excess of death and COVID´
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.png?raw=true)
 
+Alternately, I create a animation how to change COVID´s mortality since to begin to now.
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.gif?raw=true)
 
-Next, it is getting to clean and sort  dataset of COVID´s death acording to Peruvian health ministery. Bellow I attached lines scripts.
+Next, it is getting to clean and sort  data set of COVID´s death acording to Peruvian health ministry. Bellow I attached lines scripts.
 
 ```markdown
 ################################################################################
