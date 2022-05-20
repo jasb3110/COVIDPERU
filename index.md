@@ -556,13 +556,22 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 ```
 ## positive-COVID´s people
 
-In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
+In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. In the legend, "PM, PR and AG"  means molecular test, serological test and antigen test in spanish respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.hombres.png?raw=true)
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.mujeres.png?raw=true)
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.todo.png?raw=true)
+
+Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth. So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA. 
+
+
+According to Spearman correlation test reported that excess of death and COVID´s death was 94% and coefficient of regression of Pearson was 0.74.   
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.png?raw=true)
+
+
 
 Next, it is getting to clean and sort  dataset of COVID´s death acording to Peruvian health ministery. Bellow I attached lines scripts.
 
@@ -1051,7 +1060,6 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
        height = 159,unit="mm",plot =pos.mol)
 
 ```
-
 ##OPENCOVIDPERU data set
 I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references).
 
