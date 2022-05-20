@@ -560,7 +560,7 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 
 ###############################################################################
 ```
-## positive-COVID´s people
+## Positive-COVID´s people
 
 In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. In the legend, "PM, PR and AG"  means molecular test, serological test and antigen test in spanish respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
@@ -781,7 +781,7 @@ estimado_muertos_reales
 subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion subestimacion# underestimate in percent
 ################################################################################
 ```
-##Molecular positivity of COVID´s in percent on Peru
+## Molecular positivity of COVID´s in percent on Peru
 The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/relacion.positivas.positivas+negativas.molecular.png?raw=true)
@@ -1068,7 +1068,7 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
        height = 159,unit="mm",plot =pos.mol)
 
 ```
-##OPENCOVIDPERU data set
+## OPENCOVIDPERU data set
 I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references).
 
 
@@ -1535,7 +1535,7 @@ write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
 ```
 
-## free bed of Intensive care unit 
+## Free bed of Intensive care unit 
 ABCDE
 
 
@@ -1637,7 +1637,7 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =cama)
 
 ```
-##Vaccinatation in progress
+## Vaccinatation in progress
 ABCDE
 
 
@@ -1705,7 +1705,7 @@ if(v.peru$Dosis[i]=="3"){
 write.csv(vacunados,"vacunados.csv",sep=",",dec=".",col.names=TRUE)
 
 ```
-#Final ideas
+# Final ideas
 
 
 
