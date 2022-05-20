@@ -2,6 +2,7 @@
 
 - [Introdution](#introduction)
 - [to clean dataset](#to-clean-dataset)
+- [R code](#r-code)
   - [Exploratory plot](##exploratory-plot)
   - [SINADEF´s death on Peru](##sinadef´s-death-on-peru)
   - [SINADEF´s death by regions](##sinadef´s-death-by-regions)
