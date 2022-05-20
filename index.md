@@ -4,8 +4,8 @@
 - [to clean dataset](#to-clean-dataset)
 - [R code](#r-code)
   - [Exploratory pictures](#exploratory-pictures)
-  - [Mortality on Peru](#mortality-on-peru)
-  - [Mortality by regions](#mortality-by-regions)
+  - [Mortality reporting SINADEF on Peru](#mortality-reporting-sinadef-on-peru)
+  - [Mortality reporting SINADEF by regions](#mortality-reporting-sinadef-by-regions)
   - [Peruvian people with COVID](#peruvian-people-with-covid)
   - [Molecular positivity of COVID in percent on Peru](#molecular-positivity-of-covid-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
@@ -16,7 +16,7 @@
 - [Support or Contact](#support-or-contact)
 
 # Introdution
-First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [(1)](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [(2)](#references).
+First of all, The SARS-COV-2 is well-know as COVID-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [(1)](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [(2)](#references).
 
 # to clean dataset
 When Covid-19 had started to spread on Peru. The health government institutes were not systemic criteria to order COVID-19 reports. this issue had detrimental effect on reliable diffusion information to Peruvian people. So that,it was important to unificate different source in one way to present COVID-19 variables (positive rate of covid´s patients, numbers of death which have cause for COVID-19, excess of death which could have triggered for COVID-19, numbers of free UCI bed in hospitals and numbers of people were vaccinated).
@@ -337,7 +337,7 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 ################################################################################
 ```
-## Mortality on Peru
+## Mortality reporting SINADEF on Peru
 It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
@@ -437,7 +437,7 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
        height = 268,unit="mm",plot = pro.plot2)
 ################################################################################   
 ```
-## Mortality by regions
+## Mortality reporting SINADEF by regions
 
 It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
 
@@ -563,7 +563,7 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 ```
 ## Peruvian people with COVID
 
-In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. In the legend, "PM, PR and AG"  means molecular test, serological test and antigen test in spanish respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
+In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. In the legend, "PCR, SER and ANT"  means molecular test, serological test and antigen test respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/covid.hombres.png?raw=true)
 
@@ -573,8 +573,8 @@ In this pictures are showed that number of people who had been had positive covi
 
 Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth. So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA. 
 
+According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-saqured) is 0.84. Whereby, excess
 
-According to Spearman correlation test reported that excess of death and COVID´s death was 94% and coefficient of regression of Pearson was 0.74.   
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.png?raw=true)
 
