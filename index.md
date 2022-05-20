@@ -9,7 +9,7 @@
   - [Peruvian people with COVID](#peruvian-people-with-covid)
   - [Molecular positivity of COVID in percent on Peru](#molecular-positivity-of-covid-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
-  - [Free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
+  - [Free bed of Intensive care unit](#free-bed-of-intensive-care-unit)
   - [Vaccinatation in progress](#vaccinatation-in-progress)
 - [Final ideas](#final-ideas)
 - [References](#references)
@@ -1535,7 +1535,6 @@ sum(pos$`total de pruebas`[3:(length(data.esfuerzo$fecha)+2)]>data.esfuerzo$n)#d
 write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
 ```
-
 ## Free bed of Intensive care unit 
 ABCDE
 
