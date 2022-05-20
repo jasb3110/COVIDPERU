@@ -10,7 +10,9 @@
   - [OPENCOVIDPERU data set](#OPENCOVIDPERU-data-set)
   - [free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
   - [Vaccinatation in progress](#vaccinatation-in-progress)
-- [Final ideas](#Final-ideas)
+- [Final ideas](#final-ideas)
+- [References](#reference)
+- [Support or Contact](#support-or-contact)
 
 # Introdution
 First of all, The SARS-COV-2 is well-know as Covid-19, spreading pandemic illness around world during 2019 to now. COVID-19 had come through a man who came to Italia on 21th febrary, 2020 [(1)](#references). In Peru, this sickness had come through Luis Felipe Zeballos who arrived to Lima on 26 February of 2020. After, He showed that first syntoms of COVID-19 [(2)](#references).
