@@ -6,7 +6,7 @@
   - [Exploratory pictures](#exploratory-pictures)
   - [Mortality on Peru](#mortality-on-peru)
   - [Mortality by regions](#mortality-by-regions)
-  - [Peruvian people with Covid](#peruvian-people-with-covid)
+  - [Peruvian people with COVID](#peruvian-people-with-covid)
   - [Molecular positivity of COVID in percent on Peru](#molecular-positivity-of-covid-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
   - [Free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
@@ -561,7 +561,7 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 
 ###############################################################################
 ```
-## Peruvian people with Covid
+## Peruvian people with COVID
 
 In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. In the legend, "PM, PR and AG"  means molecular test, serological test and antigen test in spanish respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
