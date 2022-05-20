@@ -9,7 +9,7 @@
   - [Positive-COVID´s people](#positive-covid´s-people)
   - [Molecular positivity of COVID´s in percent on Peru](##molecular-positivity-of-covid´s-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
-  - [Free bed of Intensive care unit](#free-bed-of-intensive-care-unit)
+  - [Free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
   - [Vaccinatation in progress](#vaccinatation-in-progress)
 - [Final ideas](#final-ideas)
 - [References](#references)
