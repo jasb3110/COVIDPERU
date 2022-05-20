@@ -571,7 +571,7 @@ According to Spearman correlation test reported that excess of death and COVID´
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.png?raw=true)
 
-Alternately, I create a animation how to evolve COVID´s mortality since begining of pandemic to now. this manner you could see famous three waves.
+Alternately, I create a animation how to evolve COVID´s mortality since beginning of pandemic to now. this manner it could see famous three waves.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.gif?raw=true)
 
