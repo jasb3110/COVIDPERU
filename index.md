@@ -4,10 +4,10 @@
 - [to clean dataset](#to-clean-dataset)
 - [R code](#r-code)
   - [Exploratory pictures](#exploratory-pictures)
-  - [SINADEF´s death on Peru](#sinadef´s-death-on-peru)
-  - [SINADEF´s death by regions](#sinadef´s-death-by-regions)
-  - [Positive-COVID´s people](#positive-covid´s-people)
-  - [Molecular positivity of COVID´s in percent on Peru](#molecular-positivity-of-covid-s-in-percent-on-peru)
+  - [Mortality on Peru](#mortality-on-peru)
+  - [Mortality by regions](#mortality-by-regions)
+  - [Peruvian people with Covid](#peruvian-people-with-covid)
+  - [Molecular positivity of COVID in percent on Peru](#molecular-positivity-of-covid-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
   - [Free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
   - [Vaccinatation in progress](#vaccinatation-in-progress)
@@ -337,7 +337,7 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
 ################################################################################
 ```
-## SINADEF´s death on Peru
+## Mortality on Peru
 It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
@@ -437,7 +437,7 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
        height = 268,unit="mm",plot = pro.plot2)
 ################################################################################   
 ```
-## SINADEF´s death by regions
+## Mortality by regions
 
 It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now. X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
 
@@ -561,7 +561,7 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 
 ###############################################################################
 ```
-## Positive-COVID´s people
+## Peruvian people with Covid
 
 In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now. In the legend, "PM, PR and AG"  means molecular test, serological test and antigen test in spanish respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
@@ -782,7 +782,7 @@ estimado_muertos_reales
 subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion subestimacion# underestimate in percent
 ################################################################################
 ```
-## Molecular positivity of COVID´s in percent on Peru
+## Molecular positivity of COVID in percent on Peru
 The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/relacion.positivas.positivas+negativas.molecular.png?raw=true)
