@@ -7,7 +7,7 @@
   - [SINADEF´s death on Peru](#sinadef´s-death-on-peru)
   - [SINADEF´s death by regions](#sinadef´s-death-by-regions)
   - [Positive-COVID´s people](#positive-covid´s-people)
-  - [Molecular positivity of COVID´s in percent on Peru](##molecular-positivity-of-covid´s-in-percent-on-peru)
+  - [Molecular positivity of COVID´s in percent on Peru](#molecular-positivity-of-covid´s-in-percent-on-peru)
   - [OPENCOVIDPERU data set](#opencovidperu-data-set)
   - [Free bed of Intensive care unit](#free-bed-of-Intensive-care-unit)
   - [Vaccinatation in progress](#vaccinatation-in-progress)
