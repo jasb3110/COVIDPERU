@@ -573,7 +573,7 @@ In this pictures are showed that number of people who had been had positive covi
 
 Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth. So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA. 
 
-According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-saqured) is 0.84. Whereby, excess
+According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-squared) is 0.84. Whereby, excess
 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.png?raw=true)
