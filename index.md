@@ -1136,18 +1136,6 @@ prov=unique(ccam$provincia)
 fechasss=unique(ccam$fecha)
 ccam$provincia=factor(ccam$provincia,levels=prov)
 
-#errror
-
-#prov.perd=ccam$fecha[which(ccam$provincia=="")]
-#prov.p=ccam$provincia[which(ccam$fecha==prov.perd-1)]
-#prov.p2=ccam$provincia[which(ccam$fecha==prov.perd-1)]
-#prov.p3=ccam$provincia[which(ccam$fecha==prov.perd+1)]
-
-#count(prov.p)[2]-rbind(count(prov.p2)[2])#dep 3 o 6
-#count(prov.p)[2]-rbind(count(prov.p3)[2])#del 2 o 6
-#se asume dep 6 
-#ccam$provincia[which(ccam$provincia=="")]=count(prov.p)[[1]][6]
-
 depa=c("Amazonas",
        "Ancash",
        "Apurimac",
@@ -1249,7 +1237,7 @@ desfase=as.data.frame(cbind(rep(defase$fecha,(length(depa)+length(depylima)))
 colnames(desfase)=c("Fecha","Zona","Fuente","Casos","Fallecidos")
 desfase$Fecha=as.Date(rep(defase$fecha,length(depa)+length(depylima)),format="%Y-%m-%d")
 
-#Para la casos covid diresa
+#For COVID´s cases reporting DIRESA
 library("tidyr")
 diresa=defase[,27:51]
 for(i in 1:25){
@@ -1262,7 +1250,7 @@ write.csv(diresa,"diresa.csv",sep="")
 Diresa=read.delim("diresa.csv",sep=",",header = TRUE)
 Diresa$fuente="diresa"
 
-#Para la casos covid minsa
+#For COVID´s cases reporting MINSA
 minsa=defase[,53:78]
 for(i in 1:26){
   minsa[,i]=as.numeric(gsub(",","",defase[,52+i]))
@@ -1274,7 +1262,7 @@ write.csv(minsa,"minsa.csv",sep="")
 Minsa=read.delim("minsa.csv",sep=",",header = TRUE)
 Minsa$fuente="minsa"
 
-#Para la fallecidos covid diresa
+#For COVID´s death reporting DIRESA
 diresa.f=defase[,131:155]
 for(i in 1:25){
   diresa.f[,i]=as.numeric(gsub(",","",defase[,130+i]))
@@ -1286,7 +1274,7 @@ write.csv(diresa.f,"diresa.f.csv",sep="")
 Diresa.f=read.csv("diresa.f.csv",sep=",",header = TRUE)
 Diresa.f$fuente="diresa"
 
-#Para la fallecidos covid minsa
+#For COVID´s death reporting MINSA
 minsa.f=defase[,157:182]
 for(i in 1:26){
   minsa.f[,i]=as.numeric(gsub(",","",defase[,156+i]))
@@ -1298,7 +1286,7 @@ write.csv(minsa.f,"minsa.f.csv",sep="")
 Minsa.f=read.delim("minsa.f.csv",sep=",",header = TRUE)
 Minsa.f$fuente="minsa"
 
-#Para la casos covid diris
+#For COVID´s cases reporting DIRIS
 DIRIS=c("CENTRO","NORTE","SUR","ESTE")
 diris=defase[,85:88]
 for(i in 1:4){
@@ -1315,7 +1303,7 @@ Diris=as.data.frame(Diris)
 colnames(Diris)=c("Fecha","Zona","Casos", "fuente")
 Diris$Fecha=rep(fecha,4)
 
-#Para la casos covid MINSA zonas
+#For COVID´s cases reporting MINSA´s zones
 MINSA=c("CENTRO","NORTE","SUR","ESTE")
 minsaz=defase[,90:93]
 for(i in 1:4){
@@ -1332,7 +1320,7 @@ Minsaz=as.data.frame(Minsaz)
 colnames(Minsaz)=c("Fecha","Zona","Casos", "fuente")
 Minsaz$Fecha=rep(fecha,4)
 
-#uniendo la  data diresa, diris y minsa 
+#To merge data set: DIRIS, DIRESA and MINSA
 desfase$Zona=c(Diresa$Departamento,
                Minsa$Departamento)
 desfase$Fuente=c(Diresa$fuente,
@@ -1342,7 +1330,6 @@ desfase$Casos=c(Diresa$Casos,
 desfase$Fallecidos=c(Diresa.f$Casos,
                      Minsa.f$Casos)
 df=as.data.frame(desfase)
-#df[is.na(df)]<-0
 
 Diris.casos=as.data.frame(cbind(Diris$Fecha,Diris$Zona,Diris$fuente,Diris$Casos,rep(NA,length(Diris$Casos))))
 colnames(Diris.casos)=c("Fecha","Zona","Fuente","Casos","Fallecidos")
@@ -1410,7 +1397,7 @@ infect=ggplot(data=infe, aes(x=infe$fecha, y=infe$infec))+
 ggsave("infectados.diresa.diris.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =infect)
 
-####Solo Minsa
+# MINSA
 
 solo.minsa=todo.casos[which(todo.casos$Fuente=="minsa"&todo.casos$Casos!=0),]
 
@@ -1452,7 +1439,7 @@ infecm=ggplot(data=infm, aes(x=infm$fecha, y=infm$infec))+
 ggsave("infectados.minsa.acumulado.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =infecm)
 
-############vuebas unidas moleculares y rapidas
+# to merged Molecular and serological tests for COVID
 
 prueba=pruebas[,c(2,3,4,5,7,8,9)]
 colnames(prueba)=c("fechas","M+","R+","A+","TM","TR","TA")
@@ -1608,17 +1595,17 @@ camas.libres=as.data.frame(cbind(UCI$DATE,UCI$`Perú-Total Sum of UCI DISP`))
 colnames(camas.libres)=c("fecha","Números de Camas")
 camas.libres$Estado=rep("Disponibles",length(UCI$DATE))
 
-#error de data
+# Data has a discordance sharply, I trying to improve it and to delete mistakes.
 
 camas.libres$`Números de Camas`=as.numeric(camas.libres$`Números de Camas`)
 camas.ocupadas$`Números de Camas`=as.numeric(camas.ocupadas$`Números de Camas`)
 
-#OJO
+#WATCH OUT
 k1=camas.libres$`Números de Camas`[582]/camas.libres$`Números de Camas`[581]
 k2=camas.ocupadas$`Números de Camas`[582]/camas.ocupadas$`Números de Camas`[581]
 camas.libres$`Números de Camas`[582:length(camas.libres$`Números de Camas`)]=round(camas.libres$`Números de Camas`[582:length(camas.libres$`Números de Camas`)]/k1)
 camas.ocupadas$`Números de Camas`[582:length(camas.ocupadas$`Números de Camas`)]=round(camas.ocupadas$`Números de Camas`[582:length(camas.ocupadas$`Números de Camas`)]/k2)
-#
+
 camas=as.data.frame(rbind(camas.ocupadas,camas.libres))
 camas$fecha=c(as.Date(UCI$DATE,format="%Y-%m-%d"),
               as.Date(UCI$DATE,format="%Y-%m-%d"))
@@ -1656,9 +1643,6 @@ vac=as.data.frame(cbind(vac$FECHA_VACUNACION,vac$EDAD,vac$DOSIS,vac$DEPARTAMENTO
 colnames(vac)=c("fecha","Edad","Dosis","Departamento")
 vac$fecha=as.character(vac$fecha)
 vac$fecha=as.Date(vac$fecha,format="%Y%m%d")
-
-#vvv=as.data.frame(count(vac,c("fecha","Edad","Dosis","Departamento")))
-#v.prov=as.data.frame(count(vac,c("fecha","Edad","Dosis","Departamento")))
 v.peru=as.data.frame(vac%>%count(fecha,Dosis))
 dosis=unique(v.peru$Dosis)
 v.peru$Dosis=factor(v.peru$Dosis,levels =dosis)
@@ -1678,8 +1662,9 @@ vacuna=ggplot(data=v.peru, aes(x = v.peru$fecha, y =v.peru$n,group=v.peru$Dosis)
 ggsave("serie.tiempo.vacunados.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =vacuna)
 
-inicio.pandemia=as.Date("2020-03-04", format="%Y-%m-%d")#inicio arbitrario el 4 de marzo del 2020
-today <- Sys.Date()
+inicio.pandemia=as.Date("2020-03-04", format="%Y-%m-%d")#COVID spreading is began on 4 of march, 2020.  
+
+today <- Sys.Date() 
 hoy=format(today, format="%Y-%m-%d")
 Dates=seq(as.Date(inicio.pandemia,format="%Y-%m-%d"), as.Date(hoy, format="%Y-%m-%d"), by="days")
 Dates=as.Date(Dates,format="%Y-%m-%d")
