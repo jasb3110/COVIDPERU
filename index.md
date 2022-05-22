@@ -575,14 +575,16 @@ Many scientists and journalists said in Media that booming of mortality on Peru 
 
 According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-squared) is 0.84. Whereby, excess
 
-
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/regresion.png?raw=true)
 
 Alternately, I create a animation how to evolve COVID´s mortality since beginning of pandemic to now. this manner it could see famous three waves.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/1fc1af589150d750db96aae4a4d21699846df300/regresion.gif?raw=true)
 
-Next, it is getting to clean and sort  data set of COVID´s death acording to Peruvian health ministry. Bellow I attached lines scripts.
+According to previous results, I am able to estimate a underestimate of COVID´s death.
+If I use as a reference value  rho value of Spearman correlation, underestimate will be 55%, whether I use as a reference value a r-squared of Pearson linear regression, underestimate will be 50%. Therefore, It likely suggests that underestimation of COVID´s death is around half a less. 
+
+Next, it is getting to clean and sort  data set of COVID´s death according to Peruvian health ministry. Bellow I attached lines scripts.
 
 ```markdown
 ################################################################################
@@ -779,7 +781,12 @@ muertostotales
 
 estimado_muertos_reales=round(muertostotales*rho-muertosreportados,digits=0)
 estimado_muertos_reales
-subestimacion=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion subestimacion# underestimate in percent
+subestimacion1=(muertostotales*rho-muertosreportados)/(muertostotales*rho)#subestimacion subestimacion1# underestimate in percent for rho of spearman correlation
+
+rsquared=summary(reg)$r.squared
+subestimacion2=(muertostotales*rsquared-muertosreportados)/(muertostotales*rsquared)#subestimacion 
+subestimacion2# underestimate in percent for r-squared of Pearson Linear regression
+
 ################################################################################
 ```
 ## Molecular positivity of COVID in percent on Peru
