@@ -1079,10 +1079,13 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
 ## OPENCOVIDPERU data set
 I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references).
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/infectados.diresa.diris.png?raw=true)
 
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/infectados.minsa.acumulado.png?raw=true)
 
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/infectados.diresa.diris.png?raw=true)
 
 
 
@@ -1354,12 +1357,12 @@ todo.casos=as.data.frame(data%>%count(fecha2
 
 diresa.diris=todo.casos[which(todo.casos$Fuente!="minsa"&todo.casos$Casos!=0),]
 
-sum(diresa.diris$n>1)# error no se sabe por que
+sum(diresa.diris$n>1)# error 
 diresa.diris[which(diresa.diris$n>1),]#datos duplicados 
 diresa.diris$n=NULL
 infectados=as.data.frame(diresa.diris%>%count(fecha2
                                               ,Casos))
-sum(infectados$n>1)# error no se sabe por que
+sum(infectados$n>1)# error 
 infectados[which(infectados$n>1),]#datos duplicados
 infectados$n=NULL
 infectados$Casos=as.numeric(infectados$Casos)
