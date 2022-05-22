@@ -1505,7 +1505,6 @@ posi=ggplot(data=pos, aes(x = pos$fechas, y =pos$p,group=pos$tipo))+
 ggsave("serie.tiempo.positividad.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =posi)
 
-
 posi.r=ggplot(data=pos, aes(x = pos$fechas, y =pos$p.dia,group=pos$tipo))+
   geom_line(aes(color=pos$tipo))+
   #geom_point(aes(color=pos$tipo))+
@@ -1519,12 +1518,10 @@ posi.r=ggplot(data=pos, aes(x = pos$fechas, y =pos$p.dia,group=pos$tipo))+
 ggsave("serie.tiempo.positividad.dia.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =posi.r)
 
-#traslape de infectados inferidos prueba molecular: rojo (positivos/(negativos + indefinidos)) y negro(positivos/negativos)
+# Overlap of COVID´s people infering molecular tests: red ( positive/(negative + non-result) and black ( positive/negative)
+
 x11();plot(razon$positividad[1:(length(razon$fecha)-1)],type="l")
 points(pos$p.dia[5:(length(pos$p.dia)/3)],type="l",col="red")
-
-#length(razon$fecha)+inicio.pandemia
-sum(pos$`total de pruebas`[3:(length(data.esfuerzo$fecha)+2)]>data.esfuerzo$n)#data open.covid es mas real que la INS
 
 write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
