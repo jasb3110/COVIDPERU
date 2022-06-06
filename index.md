@@ -792,7 +792,7 @@ subestimacion2# underestimate in percent for r-squared of Pearson Linear regress
 ## Molecular positivity of COVID in percent on Peru
 The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now. 
 
-![alt text](?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/relacion.positivas.positivas+negativas.molecular.png?raw=true)
 
 In this picture, the most highlight is three sharp of curve of molecular positivity of COVID´s in percent (>20%). but, after third peak was recorded, the positivity rate had been decreased sharply. it could be due to synergy effect of vaccination on Peruvian people and wide spreading of COVID virus. bellow, attached a script.
 
@@ -1079,13 +1079,13 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
 ## OPENCOVIDPERU data set
 I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references).
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/infectados.diresa.diris.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/infectados.diresa.diris.png?raw=true)
 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/infectados.minsa.acumulado.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/infectados.minsa.acumulado.png?raw=true)
 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/aae2f32cc98d173bee698a14470288027c832f88/infectados.diresa.diris.png?raw=true)
+
 
 
 
