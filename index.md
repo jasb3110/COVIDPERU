@@ -571,7 +571,9 @@ In this pictures are showed that number of people who had been had positive covi
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/covid.todo.png?raw=true)
 
-Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth. So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA. 
+Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth. So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA.
+
+In the picture, Time series of Sinadef´s death and excess of death are showed a similar behavior of pattern for coincidence of relative minimus and maximus.  
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/860d5f287e234e02d95db78bb8354c60006239ce/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)
 
@@ -967,7 +969,6 @@ p.m.t4=as.data.frame(cbind(p.m4$FECHATOMAMUESTRA,p.m4$TIPO_MUESTRA,p.m4$RESULTAD
                            p.m4$PROVINCIA_PACIENTE,p.m4$DEPARTAMENTO_MUESTRA,p.m4$PROVINCIA_MUESTRA,
                            p.m4$dia,p.m4$mes,p.m4$año))
 
-#
 enero=fread("pm19Abr2022.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
 
 p.m=enero
