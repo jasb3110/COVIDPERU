@@ -573,6 +573,8 @@ In this pictures are showed that number of people who had been had positive covi
 
 Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth. So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA. 
 
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/860d5f287e234e02d95db78bb8354c60006239ce/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)
+
 According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-squared) is 0.84. Whereby, excess
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/regresion.png?raw=true)
@@ -679,6 +681,32 @@ fall.serie=ggplot(data =deathsextra, aes(x = deathsextra$fecha, y =deathsextra$`
 
 ggsave("serie.tiempo.fallecidosvsexcesodemuertos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =fall.serie)
+       
+# Compare two serie times      
+deathsextra2=data.frame(muertos_covid_total$fechas2,encovid$m_encovid_medio[1:length(muertos_covid_total$n)],muertos_covid_total$n)
+colnames(deathsextra2)=c("Dates","Excess of death","COVID´s death")
+
+min.covid=min(deathsextra2$`COVID´s death`)
+min.excess=min(deathsextra2$`Excess of death`)
+scaleFactor <- max(deathsextra2$`COVID´s death`-min.covid) / max(deathsextra2$`Excess of death`-min.excess)
+
+  fall.serie2=ggplot(deathsextra2, aes(x=deathsextra2$Dates)) +theme_bw()+
+  geom_line(aes(y=deathsextra2$`COVID´s death`, col="red"))+
+  geom_line(aes(y=(deathsextra2$`Excess of death`-min.excess)* scaleFactor), col="blue")+
+  scale_y_continuous(limits=c(0,max(deathsextra2$`COVID´s death`)*1.01),name="Number of COVID´s death", sec.axis=sec_axis(~./scaleFactor, name="Excess of death"))+
+  scale_x_date(date_breaks = "60 days",date_labels = "%d-%m-%Y")+
+  labs(colour="",title="COVID´s Mortality time series",
+       x ="Dates")+
+  theme(legend.position="none",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"),
+        axis.title.y.left=element_text(color="red"),
+        axis.text.y.left=element_text(color="red"),
+        axis.title.y.right=element_text(color="blue"),
+        axis.text.y.right=element_text(color="blue"))
+
+  ggsave("serie.tiempo.fallecidosvsexcesodemuertos2.png", dpi = 600,   width = 250,
+         height = 159,unit="mm",plot =fall.serie2)       
+       
 
 #Relationship with covid death and excess of death
 
@@ -1518,11 +1546,6 @@ posi.r=ggplot(data=pos, aes(x = pos$fechas, y =pos$p.dia,group=pos$tipo))+
 
 ggsave("serie.tiempo.positividad.dia.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =posi.r)
-
-# Overlap of COVID´s people infering molecular tests: red ( positive/(negative + non-result) and black ( positive/negative)
-
-x11();plot(razon$positividad[1:(length(razon$fecha)-1)],type="l")
-points(pos$p.dia[5:(length(pos$p.dia)/3)],type="l",col="red")
 
 write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
