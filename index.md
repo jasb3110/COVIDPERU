@@ -1089,8 +1089,6 @@ I really appreciate a supporting of OPENCOVIDPERU for sharing your data source w
 
 
 
-
-
 ```markdown
 #OPENCOVIDPERU data set
 defase=read.delim("DESFASE CIFRAS - MAIN.csv",sep=",",dec=".")#fallecidos segun SINADEF
@@ -1530,7 +1528,10 @@ write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
 ```
 ## Free bed of Intensive care unit 
-ABCDE
+
+ABCD
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.UCI.png?raw=true)
 
 
 ```markdown
@@ -1633,6 +1634,8 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
 ```
 ## Vaccinatation in progress
 ABCDE
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.vacunados.png?raw=true)
 
 
 ```markdown
