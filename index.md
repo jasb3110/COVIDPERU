@@ -577,7 +577,7 @@ In the picture, Time series of Sinadef´s death and excess of death are showed a
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/860d5f287e234e02d95db78bb8354c60006239ce/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)
 
-According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-squared) is 0.84. Whereby, excess
+According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-squared) is 0.83. Whereby, small difference could explained for deaths due to indirect relationship with COVID quarantine (e.g reduction Hospital´s timetable and huge demand on UCI´s beds).
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/regresion.png?raw=true)
 
