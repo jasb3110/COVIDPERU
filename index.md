@@ -1110,18 +1110,19 @@ I really appreciate a supporting of OPENCOVIDPERU for sharing your data source w
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/infectados.diresa.diris.png?raw=true)
 
-COVID´s people accumulate reporting to MINSA during May, 2020 to May ,2021. It´s showed 
+COVID´s people accumulate reporting to MINSA during May, 2020 to May ,2021. It´s showed a positive trend and a maximum value that close to 2 people millions.  
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/infectados.minsa.acumulado.png?raw=true)
 
 
-Accumulated COVID´s positivity during May, 2020 to May ,2021. It´s showed
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c2006d3371a7f6e3c97ba8aaf890cf0b40748cea/serie.tiempo.positividad.png?raw=true)
-
-Accumulated COVID´s positivity during May, 2020 to May ,2021. It´s showed
+COVID´s positivity per day  during May, 2020 to May ,2021. It´s showed positivity rate of Molecular , Antigen and Serological tests during March, 2020 to June, 2021. Three index seems to behave similar pattern along time. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c2006d3371a7f6e3c97ba8aaf890cf0b40748cea/serie.tiempo.positividad.dia.png?raw=true)
 
+
+Accumulated COVID´s positivity during May, 2020 to May ,2021. It´s showed Accumulated COVID´s positivity rate of Molecular , Antigen and Serological tests during March, 2020 to June, 2021. Molecular test was recorded high values than Antigen and Serological tests. 
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/c2006d3371a7f6e3c97ba8aaf890cf0b40748cea/serie.tiempo.positividad.png?raw=true)
 
 
 ```markdown
@@ -1559,7 +1560,7 @@ write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 ```
 ## Free bed of Intensive care unit 
 
-ABCD
+According to SUSALUD, Free COVID´s bed is showed increase and decrease during April, 2020 to April, 2022. in this picture, I managed to clean and order in percent. Non-free COVID´s bed showed three peak which could be match with three peak of COVID´s death. However, data set have a lot mistakes or discordance which are not amend.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.UCI.png?raw=true)
 
@@ -1663,7 +1664,9 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
 
 ```
 ## Vaccinatation in progress
-ABCDE
+
+In Peru, MINSA is managing of process a COVID´s Vaccination during 2020 to now. In this picture show how to progress of vaccination per day by doses. high value was recorded in August, 2021. Currently,vaccines have been administered to people which are smaller that vaccination in 2021. 
+
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.vacunados.png?raw=true)
 
