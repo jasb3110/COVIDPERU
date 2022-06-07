@@ -1792,7 +1792,7 @@ Finally, It´s too hard to clean and order COVID´s data set. Also, It has a lot
 
 # Support or Contact
 
-You can use the [editor on GitHub](https://github.com/jasb3110/COVIDPERU/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files. [Contact Us](mailto:solisbenites.jose@gmail.com)
+You can use the [editor on GitHub](https://jasb3110.github.io/COVIDPERU/) to maintain and preview the content for your website in Markdown files. [Contact Us](mailto:solisbenites.jose@gmail.com)
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
