@@ -1734,8 +1734,7 @@ write.csv(vacunados,"vacunados.csv",sep=",",dec=".",col.names=TRUE)
 
 ```
 # Final ideas
-
-
+Finally, It´s too hard to clean and order COVID´s data set. Also, It has a lot mistakes and discordance which blind to use like input for after statistic analysis. in my humble opinion, The best times series of data are Normalizded excess of death, Molecular positivity rate in percent, Free COVID´s bed in percent and number of vaccine by doses.
 
 # References
 1.  Rodriguez-Morales, A. J., Gallego, V., Escalera-Antezana, J. P., Mendez, C. A., Zambrano, L. I., Franco-Paredes, C., … Cimerman, S. (2020). COVID-19 in Latin America: The implications of the first confirmed case in Brazil
