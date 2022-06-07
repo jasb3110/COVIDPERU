@@ -1,5 +1,6 @@
 style type="text/css">
-.main-container {
+.main-container { 
+  class="columns-2"
   max-width: 1800px;
   margin-left: auto;
   margin-right: auto;
