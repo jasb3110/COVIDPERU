@@ -1782,17 +1782,17 @@ Finally, It´s too hard to clean and order COVID´s data set. Also, It has a lot
 
 3. [datosabiertos](https://www.datosabiertos.gob.pe/search/type/dataset)
 
-  3.1  (https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio)
+  3.1(https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio)
   
-  3.2  (https://www.datosabiertos.gob.pe/dataset/casos-positivo s-por-covid-19-ministerio-de-salud-minsa)
+  3.2(https://www.datosabiertos.gob.pe/dataset/casos-positivo s-por-covid-19-ministerio-de-salud-minsa)
   
-  3.3  (https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)
+  3.3(https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)
   
-  3.4  (https://www.datosabiertos.gob.pe/dataset/dataset-de-pruebas-moleculares-del-instituto-nacional-de-salud-para-covid-19-ins)
+  3.4(https://www.datosabiertos.gob.pe/dataset/dataset-de-pruebas-moleculares-del-instituto-nacional-de-salud-para-covid-19-ins)
   
-  3.5  (https://www.datosabiertos.gob.pe/dataset/data-hist%C3%B3rica-del-registro-de-camas-diarias-disponibles-y-ocupadas-del-formato-f5002-v2)
+  3.5(https://www.datosabiertos.gob.pe/dataset/data-hist%C3%B3rica-del-registro-de-camas-diarias-disponibles-y-ocupadas-del-formato-f5002-v2)
   
-  3.6  (https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa)
+  3.6(https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa)
 
 4.  [OPENCOVIDPERU data set](https://www.tagacat.com/covid/links)
 
