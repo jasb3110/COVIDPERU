@@ -1,5 +1,8 @@
+---
 theme: jekyll-theme-midnightcontainer
 title: [COVID-19 dataset of PERU]
+output: html_document
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
+---
