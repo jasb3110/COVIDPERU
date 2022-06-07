@@ -1627,7 +1627,7 @@ camas.libres=as.data.frame(cbind(UCI$DATE,UCI$`Perú-Total Sum of UCI DISP`))
 colnames(camas.libres)=c("fecha","Números de Camas")
 camas.libres$Estado=rep("free %",length(UCI$DATE))
 
-#error de data
+#to manage to amend data
 link="https://www.dge.gob.pe/portalnuevo/informacion-publica/disponibilidad-de-camas-covid-19/" #segun dge.gob.pe 01/04/2021 al 19/04/2022
 c.error=read.delim("camas.uci.segun.dge.pe.txt",sep=",",dec=".")
 colnames(c.error)=c("f","n")
@@ -1666,8 +1666,8 @@ cx=corregido$X.[which(corregido$fecha=="9/11/2021"):which(corregido$fecha=="18/0
 dx=camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-04-18")]
 ex=cx*reg.c$coefficients[2]+reg.c$coefficients[1]
 reg.c2=lm(ex~dx)
-ggplotRegression(reg.c2)# error desde 19/04/2022 hasta ahora no se puede corregir
-#pero por mientras se asume que ultimo valor es similar para corregirlo todo lo demas
+ggplotRegression(reg.c2)# error in 19/04/2022 to now
+#my assumption is last value is seems to similar in magnitude
 
 fx=camas.c$o.per[which(camas.c$fecha=="2022-04-19"):length(camas.c$fecha)]
 razon.correcion=fx*fx*fx*fx*fx*fx/(fx[1]*fx[1]*fx[1]*fx[1]*fx[1]*fx[1])
