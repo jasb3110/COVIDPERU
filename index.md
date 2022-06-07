@@ -1781,7 +1781,7 @@ Finally, It´s too hard to clean and order COVID´s data set. Also, It has a lot
 2. [La Republica-Coronavirus en Perú: Testimonio del paciente cero tras su recuperación](https://larepublica.pe/sociedad/2020/04/13/coronavirus-en-peru-testimonio-del-paciente-cero-tras-su-recuperacion-mdga/)
 
 
-3. [Datosabiertos](
+3. [datosabiertos](
 https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa
 https://www.datosabiertos.gob.pe/dataset/casos-positivo s-por-covid-19-ministerio-de-salud-minsa
 https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa
