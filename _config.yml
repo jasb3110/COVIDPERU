@@ -1,8 +1,4 @@
-theme: jekyll-theme-midnightcontainer {
-margin: 0 auto;
-max-width: 960px;
-padding: 0px 25px;
-}
+theme: jekyll-theme-midnightcontainer
 title: [COVID-19 dataset of PERU]
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
