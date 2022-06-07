@@ -227,7 +227,7 @@ dev.off()
 ################################################################################
 ```
 ## Exploratory pictures
-It show that exploratory plot of SINADEF´s data set (death´s register) [(3.1)](#references). first view it seems to be clean and sort that you can looking down eight pictures. 
+It show that exploratory plot of SINADEF´s data set (death´s register) [link1](#references). first view it seems to be clean and sort that you can looking down eight pictures. 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/exploratory.plot.png?raw=true)
 
@@ -338,7 +338,7 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
 ################################################################################
 ```
 ## Mortality reporting SINADEF on Peru
-It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now [(3.1)](#references). X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
+It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now [link1](#references). X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/fallecidos.mujeres.png?raw=true)
@@ -439,7 +439,7 @@ ggsave("fallecidos.provincias2.png", dpi = 1200,   width = 500,
 ```
 ## Mortality reporting SINADEF by regions
 
-It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now [(3.1)](#references). X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
+It show that numbers of SINADEF´s death data in timeseries each regions. here you can see total death which cause for natural cause since 2019 to now [link1](#references). X-axis is numbers of peeple who have pass away per day and Y-axis is date per day.
 
 In my view, whole regions shows that evidence three waves. but each region shows its particular patterns of trendency.  Lima region was recorded the most number of death. this aspect could be explained the Lima region is the densely populated of the country and where dayly reports were more reliable and accurate than others regions.
 
@@ -563,7 +563,7 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 ```
 ## Peruvian people with COVID
 
-In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now [(3.2)](#references). In the legend, "PCR, SER and ANT"  means molecular test, serological test and antigen test respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
+In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now [link2](#references). In the legend, "PCR, SER and ANT"  means molecular test, serological test and antigen test respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/covid.hombres.png?raw=true)
 
@@ -571,7 +571,7 @@ In this pictures are showed that number of people who had been had positive covi
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/covid.todo.png?raw=true)
 
-Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth[(3.3)](#references). So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA.
+Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth[link3](#references). So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA.
 
 In the picture, Time series of SINADEF´s death and excess of death are showed a similar behavior of pattern for coincidence of relative minimum and maximum.  
 
@@ -820,7 +820,7 @@ subestimacion2# underestimate in percent for r-squared of Pearson Linear regress
 ################################################################################
 ```
 ## Molecular positivity of COVID in percent on Peru
-The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now [(3.4)](#references). 
+The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now [link4](#references). 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/relacion.positivas.positivas+negativas.molecular.png?raw=true)
 
@@ -1560,7 +1560,7 @@ write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 ```
 ## Free bed of Intensive care unit 
 
-According to SUSALUD, Free COVID´s bed of Intensive care unit is showed increase and decrease during April, 2020 to April, 2022 [(3.5)](#references). in this picture, I managed to clean and order in percent. Non-free COVID´s bed showed three peak which could be match with three peak of COVID´s death. However, data set have a lot mistakes or discordance which are not amend.
+According to SUSALUD, Free COVID´s bed of Intensive care unit is showed increase and decrease during April, 2020 to April, 2022 [link5](#references). in this picture, I managed to clean and order in percent. Non-free COVID´s bed showed three peak which could be match with three peak of COVID´s death. However, data set have a lot mistakes or discordance which are not amend.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.UCI.png?raw=true)
 
@@ -1704,7 +1704,7 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
 ```
 ## Vaccinatation in progress
 
-In Peru, MINSA is managing of process a COVID´s Vaccination during 2020 to now. In this picture show how to progress of vaccination per day by doses. high value was recorded in August, 2021 [(3.6)](#references). Currently,vaccines have been administered to people which are smaller that vaccination in 2021. 
+In Peru, MINSA is managing of process a COVID´s Vaccination during 2020 to now. In this picture show how to progress of vaccination per day by doses. high value was recorded in August, 2021 [link6](#references). Currently,vaccines have been administered to people which are smaller that vaccination in 2021. 
 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.vacunados.png?raw=true)
@@ -1781,17 +1781,12 @@ Finally, It´s too hard to clean and order COVID´s data set. Also, It has a lot
 2. [La Republica-Coronavirus en Perú: Testimonio del paciente cero tras su recuperación](https://larepublica.pe/sociedad/2020/04/13/coronavirus-en-peru-testimonio-del-paciente-cero-tras-su-recuperacion-mdga/)
 
 3. [datosabiertos](https://www.datosabiertos.gob.pe/search/type/dataset)
-3.1   [link1](https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio)
-  
-3.2   [link2](https://www.datosabiertos.gob.pe/dataset/casos-positivo s-por-covid-19-ministerio-de-salud-minsa)
-  
-3.3   [link3](https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)
-  
-3.4   [link4](https://www.datosabiertos.gob.pe/dataset/dataset-de-pruebas-moleculares-del-instituto-nacional-de-salud-para-covid-19-ins)
-  
-3.5   [link5](https://www.datosabiertos.gob.pe/dataset/data-hist%C3%B3rica-del-registro-de-camas-diarias-disponibles-y-ocupadas-del-formato-f5002-v2)
-  
-3.6   [link6](https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa)
+  - [link1](https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos  -d- el-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio)
+  - [link2](https://www.datosabiertos.gob.pe/dataset/casos-positivo s-por-covid-19-ministerio-de-salud-minsa)
+  - [link3](https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)
+  - [link4](https://www.datosabiertos.gob.pe/dataset/dataset-de-pruebas-moleculares-del-instituto-nacional-de-salud-para-covid-19-ins)
+  - [link5](https://www.datosabiertos.gob.pe/dataset/data-hist%C3%B3rica-del-registro-de-camas-diarias-disponibles-y-ocupadas-del-formato-f5002-v2)
+  - [link6](https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa)
 
 4.  [OPENCOVIDPERU data set](https://www.tagacat.com/covid/links)
 
