@@ -1560,13 +1560,13 @@ write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 ```
 ## Free bed of Intensive care unit 
 
-According to SUSALUD, Free COVID´s bed is showed increase and decrease during April, 2020 to April, 2022. in this picture, I managed to clean and order in percent. Non-free COVID´s bed showed three peak which could be match with three peak of COVID´s death. However, data set have a lot mistakes or discordance which are not amend.
+According to SUSALUD, Free COVID´s bed of Intensive care unit is showed increase and decrease during April, 2020 to April, 2022. in this picture, I managed to clean and order in percent. Non-free COVID´s bed showed three peak which could be match with three peak of COVID´s death. However, data set have a lot mistakes or discordance which are not amend.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.UCI.png?raw=true)
 
 
 ```markdown
-#Camas UCI
+#COVID´s UCI beds
 UCI=as.data.frame(row_to_names(uci,row_number = 1, remove_row = TRUE, remove_rows_above = TRUE))
 UCI[,81]=NULL
 UCI[,80]=NULL
@@ -1622,21 +1622,59 @@ write.csv(UCI,"UCI.csv",sep=",",dec=".",col.names=TRUE)
 
 camas.ocupadas=as.data.frame(cbind(UCI$DATE,UCI$`Perú-Total Sum of UCI OCU`))
 colnames(camas.ocupadas)=c("fecha","Números de Camas")
-camas.ocupadas$Estado=rep("Ocupadas",length(UCI$DATE))
+camas.ocupadas$Estado=rep("non-free %",length(UCI$DATE))
 camas.libres=as.data.frame(cbind(UCI$DATE,UCI$`Perú-Total Sum of UCI DISP`))
 colnames(camas.libres)=c("fecha","Números de Camas")
-camas.libres$Estado=rep("Disponibles",length(UCI$DATE))
+camas.libres$Estado=rep("free %",length(UCI$DATE))
 
-# Data has a discordance sharply, I trying to improve it and to delete mistakes.
+#error de data
+link="https://www.dge.gob.pe/portalnuevo/informacion-publica/disponibilidad-de-camas-covid-19/" #segun dge.gob.pe 01/04/2021 al 19/04/2022
+c.error=read.delim("camas.uci.segun.dge.pe.txt",sep=",",dec=".")
+colnames(c.error)=c("f","n")
+c.error$f=c(as.Date("01-04-2021",format="%d-%m-%Y")+0:(which(c.error$n==3)-1),as.Date("01-04-2021",format="%d-%m-%Y")+0:(which(c.error$n==3)-1))
+c.error$f=as.Date(c.error$f,format="%d-%m-%Y")
+
+c.error$group=NA
+c.error$group[1:384]="Total"
+c.error$group[385:(2*384)]="Ocupada"
+c.error$group=factor(c.error$group,levels=unique(c.error$group))
+
+corregir=data.frame(c.error$f[1:384],c.error$n[which(c.error$group=="Total")],c.error$n[which(c.error$group=="Ocupada")])
+colnames(corregir)=c("fecha","total","ocupado")
+
+write.csv(corregir,"corregir.csv",sep=",",dec=".",col.names = TRUE)#corregido en excel
+corregido=read.csv("corregido.csv",sep=";",dec=".",header = TRUE)
+
+#watch out with error  [582: fin]
 
 camas.libres$`Números de Camas`=as.numeric(camas.libres$`Números de Camas`)
 camas.ocupadas$`Números de Camas`=as.numeric(camas.ocupadas$`Números de Camas`)
 
-#WATCH OUT
-k1=camas.libres$`Números de Camas`[582]/camas.libres$`Números de Camas`[581]
-k2=camas.ocupadas$`Números de Camas`[582]/camas.ocupadas$`Números de Camas`[581]
-camas.libres$`Números de Camas`[582:length(camas.libres$`Números de Camas`)]=round(camas.libres$`Números de Camas`[582:length(camas.libres$`Números de Camas`)]/k1)
-camas.ocupadas$`Números de Camas`[582:length(camas.ocupadas$`Números de Camas`)]=round(camas.ocupadas$`Números de Camas`[582:length(camas.ocupadas$`Números de Camas`)]/k2)
+#to amend 01/04/2021 to 08/11/2021 for both data
+
+camas.c=data.frame(as.Date(UCI$DATE,format="%Y-%m-%d"),camas.ocupadas$`Números de Camas`,camas.libres$`Números de Camas`)
+colnames(camas.c)=c("fecha","ocupadas","libres")
+camas.c$total=camas.c$ocupadas+camas.c$libres
+camas.c$o.per=camas.c$ocupadas/camas.c$total
+ax=corregido$X.[1:which(corregido$fecha=="8/11/2021")]
+bx=camas.c$o.per[which(camas.c$fecha=="2021-04-01"):which(camas.c$fecha=="2021-11-08")]
+d.c=data.frame(ax,bx)
+reg.c=lm(bx~ax,d.c)
+ggplotRegression(reg.c)#perfecto corregido
+
+cx=corregido$X.[which(corregido$fecha=="9/11/2021"):which(corregido$fecha=="18/04/2022")]
+dx=camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-04-18")]
+ex=cx*reg.c$coefficients[2]+reg.c$coefficients[1]
+reg.c2=lm(ex~dx)
+ggplotRegression(reg.c2)# error desde 19/04/2022 hasta ahora no se puede corregir
+#pero por mientras se asume que ultimo valor es similar para corregirlo todo lo demas
+
+fx=camas.c$o.per[which(camas.c$fecha=="2022-04-19"):length(camas.c$fecha)]
+razon.correcion=fx*fx*fx*fx*fx*fx/(fx[1]*fx[1]*fx[1]*fx[1]*fx[1]*fx[1])
+                              
+#to heal
+camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-04-18")]=ex
+camas.c$o.per[which(camas.c$fecha=="2022-04-19"):length(camas.c$fecha)]=ex[length(ex)]*razon.correcion
 
 camas=as.data.frame(rbind(camas.ocupadas,camas.libres))
 camas$fecha=c(as.Date(UCI$DATE,format="%Y-%m-%d"),
@@ -1644,16 +1682,17 @@ camas$fecha=c(as.Date(UCI$DATE,format="%Y-%m-%d"),
 
 camas$`Números de Camas`=as.numeric(camas$`Números de Camas`)
 camas$Estado=factor(camas$Estado,levels=unique(camas$Estado))
+camas$`Números de Camas`=c(camas.c$o.per,1-camas.c$o.per)
 
 write.csv(camas,"camas.csv",sep=",",dec=".",col.names=TRUE)
 
 cama=ggplot(data=camas, aes(x = camas$fecha, y =camas$`Números de Camas`,group=camas$Estado))+
   geom_line(aes(color=camas$Estado))+
-  scale_x_date(date_breaks = "30 days",date_labels = "%d-%b%Y")+
-  labs(colour="",title="UCIs bed timeseries",
+  scale_x_date(date_breaks = "60 days",date_labels = "%d-%m-%Y")+
+  labs(colour="",title="UCI´s bed",
        x ="Dates", 
-       y = "number of bed")+
-  scale_y_continuous(limits = c(0,1.05*max(camas$`Números de Camas`,na.rm = TRUE)), breaks = round(seq(0,1.05*max(camas$`Números de Camas`,na.rm = TRUE),length.out = 4),2))+
+       y = "number of bed in percent")+
+  scale_y_continuous(limits = c(0,1.01*max(camas$`Números de Camas`,na.rm = TRUE)),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),
         axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
