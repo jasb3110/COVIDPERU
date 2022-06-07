@@ -1,6 +1,9 @@
-theme: jekyll-theme-minimal
-skin: "dark"
+
 title: [COVID-19 dataset of PERU]
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
+theme: jekyll-theme-minimal
+remote_theme: pages-themes/minimal@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have on
