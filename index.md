@@ -1106,15 +1106,21 @@ ggsave("relacion.positivas.positivas+negativas.molecular.png", dpi = 600,   widt
 
 ```
 ## OPENCOVIDPERU data set
-I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references).
+I really appreciate a supporting of OPENCOVIDPERU for sharing your data source with me. In this step, I tried to show principal results [(3)](#references). Covid-19´s patients according to Diresa & Diris during May, 2020 to May ,2021. It´s showed high dispersion which could hide trend of number of COVID´s patients.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/infectados.diresa.diris.png?raw=true)
 
+COVID´s people accumulate reporting to MINSA during May, 2020 to May ,2021. It´s showed 
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/infectados.minsa.acumulado.png?raw=true)
 
 
+Accumulated COVID´s positivity during May, 2020 to May ,2021. It´s showed
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/c2006d3371a7f6e3c97ba8aaf890cf0b40748cea/serie.tiempo.positividad.png?raw=true)
 
+Accumulated COVID´s positivity during May, 2020 to May ,2021. It´s showed
+
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/c2006d3371a7f6e3c97ba8aaf890cf0b40748cea/serie.tiempo.positividad.dia.png?raw=true)
 
 
 
@@ -1458,9 +1464,9 @@ infecm=ggplot(data=infm, aes(x=infm$fecha, y=infm$infec))+
   geom_point(aes(fill=infm$meses), shape = 21, alpha = 0.99,size=3)+
   scale_color_viridis(discrete = TRUE, option = "C",direction = -1)+
   scale_fill_viridis(discrete = TRUE,direction = -1)+
-  labs(colour="",title="Infectados acumulados con Covid-19 Minsa",
-       x ="Fechas", 
-       y = "Millones de Infectados")+
+  labs(colour="",title="COVID´s people accumulate reporting to MINSA",
+       x ="Dates", 
+       y = "Patients (Millons)")+
   scale_y_continuous(limits = c(0,1.2), breaks = round(seq(0,1.2,length.out = 4),2))+
   theme(legend.position="top",legend.title=element_blank(),legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
@@ -1526,9 +1532,9 @@ pos$esfuerzo=c((pos$`total de pruebas`[2:round(length(pos$`total de pruebas`))]-
 posi=ggplot(data=pos, aes(x = pos$fechas, y =pos$p,group=pos$tipo))+
   geom_line(aes(color=pos$tipo))+
   scale_x_date(date_breaks = "30 days",date_labels = "%d-%b%Y")+
-  labs(colour="",title="Series de Tiempo de Seropositividad Acumulada",
-       x ="Fecha", 
-       y = "Positividad(%)")+
+  labs(colour="",title="Accumulated COVID´s positivity",
+       x ="Dates", 
+       y = "Positivity(%)")+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
