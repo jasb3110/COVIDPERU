@@ -1782,7 +1782,6 @@ Finally, It´s too hard to clean and order COVID´s data set. Also, It has a lot
 
 
 3. [datosabiertos]
-
 3.1.  (https://www.datosabiertos.gob.pe/dataset/informaci%C3%B3n-de-fallecidos-del-sistema-inform%C3%A1tico-nacional-de-defunciones-sinadef-ministerio)
 3.2.  (https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)
 3.3.  (https://www.datosabiertos.gob.pe/dataset/casos-positivo s-por-covid-19-ministerio-de-salud-minsa)
