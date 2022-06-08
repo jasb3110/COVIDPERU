@@ -12,6 +12,11 @@ Third, I would show principal outcomes. I have focus on Principal component anal
 
 # to analyze COVID-19 effect on Peru
 
-Finally, I compare two models how to spread COVID-19 pandemic on Peru during 2020 to 2022. I have updated main outcomes each week, usually sunday. You will able to look it all in this [link 4](https://github.com/jasb3110/COVIDPERU/blob/968e226b0dedc04dc222a9f723bcbb1015fb33c2/index.md).
+Fourth, I compare two models how to spread COVID-19 pandemic on Peru during 2020 to 2022. I have updated main outcomes each week, usually sunday. You will able to look it all in this [link 4](https://github.com/jasb3110/COVIDPERU/blob/968e226b0dedc04dc222a9f723bcbb1015fb33c2/index.md).
+
+# to proper a COVID-19 model on Peru
+
+Finally, my proposal a determinism model according to Peru´s variables. it´s showed principal result [link 5](https://github.com/jasb3110/COVIDPERU/blob/cb67d6f6da1f60db0ed0ef3e7a48b96e776ee160/index.md).
+
 
 Bon appetit!!!
