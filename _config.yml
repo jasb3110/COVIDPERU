@@ -1,4 +1,5 @@
 theme: jekyll-theme-minimal
+classes: wide
 title: [COVID-19 dataset of PERU]
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
