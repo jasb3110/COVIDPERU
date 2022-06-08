@@ -1,2 +1,2 @@
-# COVIDPERU
-To show how to effect on COVID-19 in Peru 
+# To clean and explore data set
+To show how to improve quality of data set
