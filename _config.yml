@@ -2,7 +2,5 @@ title: [COVID-19 dataset of PERU]
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
+date: 7 June, 2022
 theme: jekyll-theme-minimal
-output:
-  html_document:
-    css: index.css
