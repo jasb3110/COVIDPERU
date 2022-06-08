@@ -1,6 +1,6 @@
 layout: page
-permalink: https://jasb3110.github.io/COVIDPERU/dataset
-theme: jekyll-theme-hacker
+permalink: https://github.com/jasb3110/COVIDPERU/blob/de0bcddb3b254a25fae42e8c6b23e8c78ae59e7d/index.md
+theme: jekyll-theme-dinky
 title: [COVID-19 dataset of PERU]
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
