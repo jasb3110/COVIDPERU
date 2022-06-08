@@ -7,8 +7,8 @@ theme: jekyll-theme-minimal
 author: "Me"
 date: June 7, 2022
 output:
-  prettydoc::html_pretty:
-    theme: architect
-    highlight: github
-    html_document:
-    css: index.css
+  html_document:
+    theme: yeti
+    toc: TRUE
+    toc_float: TRUE
+    code_folding: TRUE
