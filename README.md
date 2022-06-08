@@ -1,7 +1,7 @@
 # COVIDPERU
 The COVIDPERU is project which have goal to analyze COVID´s data set on Peru. Before that whole information have downloaded Peruvian government´s source. 
 
-# To clean data set and explore data set
+# To clean and explore data set
 
 First, the data has a lot of error and/or discordance. Because it had cleared of mistakes and order it. So that, it showed a script in R how to edit and improve it. I show you  how to do it in this [link 1:](https://jasb3110.github.io/COVIDPERU/tree/COVID-19-dataset) https://jasb3110.github.io/COVIDPERU/
 
