@@ -1,4 +1,5 @@
 theme: jekyll-theme-minimal
 title: [COVIDPERU]
+description: "COVIDPERU is project which have goal to analyze COVID´s data set on Peru"
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
