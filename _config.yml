@@ -16,5 +16,4 @@ show_excerpt: true
 show_frame: true
 show_sidebar: true
 
-plugins:
-  -jekyll-feed
+theme: jekyll-feed
