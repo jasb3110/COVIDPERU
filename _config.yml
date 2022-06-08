@@ -10,3 +10,5 @@ output:
   prettydoc::html_pretty:
     theme: architect
     highlight: github
+    html_document:
+    css: index.css
