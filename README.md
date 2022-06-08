@@ -1,6 +1,3 @@
-
-layout: double
-
 ![logo](https://github.com/jasb3110/COVIDPERU/blob/6dd0c3ba7d5ecef0b297924953c5a5ae1c0afa0d/logo.png)
 # To clean and explore data set
 
