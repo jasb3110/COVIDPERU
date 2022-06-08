@@ -1,3 +1,4 @@
+theme: jekyll-theme-minimal
 title: [COVID-19 dataset of PERU]
 author: [JASB3110]
 permalink: /:title/
@@ -13,5 +14,3 @@ show_social: true
 show_excerpt: true
 show_frame: true
 show_sidebar: true
-
-theme: jekyll-theme-minimal
