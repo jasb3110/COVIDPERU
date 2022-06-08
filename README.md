@@ -7,7 +7,7 @@ After that data include date since 6/06/2020 to 07/06/2022 (Column 1), COVID pos
 
 # To Multivariate Analysis on to R
 
-Third, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. You will able to look it all in this [link 3:](https://jasb3110.github.io/COVIDPERU/) https://jasb3110.github.io/COVIDPERU/
+Third, I would show principal outcomes. I have focus on Principal component analysis, cluster and ordicluster. You will able to look it all in this [link 3](https://github.com/jasb3110/COVIDPERU/blob/868f92811b1c48465f314823c69e1291d88cbd2a/index.md).
 
 # to analyze COVID-19 effect on Peru
 
