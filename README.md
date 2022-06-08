@@ -19,4 +19,5 @@ Fourth, I compare two models how to spread COVID-19 pandemic on Peru during 2020
 Finally, my proposal a determinism model according to Peru´s variables. it´s showed principal result [link 5](https://github.com/jasb3110/COVIDPERU/blob/cb67d6f6da1f60db0ed0ef3e7a48b96e776ee160/index.md).
 
 
+
 Bon appetit!!!
