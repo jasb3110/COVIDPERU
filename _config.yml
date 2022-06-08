@@ -9,5 +9,4 @@ author: "Me"
 date: June 7, 2022
 output:
   html_document:
-   html_document:
     css: index.css
