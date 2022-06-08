@@ -3,10 +3,3 @@ title: [COVID-19 dataset of PERU]
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
-date_format: "%d-%m-%Y"
-
-#layout 
-show_social: true
-show_excerpt: true
-show_frame: true
-show_sidebar: true
