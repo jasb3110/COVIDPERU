@@ -1,2 +1,2 @@
-# Multivariate Analysis on to R
-To focus on Principal component analysis, cluster and ordicluster.
+# SEIRDS model applied on COVID-19 in Peru
+To focus on determinist model based on differencial equations.
