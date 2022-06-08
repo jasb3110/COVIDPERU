@@ -1,6 +1,6 @@
 theme: jekyll-theme-minimal
 title: [COVIDPERU]
-logo: [https://github.com/jasb3110/COVIDPERU/blob/81eeab1c6ab315eda98a6ab64a2e67f57c1c084a/logo.jpg]
+logo: https://github.com/jasb3110/COVIDPERU/blob/81eeab1c6ab315eda98a6ab64a2e67f57c1c084a/logo.jpg
 description: "The COVIDPERU is project which have goal to analyze COVID´s data set on Peru. Before that whole information have downloaded Peruvian government´s source."
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
