@@ -1,4 +1,7 @@
-![Branching](https://github.com/jasb3110/COVIDPERU/blob/6dd0c3ba7d5ecef0b297924953c5a5ae1c0afa0d/logo.png)
+---
+layout: double
+---
+![logo](https://github.com/jasb3110/COVIDPERU/blob/6dd0c3ba7d5ecef0b297924953c5a5ae1c0afa0d/logo.png)
 # To clean and explore data set
 
 First, the data has a lot of error and/or discordance. Because it had cleared of mistakes and order it. So that, it showed a script in R how to edit and improve it. I show you  how to do it in this [link 1](https://github.com/jasb3110/COVIDPERU/blob/7cb479cecd532ddaa0008766fa7f0281f796b5d6/index.md).
