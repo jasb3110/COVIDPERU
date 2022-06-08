@@ -8,7 +8,5 @@ author: "Me"
 date: June 7, 2022
 output:
   html_document:
-    theme: yeti
-    toc: TRUE
-    toc_float: TRUE
-    code_folding: TRUE
+   html_document:
+    css: index.css
