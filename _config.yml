@@ -1,12 +1,8 @@
 theme: jekyll-theme-minimal
 title: [COVID-19 dataset of PERU]
-author: [JASB3110]
-permalink: /:title/
 description: [To show how to effect on COVID-19 in Peru]
 show_downloads: ["true"]
 google_analytics: [G-YYYC4TQEDL]
-lang: "en"
-excerpt_separator: /n/n/n
 date_format: "%d-%m-%Y"
 
 #layout 
