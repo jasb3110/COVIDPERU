@@ -1708,7 +1708,6 @@ In Peru, MINSA is managing of process a COVID´s Vaccination during 2020 to now.
 
 ![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/serie.tiempo.vacunados.png?raw=true)
 
-
 ```markdown
 #Vaccinatation in progress
 
