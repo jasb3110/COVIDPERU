@@ -228,7 +228,7 @@ dev.off()
 ## Exploratory pictures
 It show that exploratory plot of SINADEF´s data set (death´s register) [link1](#references). first view it seems to be clean and sort that you can looking down eight pictures. 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/exploratory.plot.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/exploratory.plot.png?raw=true)
 
 Next, it is getting to clean and sort of SINADEF´s data. I try to delete non-natural death signal. The assumption is excess of death during 2020 to 2022, due to COVID-19 spreading. Also, I plotted numbers of men, women and people to evidence some patterns. Bellow I attached lines scripts.
 
@@ -338,14 +338,14 @@ ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
 ```
 ## Mortality reporting SINADEF on Peru
 It show that numbers of death in timeseries per genre. here you can see men´s death which cause for COVID-19 since 2019 to now [link1](#references). X-axis is numbers of peeple who have pass away per day and Y-axis is date per day. 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/fallecidos.hombres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/fallecidos.hombres.png?raw=true)
 Women´s  death which cause for COVID-19 since 2019 to now
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/fallecidos.mujeres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/fallecidos.mujeres.png?raw=true)
 
 In first view, number of death men is major than number of death women. therefore, COVID-19 have detrimental effect on Men a lot. 
 People´s death which cause for COVID-19 since 2019 to now
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/fallecidos.todos.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/fallecidos.todos.png?raw=true)
 
 In three wave of COVID-19 on Peru, the most of number death people probably relation with COVID-19 are: May to August in 2020 (first wave), February to April in 2021 (Second wave) and January to February 2022 (Third wave). Second wave was more lethal than others waves around 1250 death.
 Next, it is getting to clean and sort of SINADEF´s death data by regions. Bellow I attached lines scripts.
@@ -442,7 +442,7 @@ It show that numbers of SINADEF´s death data in timeseries each regions. here y
 
 In my view, whole regions shows that evidence three waves. but each region shows its particular patterns of trendency.  Lima region was recorded the most number of death. this aspect could be explained the Lima region is the densely populated of the country and where dayly reports were more reliable and accurate than others regions.
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/fallecidos.provincias2.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/fallecidos.provincias2.png?raw=true)
 
 Next, it is getting to clean and sort of positive COVID´s test dataset. Bellow I attached lines scripts.
 
@@ -564,25 +564,25 @@ ggsave("covid.todo.png", dpi = 600,   width = 250,
 
 In this pictures are showed that number of people who had been had positive covid´s tests during 2020 to now [link2](#references). In the legend, "PCR, SER and ANT"  means molecular test, serological test and antigen test respectively.the most important to describe is to high magnitude of positive covid´s test in third wave. the dataset have not got number of negative covid´s tests. Because it wasn´t able to normalize. therefore, this dataset isn´t satisfied minimum requirement.
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/covid.hombres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/covid.hombres.png?raw=true)
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/covid.mujeres.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/covid.mujeres.png?raw=true)
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/covid.todo.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/covid.todo.png?raw=true)
 
 Many scientists and journalists said in Media that booming of mortality on Peru in SINADEF´s data which owned to COVID´s death growth[link3](#references). So that, I´m trying of finding the relationship between excess of death and COVID´s death. Therefore, SINADEF´s data was subtracted natural mortality effect in 2019. This step is to extract the possible effect of COVID´s death. Then I ought transform to normal distribution to the effect of COVID´s death and COVID´s death, reporting for MINSA.
 
 In the picture, Time series of SINADEF´s death and excess of death are showed a similar behavior of pattern for coincidence of relative minimum and maximum.  
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/860d5f287e234e02d95db78bb8354c60006239ce/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)
 
 According to statistic tests, coefficient of Spearman correlation (Rs) reported that excess of death and COVID´s death is 0.94 and coefficient of regression of Pearson (r-squared) is 0.83. Whereby, small difference could explained for deaths due to indirect relationship with COVID quarantine (e.g reduction Hospital´s timetable and huge demand on UCI´s beds).
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/regresion.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/regresion.png?raw=true)
 
 Alternately, I create a animation how to evolve COVID´s mortality since beginning of pandemic to now. this manner it could see famous three waves.
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/c38bfa06935875e5c859c858983561a8a765e19a/regresion.gif?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/regresion.gif?raw=true)
 
 According to previous results, I am able to estimate a underestimate of COVID´s death.
 If I use as a reference value  rho value of Spearman correlation, underestimate will be 55%, whether I use as a reference value a r-squared of Pearson linear regression, underestimate will be 50%. Therefore, It likely suggests that underestimation of COVID´s death is around half a less. 
@@ -821,7 +821,7 @@ subestimacion2# underestimate in percent for r-squared of Pearson Linear regress
 ## Molecular positivity of COVID in percent on Peru
 The big deal of Peru was how to estimate positivity rate (%), when there isn´t enougth data (small tests and delay in reports). National of healthy institution of Peru(INS in spanish), generally update data per 15 days. However, I currently noticed that data was reported after two month. Well, I show that positive-COVID´s tests in percent (%) during 2020 to now [link4](#references). 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/relacion.positivas.positivas+negativas.molecular.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/relacion.positivas.positivas+negativas.molecular.png?raw=true)
 
 In this picture, the most highlight is three sharp of curve of molecular positivity of COVID´s in percent (>20%). but, after third peak was recorded, the positivity rate had been decreased sharply. it could be due to synergy effect of vaccination on Peruvian people and wide spreading of COVID virus. bellow, attached a script.
 
@@ -1561,7 +1561,7 @@ write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 
 According to SUSALUD, Free COVID´s bed of Intensive care unit is showed increase and decrease during April, 2020 to April, 2022 [link5](#references). in this picture, I managed to clean and order in percent. Non-free COVID´s bed showed three peak which could be match with three peak of COVID´s death. However, data set have a lot mistakes or discordance which are not amend.
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.UCI.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/serie.tiempo.UCI.png?raw=true)
 
 
 ```markdown
@@ -1706,7 +1706,7 @@ ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
 In Peru, MINSA is managing of process a COVID´s Vaccination during 2020 to now. In this picture show how to progress of vaccination per day by doses. high value was recorded in August, 2021 [link6](#references). Currently,vaccines have been administered to people which are smaller that vaccination in 2021. 
 
 
-![alt text](https://github.com/jasb3110/COVIDPERU/blob/8581ffa075005565bc4f6cfaa901b4e904cc6c35/serie.tiempo.vacunados.png?raw=true)
+![alt text](https://github.com/jasb3110/COVIDPERU/blob/3b8df8f8e757a50105e849e20c776a3ec2ca967d/serie.tiempo.vacunados.png?raw=true)
 
 
 ```markdown
