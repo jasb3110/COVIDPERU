@@ -1,18 +1,18 @@
 # COVIDPERU
 
-This project is trying of improving quality and order of Covid of Peru.First, I managed to order and clean conflict and bug due to fail type and others issues.
+This project is trying of improving quality and order of Covid of Peru. First, I managed to order and clean conflict and bug due to fail type and others issues.
 
 ## To clean, sort and exploratory plotting
 
-This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here](https://github.com/jasb3110/COVIDPERU/blob/7d45ce76cc625757856c1cd3a60a7890105a2756/to%20clean%20and%20sort.md).
+This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 5th December, 2022. [click here](https://github.com/jasb3110/COVIDPERU/blob/7d45ce76cc625757856c1cd3a60a7890105a2756/to%20clean%20and%20sort.md).
 
 ## Multivariate analyze
 
-This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here]().
+This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 5th December, 2022. [click here](https://github.com/jasb3110/COVIDPERU/blob/98773553ffb736d9fecc15573338e64dd07b5629/multivariate.md).
 
 ## GAM model
 
-This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here]().
+This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here](https://github.com/jasb3110/COVIDPERU/blob/98773553ffb736d9fecc15573338e64dd07b5629/GAM.md).
 
 ## Source
 
