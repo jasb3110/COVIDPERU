@@ -3,14 +3,15 @@
 ## Contents
 
 -   [Introduction](#introduction)
--   [Materials and methods](#materials-and-methods)
+-   [Exploratory plotting](#exploratory-plotting)
+-   [Excess deaths](#excess-of-deaths)
 -   [Principal outcomes](#principal-outcomes)
 -   [Discussion](##discussion)
 -   [Conclusions](#conclusions)
 -   [References](#references)
 -   [R code](#r-code)
 
-## Introduction {#introduction}
+## Introduction
 
 ## Exploratory plotting
 
@@ -18,6 +19,26 @@
 |[![Figure 1.](exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/fff28c3641288dbaa4569f8aa349daae3dc3c16f/plotting/exploratory.plot.png) |
 +:=======================================================================================================================================================:+
 | *Figure 1. Compoused exploratory plot*|
+
+
+
+## Excess of deaths
+
+
+## Covid death
+
+
+## Covid positivy
+
+### Molecular test
+
+### Molecular, antigen and serologic test
+
+
+## Covid vaccination
+
+
+
 
 LA DATA no incluye prueba negativas por lo cual se usara la data acumulada por el Minsa de la pruebas no reactivas no se puede normalizar la data por esfuerzo de muestreo y ademas el muestreo no es aleatorio por lo cual se debe usar test no parametricos y analisis multivariado. probar que el aumento de la mortalidad natural es por el covid
 
