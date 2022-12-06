@@ -1,9 +1,7 @@
-
 # to clean and sort Covid data-set
 
 ## Contents
 
--   [Abstract](#abstract)
 -   [Introduction](#introduction)
 -   [Materials and methods](#materials-and-methods)
 -   [Principal outcomes](#principal-outcomes)
@@ -12,7 +10,11 @@
 -   [References](#references)
 -   [R code](#r-code)
 
-## Abstract
+## Introduction 
+
+
+##
+
 
 
 |[![Figure 1.](AMV.biplot.png)](https://github.com/jasb3110/Radiocarbon-reservoir/blob/db842ff0620d55ea5ca5ceec0d96a369406b6e3c/AMV.biplot.png?raw=true)|
@@ -31,7 +33,7 @@ Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) h
 ``` markdown
 ################################################################################
 memory.size(max=99999)
-setwd("19/")#directory
+setwd("~/COVID19/")#directory
 
 #Packages
 library("plyr")
@@ -88,7 +90,7 @@ e3=sum(which(dead$dia<1))
 e1
 e2
 e3
-#para meses
+#for months
 #para dias e4|e5|e6 = 0
 e4=sum(is.na(dead$meses))
 e5=sum(which(dead$meses>12))
@@ -96,7 +98,7 @@ e6=sum(which(dead$meses<1))
 e4
 e5
 e6
-#para años
+#for years
 #para dias e7|e8|e9 = 0
 e7=sum(is.na(dead$años))
 e8=sum(which(dead$años>2022))
@@ -1720,7 +1722,7 @@ infect=ggplot(data=infe, aes(x=infe$fecha, y=infe$infec))+
 ggsave("infectados.diresa.diris.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =infect)
 
-####Solo Minsa
+####Minsa data
 
 solo.minsa=todo.casos[which(todo.casos$Fuente=="minsa"&todo.casos$Casos!=0),]
 
@@ -1851,7 +1853,7 @@ sum(pos$`total de pruebas`[3:(length(data.esfuerzo$fecha)+2)]>data.esfuerzo$n)#d
 
 write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 #######################################################################################################
-#Camas UCI
+#Bed of UCI
 UCI=as.data.frame(row_to_names(uci,row_number = 1, remove_row = TRUE, remove_rows_above = TRUE))
 UCI[,81]=NULL
 UCI[,80]=NULL
@@ -1915,7 +1917,8 @@ camas.libres$Estado=rep("free %",length(UCI$DATE))
 #plot(camas.libres$fecha[(length(camas.libres$fecha)-50):length(camas.libres$fecha)],camas.libres$`Números de Camas`[(length(camas.libres$fecha)-50):length(camas.libres$fecha)])
 #plot(camas.ocupadas$fecha[(length(camas.ocupadas$fecha)-50):length(camas.ocupadas$fecha)],camas.ocupadas$`Números de Camas`[(length(camas.ocupadas$fecha)-50):length(camas.ocupadas$fecha)])
 
-#error de data
+#errors in data
+#source:
 link="https://www.dge.gob.pe/portalnuevo/informacion-publica/disponibilidad-de-camas-covid-19/" #segun dge.gob.pe 01/04/2021 al 19/04/2022
 c.error=read.delim("camas.uci.segun.dge.pe.txt",sep=",",dec=".")
 c.error2=read.csv(file = "camas ocupada dge 29.11.22.csv",sep=";",dec=".",header = TRUE)
@@ -1941,13 +1944,13 @@ corregido=read.csv("corregido.csv",sep=";",dec=".",header = TRUE)
 camas.libres$`Números de Camas`=as.numeric(camas.libres$`Números de Camas`)
 camas.ocupadas$`Números de Camas`=as.numeric(camas.ocupadas$`Números de Camas`)
 
-#guardando data antes de la correción
+#to save data before which will amend 
 
 camas.data=data.frame(as.Date(UCI$DATE,format="%Y-%m-%d"),camas.ocupadas$`Números de Camas`,camas.libres$`Números de Camas`)
 colnames(camas.data)=c("fecha","ocupadas","libres")
 write.csv(camas.data,"cama.data.csv",sep=",",dec=".",col.names=TRUE)
 
-#para corregir desde 01/04/2021 al 08/11/2021 para ambas datas
+#to amend since 01/04/2021 to 08/11/2021 to both datas
 
 camas.c=data.frame(as.Date(UCI$DATE,format="%Y-%m-%d"),camas.ocupadas$`Números de Camas`,camas.libres$`Números de Camas`)
 colnames(camas.c)=c("fecha","ocupadas","libres")
@@ -1958,16 +1961,13 @@ ax=corregido$X.[1:which(corregido$fecha=="8/11/2021")]
 bx=camas.c$o.per[which(camas.c$fecha=="2021-04-01"):which(camas.c$fecha=="2021-11-08")]
 d.c=data.frame(ax,bx)
 reg.c=lm(bx~ax,d.c)
-ggplotRegression(reg.c)#perfecto corregido
+ggplotRegression(reg.c)#good
 
 cx=corregido$X.[which(corregido$fecha=="9/11/2021"):which(corregido$fecha=="18/04/2022")]
 dx=camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-04-18")]
 ex=cx*reg.c$coefficients[2]+reg.c$coefficients[1]
 reg.c2=lm(ex~dx)
-ggplotRegression(reg.c2)#perfecto corregido hasta 18/04/2022
-
-#fx=camas.c$o.per[which(camas.c$fecha=="2022-04-19"):length(camas.c$fecha)]
-#razon.correcion=fx*fx/(fx[1]*fx[1])
+ggplotRegression(reg.c2)#good since 18/04/2022
 
 ###############################################################################
 
@@ -2001,7 +2001,7 @@ fx1=camas.c$o.per[which(camas.c$fecha=="2022-06-19"):length(camas.c$fecha)]
 gx1=fx1*reg.c2$coefficients[2]+reg.c2$coefficients[1]
 
 ######################################                              
-#Corregiendo
+#to repare data
 camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-06-18")]=ex1
 camas.c$o.per[which(camas.c$fecha=="2022-06-19"):length(camas.c$fecha)]=gx1
 
@@ -2030,8 +2030,8 @@ cama=ggplot(data=camas, aes(x = camas$fecha, y =camas$`Números de Camas`,group=
 ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =cama)
 
-################################################################################3
-#Vaccinatation in progress
+################################################################################
+#Covid vaccinatation in progress
 
 vac=fread("vacunas_covid.csv",sep=",",dec=".",header = TRUE,fill=TRUE)
 vac=as.data.frame(cbind(vac$FECHA_VACUNACION,vac$EDAD,vac$DOSIS,vac$DEPARTAMENTO))
