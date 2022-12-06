@@ -9,6 +9,7 @@
 -   [Covid positivity](#excess-of-deaths)
 -   [Bed of UCI](#bed-of-uci)
 -   [Covid vaccination](#covid-vaccination)
+-   [OPENCOVIDPERU](#opencovidperu)
 -   [Discussion](##discussion)
 -   [Conclusions](#conclusions)
 -   [References](#references)
@@ -22,7 +23,7 @@
 
 |[![Figure .1](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/871460efa0250d439347fe750f06af2669e13c8c/plotting/exploratory.plot.png?raw=true)|
 |:----------------------------------------------------------------------:|
-|*Figure 1. Compoused exploratory plot*|
+|*Figure 1. Compounded exploratory plot*|
 
 
 
@@ -35,19 +36,21 @@
 
 ## Covid positivity
 
-## Bed of UCI {#bed-of-uci}
+## Bed of UCI
 
-## Covid vaccination {#covid-vaccination}
+## Covid vaccination
+
+## OPENCOVIDPERU
 
 ## Discussion
 
 LA DATA no incluye prueba negativas por lo cual se usara la data acumulada por el Minsa de la pruebas no reactivas no se puede normalizar la data por esfuerzo de muestreo y ademas el muestreo no es aleatorio por lo cual se debe usar test no parametricos y analisis multivariado. probar que el aumento de la mortalidad natural es por el covid
 
-## Conclusions {#conclusions}
+## Conclusions
 
 ## Reference
 
-## R code {#r-code}
+## R code
 
 Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) here, if you consider to give opinions, suggestions and questions.
 
