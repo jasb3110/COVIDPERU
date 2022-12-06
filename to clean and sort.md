@@ -17,9 +17,9 @@
 
 
 
-|[![Figure 1.](AMV.biplot.png)](https://github.com/jasb3110/Radiocarbon-reservoir/blob/db842ff0620d55ea5ca5ceec0d96a369406b6e3c/AMV.biplot.png?raw=true)|
+|[![Figure 1.](exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/fff28c3641288dbaa4569f8aa349daae3dc3c16f/plotting/exploratory.plot.png)|
 |:----------------------------------------------------------------------:|
-|*Figure 1. Biplot of Principal component of data (n=96)*|
+|*Figure 1. Compoused exploratory plot*|
 
 
 
