@@ -18,11 +18,11 @@
 
 ## Exploratory plotting
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-| [![Figure 1.](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/fff28c3641288dbaa4569f8aa349daae3dc3c16f/plotting/exploratory.plot.png) |
-+:=======================================================================================================================================================:+
-| *Figure 1. Compoused exploratory plot*                                                                                                                  |
-+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+|[![Figure 1.](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/fff28c3641288dbaa4569f8aa349daae3dc3c16f/plotting/exploratory.plot.png)|
+|:===:|
+| *Figure 1. Compoused exploratory plot*|
+
 
 ## Excess of deaths 
 
