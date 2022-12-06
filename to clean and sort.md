@@ -29,12 +29,13 @@
 ## Covid mortality
 
 ## Covid positivity
+
 ## Bed of UCI
+
 ## Covid vaccination
+
 ## Discussion
-## Conclusions
-## References
-## R code
+
 
 
 
@@ -42,9 +43,10 @@ LA DATA no incluye prueba negativas por lo cual se usara la data acumulada por e
 
 
 ## Conclusions
+
 ## Reference
 
-## R code {#r-code}
+## R code
 
 Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) here, if you consider to give opinions, suggestions and questions.
 
