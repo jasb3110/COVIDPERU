@@ -4,9 +4,15 @@ This project is trying of improving quality and order of Covid of Peru.First, I 
 
 ## To clean, sort and exploratory plotting
 
+This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here]().
+
 ## Multivariate analyze
 
+This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here]().
+
 ## GAM model
+
+This part, I show that how to do in R script. my assumption is begining date is 4th March, 2020 and last update is 5th December, 2022. [click here]().
 
 ## Source
 
