@@ -5,7 +5,7 @@
 -   [Introduction](#introduction)
 -   [Exploratory plotting](#exploratory-plotting)
 -   [Natural mortality](#natural-mortality)
--   [Covid positivity](#excess-of-deaths)
+-   [Covid positivity](#covid-positivy)
 -   [Covid mortality](#covid-mortality)
 -   [Bed of UCI](#bed-of-uci)
 -   [Covid vaccination](#covid-vaccination)
@@ -15,97 +15,79 @@
 -   [References](#references)
 -   [R code](#r-code)
 
-## Introduction 
-
-
+## Introduction
 
 ## Exploratory plotting
 
-
 |[![Figure .1](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/871460efa0250d439347fe750f06af2669e13c8c/plotting/exploratory.plot.png?raw=true)|
-|:----------------------------------------------------------------------:|
-|*Figure 1. Compounded exploratory plot*|
+|:----------------------------------------------------------------------------:|
+|*Figure 1.Compounded exploratory plot*|
 
 
-
-## Natural mortality 
-
+## Natural mortality
 
 |[![Figure .2](plotting/fallecidos.todos.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.todos.png?raw=true)|
-|:----------------------------------------------------------------------:|
-|*Figure 2. Natural mortality according to SINADEF*|
+|:----------------------------------------------------------------------------:|
+| *Figure 2. Natural mortality according to SINADEF*|
 
 
-|[![Figure .3](plotting/fallecidos.provincias2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.provincias2.png?raw=true)|
-|:----------------------------------------------------------------------:|
+
+|[![Figure .3](plotting/fallecidos.provincias2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.provincias2.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 3. Natural mortality by regions*|
-
-
-
 
 ## Covid positivity
 
 
-|[![Figure .4](plotting/covid.todo.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/covid.todo.png?raw=true)|
-|:----------------------------------------------------------------------:|
+
+| [![Figure .4](plotting/covid.todo.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/covid.todo.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 4. Covid positivity according to type of test*|
 
 
 
 
-|[![Figure .5](plotting/relacion.positivas.positivas+negativas.molecular.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/relacion.positivas.positivas+negativas.molecular.png?raw=true)|
-|:----------------------------------------------------------------------:|
+|[![Figure .5](plotting/relacion.positivas.positivas+negativas.molecular.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/relacion.positivas.positivas+negativas.molecular.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 5. Covid positivity molecular test in percent*|
-
-
 
 
 
 ## Covid mortality
 
-
-|[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png.png?raw=true)|
-|:----------------------------------------------------------------------:|
+|[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported*|
 
 
 
-|[![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)|
-|:----------------------------------------------------------------------:|
+| [![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 7. Covid mortality according to SINADEF estimated how excess of deaths and MINSA reported how Covid number of death*|
-
-
 
 ## Bed of UCI
 
-
-|[![Figure .8](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true)|
-|:----------------------------------------------------------------------:|
+|[![Figure .8](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 8. Bed of UCI in percent*|
-
-
 
 ## Covid vaccination
 
-
-|[![Figure .9](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true)|
-|:----------------------------------------------------------------------:|
+|[![Figure .9](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true) |
+|:----------------------------------------------------------------------------:|
 |*Figure 8. Bed of UCI in percent*|
 
-
-
-
-## OPENCOVIDPERU
+## OPENCOVIDPERU {#opencovidperu}
 
 ## Discussion
 
 LA DATA no incluye prueba negativas por lo cual se usara la data acumulada por el Minsa de la pruebas no reactivas no se puede normalizar la data por esfuerzo de muestreo y ademas el muestreo no es aleatorio por lo cual se debe usar test no parametricos y analisis multivariado. probar que el aumento de la mortalidad natural es por el covid
 
-## Conclusions
+## Conclusions {#conclusions}
 
 ## Reference
 
-## R code
+## R code {#r-code}
 
 Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) here, if you consider to give opinions, suggestions and questions.
 
