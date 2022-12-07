@@ -6,9 +6,9 @@
 -   [Natural mortality](#natural-mortality)
 -   [Covid positivity](#covid-positivy)
 -   [Covid mortality](#covid-mortality)
--   [Bed of UCI](#bed-of-uci)
--   [Covid vaccination](#covid-vaccination)
 -   [OPENCOVIDPERU](#opencovidperu)
+-   [Available bed of UCI](#available-bed-of-uci)
+-   [Covid vaccination](#covid-vaccination)
 -   [Discussion](##discussion)
 -   [Conclusions](#conclusions)
 -   [References](#references)
@@ -58,7 +58,7 @@
 
 |[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported*|
+|*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to Covid vaccination effect*|
 
 
 
@@ -66,19 +66,30 @@
 |:----------------------------------------------------------------------------:|
 |*Figure 7. Covid mortality according to SINADEF estimated how excess of deaths and MINSA reported how Covid number of death*|
 
-## Bed of UCI
 
-|[![Figure .8](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true) |
+## OPENCOVIDPERU
+
+|[![Figure .8](plotting/infectados.diresa.diris.png)](https://github.com/jasb3110/COVIDPERU/blob/776631001b14282fe611844d3de06b0d23892d2d/plotting/infectados.diresa.diris.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 8. Bed of UCI in percent*|
+|*Figure 8. Covid infected people according to DIRESA & DIRIS*|
 
-## Covid vaccination
+
+
+
+
+## Available bed of UCI
 
 |[![Figure .9](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 8. Bed of UCI in percent*|
+|*Figure 9. free and non-free beds of UCI in percent*|
 
-## OPENCOVIDPERU
+## Covid vaccination
+
+|[![Figure .10](plotting/serie.tiempo.vacunados.png)](https://github.com/jasb3110/COVIDPERU/blob/776631001b14282fe611844d3de06b0d23892d2d/plotting/serie.tiempo.vacunados.png?raw=true) |
+|:----------------------------------------------------------------------------:|
+|*Figure 10. Covid vaccination in progress in Peru*|
+
+
 
 ## Discussion
 
