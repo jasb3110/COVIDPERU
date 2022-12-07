@@ -56,7 +56,7 @@
 
 ## Covid mortality
 
-|[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png.png?raw=true) |
+|[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
 |:----------------------------------------------------------------------------:|
 |*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to Covid vaccination effect*|
 
