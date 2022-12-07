@@ -1,7 +1,6 @@
 # to clean and sort Covid data-set
 
 ## Contents
-
 -   [Introduction](#introduction)
 -   [Exploratory plotting](#exploratory-plotting)
 -   [Natural mortality](#natural-mortality)
@@ -14,6 +13,8 @@
 -   [Conclusions](#conclusions)
 -   [References](#references)
 -   [R code](#r-code)
+
+
 
 ## Introduction
 
