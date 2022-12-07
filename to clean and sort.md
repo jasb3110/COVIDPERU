@@ -4,9 +4,9 @@
 
 -   [Introduction](#introduction)
 -   [Exploratory plotting](#exploratory-plotting)
--   [Excess deaths](#excess-of-deaths)
--   [Covid mortality](#exploratory-plotting)
+-   [Natural mortality](#natural-mortality)
 -   [Covid positivity](#excess-of-deaths)
+-   [Covid mortality](#covid-mortality)
 -   [Bed of UCI](#bed-of-uci)
 -   [Covid vaccination](#covid-vaccination)
 -   [OPENCOVIDPERU](#opencovidperu)
@@ -17,8 +17,9 @@
 
 ## Introduction 
 
-## Exploratory plotting
 
+
+## Exploratory plotting
 
 
 |[![Figure .1](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/871460efa0250d439347fe750f06af2669e13c8c/plotting/exploratory.plot.png?raw=true)|
@@ -27,16 +28,62 @@
 
 
 
+## Natural mortality 
+
+
+|[![Figure .2](plotting/fallecidos.todos.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.todos.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 2. Natural mortality according to SINADEF*|
+
+
+|[![Figure .3](plotting/fallecidos.provincias2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.provincias2.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 3. Natural mortality by regions*|
 
 
 
-## Excess of deaths 
-
-## Covid mortality
 
 ## Covid positivity
 
+
+|[![Figure .4](plotting/covid.todo.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/covid.todo.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 4. Covid positivity according to type of test*|
+
+
+
+
+|[![Figure .5](plotting/relacion.positivas.positivas+negativas.molecular.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/relacion.positivas.positivas+negativas.molecular.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 5. Covid positivity molecular test in percent*|
+
+
+
+
+
+## Covid mortality
+
+
+|[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported*|
+
+
+
+|[![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 7. Covid mortality according to SINADEF estimated how excess of deaths and MINSA reported how Covid number of death*|
+
+
+
 ## Bed of UCI
+
+
+|[![Figure .8](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 8. Bed of UCI in percent*|
+
+
 
 ## Covid vaccination
 
