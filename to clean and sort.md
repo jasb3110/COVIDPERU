@@ -56,13 +56,13 @@
 
 ## Covid mortality
 
-|[![Figure .6](regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
+|[![Figure .6](plotting/regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
 |:----------------------------------------------------------------------------:|
 |*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to Covid vaccination effect*|
 
 
 
-| [![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true) |
+| [![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)|
 |:----------------------------------------------------------------------------:|
 |*Figure 7. Covid mortality according to SINADEF estimated how excess of deaths and MINSA reported how Covid number of death*|
 
