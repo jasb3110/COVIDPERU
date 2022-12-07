@@ -64,7 +64,7 @@
 
 | [![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)|
 |:----------------------------------------------------------------------------:|
-|*Figure 7. Covid mortality according to SINADEF estimated how excess of deaths and MINSA reported how Covid number of death*|
+|*Figure 7. Excess of deaths according to SINADEF and Covid number of death according to MINSA*|
 
 
 ## OPENCOVIDPERU
