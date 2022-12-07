@@ -87,6 +87,14 @@
 
 ## Covid vaccination
 
+
+|[![Figure .9](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true)|
+|:----------------------------------------------------------------------:|
+|*Figure 8. Bed of UCI in percent*|
+
+
+
+
 ## OPENCOVIDPERU
 
 ## Discussion
