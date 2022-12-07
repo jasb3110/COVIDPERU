@@ -78,17 +78,17 @@
 |:----------------------------------------------------------------------------:|
 |*Figure 8. Bed of UCI in percent*|
 
-## OPENCOVIDPERU {#opencovidperu}
+## OPENCOVIDPERU
 
 ## Discussion
 
 LA DATA no incluye prueba negativas por lo cual se usara la data acumulada por el Minsa de la pruebas no reactivas no se puede normalizar la data por esfuerzo de muestreo y ademas el muestreo no es aleatorio por lo cual se debe usar test no parametricos y analisis multivariado. probar que el aumento de la mortalidad natural es por el covid
 
-## Conclusions {#conclusions}
+## Conclusions
 
 ## Reference
 
-## R code {#r-code}
+## R code
 
 Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) here, if you consider to give opinions, suggestions and questions.
 
