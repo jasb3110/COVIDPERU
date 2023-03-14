@@ -4,7 +4,7 @@ This project is trying of improving quality and order of Covid of Peru. First, I
 
 ## To clean and sort
 
-This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 5th December, 2022 [click here](https://github.com/jasb3110/COVIDPERU/blob/7d45ce76cc625757856c1cd3a60a7890105a2756/to%20clean%20and%20sort.md).
+This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 13th March, 2023 [click here](https://github.com/jasb3110/COVIDPERU/blob/7d45ce76cc625757856c1cd3a60a7890105a2756/to%20clean%20and%20sort.md).
 
 ## Multivariate analyze
 
