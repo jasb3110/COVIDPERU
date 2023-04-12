@@ -14,18 +14,22 @@
 -   [References](#references)
 -   [R code](#r-code)
 
-
-
 ## Introduction
+
+One highlight of scientific research is the process of cleaning and sorting data to identify and resolve any potential issues. Therefore, researchers should invest a significant amount of time inspecting their data for potential errors or inconsistencies. This meticulous approach ensures that the data is reliable and accurate, and helps to avoid any false conclusions or incorrect interpretations. By carefully examining and cleaning the data, researchers can have confidence in their results and ensure that their findings contribute to advancing knowledge in their field.
 
 ## Exploratory plotting
 
-|[![Figure .1](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/871460efa0250d439347fe750f06af2669e13c8c/plotting/exploratory.plot.png?raw=true)|
+First of all, one way to improve the quality of your data is to plot it. By visualizing your data, you can quickly identify any outliers or distorted values that may need to be corrected.
+
+|[![Figure .1](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/f41196ef7096026e2a940d7323583b8b07b9956b/plotting/exploratory.plot.png?raw=true)|
 |:----------------------------------------------------------------------------:|
 |*Figure 1.Compounded exploratory plot*|
 
+SINADEF's data is compiled as the number of deaths per day which are managed by Peruvian heath ministry. In [(fig. 1)](#exploratory-plotting), there is a noticeable breakpoint on October 12th, 2022 in the SINADEF´s data. It is unclear what caused this change or if there was an issue that was not explained. After identifying the issue with the data, I made an effort to resolve it and remove any discrepancies from the dataset.
 
 ## Natural mortality
+
 
 |[![Figure .2](plotting/fallecidos.todos.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.todos.png?raw=true)|
 |:----------------------------------------------------------------------------:|
