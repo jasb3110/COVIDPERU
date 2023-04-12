@@ -15,11 +15,9 @@
 -   [R code](#r-code)
 
 ## Introduction
-
 One highlight of scientific research is the process of cleaning and sorting data to identify and resolve any potential issues. Therefore, researchers should invest a significant amount of time inspecting their data for potential errors or inconsistencies. This meticulous approach ensures that the data is reliable and accurate, and helps to avoid any false conclusions or incorrect interpretations. By carefully examining and cleaning the data, researchers can have confidence in their results and ensure that their findings contribute to advancing knowledge in their field.
 
 ## Exploratory plotting
-
 First of all, one way to improve the quality of your data is to plot it. By visualizing your data, you can quickly identify any outliers or distorted values that may need to be corrected.
 
 |[![Figure .1](plotting/exploratory.plot.png)](https://github.com/jasb3110/COVIDPERU/blob/f41196ef7096026e2a940d7323583b8b07b9956b/plotting/exploratory.plot.png?raw=true)|
@@ -29,7 +27,6 @@ First of all, one way to improve the quality of your data is to plot it. By visu
 SINADEF's data is compiled as the number of deaths per day which are managed by Peruvian heath ministry. In [(fig. 1)](#exploratory-plotting), there is a noticeable breakpoint on October 12th, 2022 in the SINADEF´s data. It is unclear what caused this change or if there was an issue that was not explained. After identifying the issue with the data, I made an effort to resolve it and remove any discrepancies from the dataset.
 
 ## Natural mortality
-
 Natural mortality refers to the number of deaths that occur due to natural causes, such as diseases and age-related conditions, but excludes deaths caused by accidents, homicides, and suicides.
 
 |[![Figure .2](plotting/fallecidos.todos.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.todos.png?raw=true)|
@@ -44,42 +41,41 @@ In [(fig. 2)](#natural-mortality), the number of natural deaths is shown to be c
 
 Similarly, I plotted the number of natural deaths per region and found an issue in October 2022 that was not consistent across all regions. The issue in October 2022 appears to be more pronounced in certain regions with larger populations (fig. 3).
 
-
 ## Covid positivity
-
-
+During the COVID-19 pandemic in Peru, the Peruvian government implemented various methods to detect the presence of COVID-19 in people, including different types of biological tests like: Molecular, Antigen and serological test. Each test has its own assumptions and biases that should be taken into account when interpreting the results.
 
 | [![Figure .4](plotting/covid.todo.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/covid.todo.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 4. Covid positivity according to type of test*|
+|*Figure 4. COVID-19 positivity according to type of test*|
 
-
-
+The results of molecular, antigen, and serological tests tend to behave similarly. The high and low values seem to describe the increase/decrease of COVID-19 cases in Peru (fig. 4).
 
 |[![Figure .5](plotting/relacion.positivas.positivas+negativas.molecular.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/relacion.positivas.positivas+negativas.molecular.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 5. Covid positivity molecular test in percent*|
+|*Figure 5. Covid-19 positivity molecular test in percent*|
 
-
+In particular, Molecular test revealed better than other tests. Because it is less likely to present false positive or negative results and represents a shorter testing time.
 
 ## Covid mortality
+Here, I have linked the COVID-19 deaths reported by the Health Ministry (MINSA) with the excess natural deaths reported by SINADEF, which estimates the difference between natural deaths during the COVID-19 pandemic and the average number of natural deaths before the pandemic. I have observed that the gap that appeared on 12th October, 2022 is not present in the COVID-19 deaths data.
 
-|[![Figure .6](plotting/regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
+| [![Figure .6](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)|
 |:----------------------------------------------------------------------------:|
-|*Figure 6. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to Covid vaccination effect*|
+|*Figure 6. Excess of deaths according to SINADEF and COVID-19 number of death according to MINSA*|
 
+Next, I examined the relationship between COVID-19 deaths and excess natural deaths before October 12th, 2022. Fig. 7 displays the linear model that illustrates the correlation between these two variables. Notably, there is a close relationship between the two, indicating similar patterns of behavior.
 
-
-| [![Figure .7](plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.fallecidosvsexcesodemuertos2.png?raw=true)|
+|[![Figure .7](plotting/regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 7. Excess of deaths according to SINADEF and Covid number of death according to MINSA*|
-
+|*Figure 7. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to Covid vaccination effect*|
 
 ## OPENCOVIDPERU
 
+
+
 |[![Figure .8](plotting/infectados.diresa.diris.png)](https://github.com/jasb3110/COVIDPERU/blob/776631001b14282fe611844d3de06b0d23892d2d/plotting/infectados.diresa.diris.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 8. Covid infected people according to DIRESA & DIRIS*|
+|*Figure 8. COVID-19 infected people according to DIRESA & DIRIS*|
 
 
 
@@ -91,7 +87,7 @@ Similarly, I plotted the number of natural deaths per region and found an issue 
 |:----------------------------------------------------------------------------:|
 |*Figure 9. free and non-free beds of UCI in percent*|
 
-## Covid vaccination
+## COVID-19 vaccination
 
 |[![Figure .10](plotting/serie.tiempo.vacunados.png)](https://github.com/jasb3110/COVIDPERU/blob/776631001b14282fe611844d3de06b0d23892d2d/plotting/serie.tiempo.vacunados.png?raw=true) |
 |:----------------------------------------------------------------------------:|
