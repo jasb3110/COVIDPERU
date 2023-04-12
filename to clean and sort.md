@@ -8,9 +8,7 @@
 -   [Covid mortality](#covid-mortality)
 -   [Available bed of UCI](#available-bed-of-uci)
 -   [Covid vaccination](#covid-vaccination)
--   [Discussion](##discussion)
 -   [Conclusions](#conclusions)
--   [References](#references)
 -   [R code](#r-code)
 
 ## Introduction
@@ -66,28 +64,33 @@ Next, I examined the relationship between COVID-19 deaths and excess natural dea
 
 |[![Figure .7](plotting/regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 7. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to gap on 12th Octuber, 2022*|
+|*Figure 7. Linear regression of excess of deaths versus number of COVID-19 deaths which reported by MINSA before to gap on 12th Octuber, 2022*|
 
 ## Available bed of UCI
 
+During the COVID-19 pandemic, a large number of deaths likely led to a shortage of intensive care unit beds, which had a detrimental effect on COVID-19 patients."Unidad de Cuidados Intensivos (UCI)" in Spanish, which translates to Intensive Care Unit (ICU) in English.
+
 |[![Figure .8](plotting/serie.tiempo.UCI2.png)](https://github.com/jasb3110/COVIDPERU/blob/94c2fd6b2429b4f645d293f475734a3b6690e360/plotting/serie.tiempo.UCI2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 8. free and non-free beds of UCI in percent*|
+|*Figure 8. free beds of UCI in percent*|
+
+Fig. 8 shows that the percentage of available UCI beds is modulated by increasing/decreasing COVID-19 positivity rates, with high and low signals observed previously.
 
 ## COVID-19 vaccination
 
+In the case of COVID-19, vaccination is a process being managed by the Peruvian government to control the spread of the pandemic.
+
 |[![Figure .9](plotting/serie.tiempo.vacunados2.png)](https://github.com/jasb3110/COVIDPERU/blob/94c2fd6b2429b4f645d293f475734a3b6690e360/plotting/serie.tiempo.vacunados2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 9. Covid vaccination in progress in Peru*|
+|*Figure 9. COVID-19 Vaccination in progress in Peru*|
 
+Fig. 9 shows that Peruvian people are not willing to receive or access new doses of vaccination. Stakeholders should take note of this pattern and promote vaccination as a way to prevent future waves of COVID-19 in Peru.
 
-## Discussion
+## Conclusion
 
-LA DATA no incluye prueba negativas por lo cual se usara la data acumulada por el Minsa de la pruebas no reactivas no se puede normalizar la data por esfuerzo de muestreo y ademas el muestreo no es aleatorio por lo cual se debe usar test no parametricos y analisis multivariado. probar que el aumento de la mortalidad natural es por el covid
+The COVID-19 data provided to the Peruvian government, including excess deaths, COVID-19 deaths, COVID-19 infections, available ICU beds, and the number of vaccine doses administered, could be improved to show more consistent and similar patterns.
 
-## Conclusions
-
-## Reference
+Finally, this data will help to understand the mechanisms of COVID-19 spread at the population level and can be used as input for predictive models.
 
 ## R code
 
