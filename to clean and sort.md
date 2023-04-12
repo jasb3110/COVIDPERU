@@ -63,36 +63,23 @@ Here, I have linked the COVID-19 deaths reported by the Health Ministry (MINSA) 
 |:----------------------------------------------------------------------------:|
 |*Figure 6. Excess of deaths according to SINADEF and COVID-19 number of death according to MINSA*|
 
-Next, I examined the relationship between COVID-19 deaths and excess natural deaths before October 12th, 2022. Fig. 7 displays the linear model that illustrates the correlation between these two variables. Notably, there is a close relationship between the two, indicating similar patterns of behavior.
+Next, I examined the relationship between COVID-19 deaths and excess natural deaths before October 12th, 2022. Fig. 7 displays the linear model that illustrates the correlation between these two variables. Notably, there is a close relationship between the two, indicating similar patterns of behaviour.
 
 |[![Figure .7](plotting/regresion.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/regresion.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 7. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to Covid vaccination effect*|
-
-## OPENCOVIDPERU
-
-
-
-|[![Figure .8](plotting/infectados.diresa.diris.png)](https://github.com/jasb3110/COVIDPERU/blob/776631001b14282fe611844d3de06b0d23892d2d/plotting/infectados.diresa.diris.png?raw=true) |
-|:----------------------------------------------------------------------------:|
-|*Figure 8. COVID-19 infected people according to DIRESA & DIRIS*|
-
-
-
-
+|*Figure 7. Linear regression of excess of deaths versus number of Covid death which reported by MINSA before to gap on 12th Octuber, 2022*|
 
 ## Available bed of UCI
 
-|[![Figure .9](plotting/serie.tiempo.UCI.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/serie.tiempo.UCI.png?raw=true) |
+|[![Figure .8](plotting/serie.tiempo.UCI2.png)](https://github.com/jasb3110/COVIDPERU/blob/94c2fd6b2429b4f645d293f475734a3b6690e360/plotting/serie.tiempo.UCI2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 9. free and non-free beds of UCI in percent*|
+|*Figure 8. free and non-free beds of UCI in percent*|
 
 ## COVID-19 vaccination
 
-|[![Figure .10](plotting/serie.tiempo.vacunados.png)](https://github.com/jasb3110/COVIDPERU/blob/776631001b14282fe611844d3de06b0d23892d2d/plotting/serie.tiempo.vacunados.png?raw=true) |
+|[![Figure .9](plotting/serie.tiempo.vacunados2.png)](https://github.com/jasb3110/COVIDPERU/blob/94c2fd6b2429b4f645d293f475734a3b6690e360/plotting/serie.tiempo.vacunados2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 10. Covid vaccination in progress in Peru*|
-
+|*Figure 9. Covid vaccination in progress in Peru*|
 
 
 ## Discussion
