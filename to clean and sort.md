@@ -6,7 +6,6 @@
 -   [Natural mortality](#natural-mortality)
 -   [Covid positivity](#covid-positivy)
 -   [Covid mortality](#covid-mortality)
--   [OPENCOVIDPERU](#opencovidperu)
 -   [Available bed of UCI](#available-bed-of-uci)
 -   [Covid vaccination](#covid-vaccination)
 -   [Discussion](##discussion)
@@ -99,34 +98,84 @@ Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) h
 memory.size(max=99999)
 setwd("~/COVID19/")#directory
 
-#Packages
+
+library("magrittr")
 library("plyr")
 library("dplyr")
-library("janitor")
+library("janitor")#paquetes que se deben instalar
+library("ggplot2")
 library("viridis")  
+library("scales")
 library("stringr")
 library("gganimate")
 library("transformr")
-library("ggplot2")
 library("gifski")
 library("data.table")
 library("pracma")
-require("ggplot2")
-library("ggplot2")
+library("tidyr")
+library("bestNormalize")
+library("FactoMineR")
+library("vegan")
+library("vars")
+library("forecast")
+library("mgcv")
+library("mgcViz")
+library("itsadug")
+library("visreg")
+library("gridExtra")
+library("magrittr")
+library("devtools")
+library("gamm4")
+library("tidymv")
 
+####
+ggplotRegression<- function (fit) {
+  
+  if(round(fit$coef[[1]],2)==0){
+    a=format(fit$coefficients[[1]], scientific = TRUE)
+  }else{
+    a=round(fit$coef[[1]],2)
+  }
+  
+  if(round(fit$coef[[2]],2)==0){
+    b=format(fit$coefficients[[2]], scientific = TRUE)
+  }else{
+    b=round(fit$coef[[2]],2)
+  }
+  
+  if(round(summary(fit)$coef[2,4],2)==0){
+    pv="p < 0.001"
+  }else{
+    pv="p > 0.001"
+  }
 
-#to read data
-m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)# people who pass away according to SINADEF data
-mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header = TRUE,fill=TRUE)#People death by COVID
+  Label=paste0("y = ",a," + ",
+               b,"x\n",
+               "adj R-squared"," = ",round(summary(fit)$r.squared,3),"\n",
+               "  n = ",length(fit$fitted.values),"\n",
+              pv)
+  
+  ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
+    geom_point() +
+    stat_smooth(method = "lm",se=TRUE,col="black") +
+    scale_x_continuous(limits = c((-.2*abs(min(as.numeric(fit$model[[2]]),na.rm=TRUE))+min(as.numeric(fit$model[[2]]),na.rm=TRUE)),(.2*abs(max(as.numeric(fit$model[[2]]),na.rm=TRUE))+max(as.numeric(fit$model[[2]]),na.rm=TRUE))),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+    scale_y_continuous(limits = c((-.2*abs(min(as.numeric(fit$model[[1]]),na.rm=TRUE))+min(as.numeric(fit$model[[1]]),na.rm=TRUE)),(.2*abs(max(as.numeric(fit$model[[1]]),na.rm=TRUE))+max(as.numeric(fit$model[[1]]),na.rm=TRUE))),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+    annotate(geom = 'text', x =(.6*abs(min(as.numeric(fit$model[[2]]),na.rm=TRUE))+min(as.numeric(fit$model[[2]]),na.rm=TRUE)), y =(.1*abs(max(as.numeric(fit$model[[1]]),na.rm=TRUE))+max(as.numeric(fit$model[[1]]),na.rm=TRUE)), label =Label, parse=F)+
+    theme_bw()
+}
+####
 
-#to clean and sort of SINADEF data
+#Leyendo la data
+m=fread("fallecidos_sinadef.csv",sep="|",dec=".",header = TRUE,fill=TRUE)#fallecidos segun SINADEF
+
+#limpiando y ordenando la data de muertos sinadef
 m=as.data.frame(m)
 #dead=row_to_names(m,row_number = 2, remove_row = TRUE, remove_rows_above = TRUE)
 #
 dead=m
 rownames(dead)=NULL
 dead$NÂº=NULL
-#dead$TIEMPO.EDAD=NULL
+#dead$`TIEMPO EDAD`=NULL
 #dead$`COD# UBIGEO DOMICILIO`=NULL
 dead$`TIPO SEGURO`=NULL
 
@@ -157,7 +206,7 @@ e3=sum(which(dead$dia<1))
 e1
 e2
 e3
-#for months
+#para meses
 #para dias e4|e5|e6 = 0
 e4=sum(is.na(dead$meses))
 e5=sum(which(dead$meses>12))
@@ -165,7 +214,7 @@ e6=sum(which(dead$meses<1))
 e4
 e5
 e6
-#for years
+#para años
 #para dias e7|e8|e9 = 0
 e7=sum(is.na(dead$años))
 e8=sum(which(dead$años>2022))
@@ -177,92 +226,96 @@ e9
 MM=unique(dead$`MUERTE VIOLENTA`)
 tt=dead[which(dead$`MUERTE VIOLENTA`==MM[1]|dead$`MUERTE VIOLENTA`==MM[2]|dead$`MUERTE VIOLENTA`==MM[3]|dead$`MUERTE VIOLENTA`==MM[9]),]
 
-#to clean
-#to assume there are only error each columns
+#Limpiando errores
+#se asume que hay un solo error por columna de datos
 
 TT=unique(tt$`TIEMPO EDAD`)
 EC=unique(tt$`ESTADO CIVIL`)
-NI=unique(tt$`NIVEL DE INSTRUCCIÃ“N`)
+NI=unique(tt$`NIVEL DE INSTRUCCIÓN`)
 
-me=c(which(tt$`ESTADO CIVIL`==EC[1]&tt$EDAD>17),
-     which(tt$`ESTADO CIVIL`==EC[6]&tt$EDAD>17),
+me=c(which(tt$`ESTADO CIVIL`==EC[2]&tt$EDAD>17),
+     which(tt$`ESTADO CIVIL`==EC[4]&tt$EDAD>17),
      which(tt$`ESTADO CIVIL`==EC[7]&tt$EDAD>17),
      which(tt$`ESTADO CIVIL`==EC[8]&tt$EDAD>17),
      which(tt$`ESTADO CIVIL`==EC[9]&tt$EDAD>17))
 
-mi=c(which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[2]&tt$EDAD>17),
-     which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[4]&tt$EDAD>16),
-     which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[6]&tt$EDAD>12),
-     which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[7]&tt$EDAD>6),
-     which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[8]&tt$EDAD>11),
-     which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[9]&tt$EDAD>21),
-     which(tt$`NIVEL DE INSTRUCCIÃ“N`==NI[11]&tt$EDAD>17))
+mi=c(which(tt$`NIVEL DE INSTRUCCIÓN`==NI[1]&tt$EDAD>12),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[2]&tt$EDAD>6),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[4]&tt$EDAD>12),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[5]&tt$EDAD>16),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[6]&tt$EDAD>21),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[8]&tt$EDAD>12),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[9]&tt$EDAD>18),
+     which(tt$`NIVEL DE INSTRUCCIÓN`==NI[10]&tt$EDAD>18))
 
-#Secunds
+#Segundos
 m1=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[7])]>60)
-tt$TIEMPO.EDAD[intersect(m1,me)]=TT[1]
-tt$TIEMPO.EDAD[intersect(m1,mi)]=TT[1]
+tt$`TIEMPO EDAD`[intersect(m1,me)]=TT[1]
+tt$`TIEMPO EDAD`[intersect(m1,mi)]=TT[1]
 ss1=which(tt$`TIEMPO EDAD`==TT[7])
 tt$EDAD[ss1]=tt$EDAD[ss1]/(60*60*24*365)
 
-#minutes
+#minutos
 m2=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[2])]>60)
 tt$`TIEMPO EDAD`[intersect(m2,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m2,mi)]=TT[1]
 ss2=which(tt$`TIEMPO EDAD`==TT[2])
 tt$EDAD[ss2]=tt$EDAD[ss2]/(60*24*365)
-
-#Hours
-m3=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[5])]>24)
+#HORAS
+m3=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[6])]>24)
 tt$`TIEMPO EDAD`[intersect(m3,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m3,mi)]=TT[1]
 ss3=which(tt$`TIEMPO EDAD`==TT[5])
-tt$EDAD[ss3]=tt$EDAD[ss3]/(24*365) 
-
-#days
-m4=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[4])]>31)
+tt$EDAD[ss3]=tt$EDAD[ss3]/(24*365)  
+#dias
+m4=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[5])]>31)
 tt$`TIEMPO EDAD`[intersect(m4,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m4,mi)]=TT[1]
 ss4=which(tt$`TIEMPO EDAD`==TT[4])
-tt$EDAD[ss4]=tt$EDAD[ss4]/(365)
-
-#Moths
+tt$EDAD[ss4]=tt$EDAD[ss4]/(365) 
+#MESES
 m5=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[3])]>12)
 tt$`TIEMPO EDAD`[intersect(m5,me)]=TT[1]
 tt$`TIEMPO EDAD`[intersect(m5,mi)]=TT[1]
 ss4=which(tt$`TIEMPO EDAD`==TT[3])
-tt$EDAD[ss4]=tt$EDAD[ss4]/(12)
-
-#Years
+tt$EDAD[ss4]=tt$EDAD[ss4]/(12) 
+#AñOS
 m6=which(tt$EDAD[which(tt$`TIEMPO EDAD`==TT[1])]>123)
 tt$EDAD[m6]=NA
 
-#unknows and without records
-m7=c(which(tt$`TIEMPO EDAD`==TT[6]|tt$`TIEMPO EDAD`==TT[8]|tt$`TIEMPO EDAD`==TT[9]))
-tt$`TIEMPO EDAD`[which(tt$EDAD[m7]>60)]=TT[1]
+#ignorados y sin registro
+m7=c(which(tt$`TIEMPO EDAD`==TT[1]|tt$`TIEMPO EDAD`==TT[3]|tt$`TIEMPO EDAD`==TT[6]|tt$`TIEMPO EDAD`==TT[7]))
+tt$`TIEMPO EDAD`[which(tt$EDAD[m7]>60)]=TT[2]
 tt$EDAD[which(tt$EDAD[m7]<60)]=NA
 
 tt$EDAD=as.numeric(tt$EDAD)
 tt$EDAD[which(tt$EDAD>=123)]=NA
 
-#to sort of age and sexs
-
+#ordenando por sexos y edades
 sinsexo=tt
 sinsexo$SEXO=NULL
+
 sinsexo$EDAD=trunc(sinsexo$EDAD*100)/100
+
 todo=as.data.frame(sinsexo%>%count(date,dia,meses,años,EDAD))
+
 y1=tt[which(tt$SEXO=="FEMENINO"),]
 y1$SEXO=NULL
 y1$EDAD=trunc(y1$EDAD*100)/100
+
 muj=as.data.frame(y1%>%count(date,dia,meses,años,EDAD))
+
 y2=tt[which(tt$SEXO=="MASCULINO"),]
 y2$SEXO=NULL
 y2$EDAD=trunc(y2$EDAD*100)/100
 hom=as.data.frame(y2%>%count(date,dia,meses,años,EDAD))
+
 mujeres=as.data.frame(y1%>%count(date,dia,meses,años))
 mujeres$fechas=paste(mujeres$dia,"-",mujeres$meses,"-",mujeres$años)
+
 hombres=as.data.frame(y2%>%count(date,dia,meses,años))
 hombres$fechas=paste(hombres$dia,"-",hombres$meses,"-",hombres$años)
+
 todos=as.data.frame(sinsexo%>%count(date,dia,meses,años))
 todos$fechas=as.Date(paste0(todos$dia,"-",todos$meses,"-",todos$años),format="%d-%m-%Y")
 
@@ -303,18 +356,22 @@ points(d2, col="red", type="l",lwd=4)
 points(d3, col="gray70", type="l",lwd=4)
 dev.off()
 
-##############################################################################################################################################################################
+##############################################################################################################################################################################################33
 # Natural mortality during COVID19 
 
-"04 - 3 - 2020" #begining date
+"04 - 3 - 2020" #fecha inicio
 todos=todos[which(todos$años>=2019),]
 ini=which(todos$dia==04&todos$meses==3&todos$años==2020)
 fin=length(todos$fechas)
 
-fin-ini# average of people pass away during Covid pandemic
-media_covid=mean(todos$n[ini:fin])
-std_covid=sd(todos$n[ini:fin])
-100*std_covid/media_covid#Variation coeficent
+#Antes del covid
+iii=which(todos$dia==02&todos$meses==2&todos$años==2020)#02 - 2 - 2020 fecha inicio
+fff=which(todos$dia==03&todos$meses==3&todos$años==2020)#03 - 3 - 2020" fecha inicio
+
+fff-iii#promedio de los muertos 30 dias antes del covid
+media=mean(todos$n[iii:fff])
+std=sd(todos$n[iii:fff])
+100*std/media#coeficiente e variacion
 
 #before Covid period
 iii=which(todos$dia==02&todos$meses==2&todos$años==2020)#02 - 2 - 2020 
@@ -342,7 +399,7 @@ colnames(encovid)=c("fechas","dia","mes","año","m_encovid_medio","m_encovid_min
 # for intervale each month
 
 mes.abb=c("Ja","Fe","Ma","Ap","My","Jn","Jl","Au","Se","Oc","No","De")
-names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12)),"-",month.abb)# desde 2019
+names.mes=paste0(c(rep(19,12),rep(20,12),rep(21,12),rep(22,12),rep(23,12)),"-",month.abb)# desde 2019
 
 ###Women
 mujeres$nombre.mes=NULL
@@ -355,9 +412,10 @@ mujeres$mes.año=factor(mujeres$mes.año , levels=c(names.mes))
 
 mujeres$monthYear = paste0((as.numeric(mujeres$años)-2000)+trunc((mujeres$meses-0.5)*100/12)/100)
 mujeres=mujeres[mujeres$años>=2019,]
-fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$n)) + geom_boxplot()+labs(title="Women´s deaths time serie from 2019 to 2022",
-                                                                                  x ="Months from 2019 to 2022", 
-                                                                                  y = "Number of women´s deaths")+
+fall.muj=ggplot(data = mujeres, aes(x=mujeres$mes.año, y=mujeres$n)) + geom_boxplot()+labs(title="Women´s deaths time serie from 2019 to 2023",
+                                                                                           x ="Months from 2019 to 2023", 
+                                                                                           y = "Number of women´s deaths")+
+  theme_bw()+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -375,9 +433,10 @@ hombres$mes.año=factor(hombres$mes.año , levels=c(names.mes))
 
 hombres$monthYear = paste0((as.numeric(hombres$años)-2000)+trunc((hombres$meses-0.5)*100/12)/100)
 hombres=hombres[hombres$años>=2019,]
-fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$n)) + geom_boxplot()+labs(title="Men´s deaths time serie from 2019 to 2022",
-                                                                                  x ="Months from 2019 to 2022", 
-                                                                                  y = "Number of Men´s deaths")+
+fall.hom=ggplot(data = hombres, aes(x=hombres$mes.año, y=hombres$n)) + geom_boxplot()+labs(title="Men´s deaths time serie from 2019 to 2023",
+                                                                                           x ="Months from 2019 to 2023", 
+                                                                                           y = "Number of Men´s deaths")+
+  theme_bw()+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -396,17 +455,18 @@ todos$mes.año=factor(todos$mes.año , levels=c(names.mes))
 todos$monthYear = paste0((as.numeric(todos$años)-2000)+trunc((todos$meses-0.5)*100/12)/100)
 todos=todos[todos$años>=2019,]
 
-fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$n)) + geom_boxplot()+labs(title="Total deaths time serie from 2019 to 2022",
-                                                                                       x ="Months from 2019 to 2022", 
+fall.todos=ggplot(data = todos, aes(x=todos$mes.año, y=todos$n)) + geom_boxplot()+labs(title="Total deaths time serie from 2019 to 2023",
+                                                                                       x ="Months from 2019 to 2023", 
                                                                                        y = "Number of Total deathss")+
+  theme_bw()+
   theme(axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
 ggsave("fallecidos.todos.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = fall.todos)
-#############################################################################################################################################################################
-#Sinadef´s data
-library("tidyr")
+
+####################################################################################################################################################################################
+#Sinadef
 sinadef=fread("SINADEF - Data.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#fallecidos segun SINADEF
 ub=fread("TB_UBIGEOS.csv",sep=",",dec=".",header=TRUE,fill=TRUE)#ubigeos reales
 
@@ -419,12 +479,14 @@ colnames(sinadef)[29]="Perú"
 fechas1=sinadef$DATE[1:366]
 fechas1.1=paste0(fechas1,"-","2020")
 fechas1.1=as.Date(fechas1.1,format="%d-%m-%Y")
+
 fechas2=sinadef$DATE[367:731]
 fechas2.1=paste0(fechas2,"-","2021")
 fechas3=sinadef$DATE[732:length(sinadef$DATE)]
 fechas3.1=paste0(fechas3,"-","2022")
 fechas2.1=as.Date(fechas2.1,format="%d-%m-%Y")
 fechas3.1=as.Date(fechas3.1,format="%d-%m-%Y")
+
 sinadef$fecha=as.Date(c(fechas1.1,fechas2.1,fechas3.1),format="%Y-%m-%d")
 sinadef$DATE=sinadef$fecha
 sinadef$fecha=NULL
@@ -445,12 +507,13 @@ depp=unique(sinsexo$`DEPARTAMENTO DOMICILIO`)
 
 vector=depp
 for( i in 3:length(n.pro)){
-vector[which(vector==n.pro[i])]=i
-vector=na.omit(vector)  
+  vector[which(vector==n.pro[i])]=i
+  vector=na.omit(vector)  
 }
 
-depp[c(1:24,26,27,29:32)]
-Vec=c(1:24,26,27,29:32)
+depp[c(1:25,27,29:32)]
+
+Vec=c(1:25,27,29:32)
 
 vdepp=1:length(depp)
 nn.ex=depp[vdepp[!vdepp %in% Vec]]
@@ -462,17 +525,16 @@ sinsexo$`DEPARTAMENTO DOMICILIO`[which(sinsexo$`DEPARTAMENTO DOMICILIO`=="[NO DE
 sinsexo$`DEPARTAMENTO DOMICILIO`[which(sinsexo$`DEPARTAMENTO DOMICILIO`=="     ")]="SIN REGISTRO" 
 
 for(i in 1:length(sinsexo$`DEPARTAMENTO DOMICILIO`)){
-if (sum(nn.ex==sinsexo$`DEPARTAMENTO DOMICILIO`[i])==0){
-  next()
-}else{
-  if (sum(which(nn.ex==sinsexo$`DEPARTAMENTO DOMICILIO`[i]))<4){  
-    sinsexo$Dep[i]="SIN REGISTRO"
+  if (sum(nn.ex==sinsexo$`DEPARTAMENTO DOMICILIO`[i])==0){
+    next()
   }else{
-    sinsexo$Dep[i]="EXTRANJERO"  
+    if (sum(which(nn.ex==sinsexo$`DEPARTAMENTO DOMICILIO`[i]))<4){  
+      sinsexo$Dep[i]="SIN REGISTRO"
+    }else{
+      sinsexo$Dep[i]="EXTRANJERO"  
+    }
   }
- }
 }
-
 
 prov.sinadef=as.data.frame(sinsexo%>%count(FECHA,Dep))
 unique(prov.sinadef$Dep)
@@ -624,6 +686,7 @@ covid.hom=ggplot(data=covidhom, aes(x=covidhom$FECHA, y=covidhom$n, group=covidh
   labs(colour="",title="Positive COVID´s men",
        x ="Dates", 
        y = "Number of COVID´s tests that are positive")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"), axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -639,7 +702,8 @@ covid.muj=ggplot(data=covidmuj, aes(x=covidmuj$FECHA, y=covidmuj$n, group=covidm
   theme(legend.position="top")+
   labs(colour="",title="Positive COVID´s women",
        x ="Dates", 
-       y = "Number of COVID´s tests that are positive")+  
+       y = "Number of COVID´s tests that are positive")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"), axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -654,14 +718,17 @@ covid.todo=ggplot(data=sinsexocovid, aes(x=sinsexocovid$FECHA, y=sinsexocovid$n,
   labs(colour="",title="Positive COVID´s people",
        x ="Dates", 
        y = "Number of COVID´s tests that are positive")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"), axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
 ggsave("covid.todo.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot = covid.todo)
 
-
+################################################################################
 #Covid mortality
+mcovid=fread("fallecidos_covid.csv",sep=";",dec=".",header=TRUE,fill=TRUE)
+
 #to find Nas
 mm1=sum(is.na(mcovid$FECHA_FALLECIMIENTO))
 mm2=sum(is.na(mcovid$EDAD_DECLARADA))
@@ -731,7 +798,7 @@ write.csv(todos,"todos.csv",sep=",",dec=".",col.names=TRUE)
 
 #Creando tabla de numero de muertos por covid y exceso de muertos normalizado durante el tiempo que dura la pandemia 
 deathsextra=as.data.frame(rbind(cbind(1:length(muertos_covid_total$n),encovid$m_encovid_medio[1:length(muertos_covid_total$n)],"Excess of normalized natural deaths"),
-                               cbind(1:length(muertos_covid_total$n),muertos_covid_total$n,"COVID-19´s deaths")))
+                                cbind(1:length(muertos_covid_total$n),muertos_covid_total$n,"COVID-19´s deaths")))
 
 colnames(deathsextra)=c("Dias con el COVID","Número de muertos","Estimador")
 
@@ -746,6 +813,7 @@ fall.serie=ggplot(data =deathsextra, aes(x = deathsextra$fecha, y =deathsextra$`
   labs(colour="",title="Deaths time series since 16th march of 2020 to now",
        x ="Dates to begin Covid-19 epidemic", 
        y = "Number of deaths")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -759,13 +827,14 @@ min.covid=min(deathsextra2$`COVID´s death`)
 min.excess=min(deathsextra2$`Excess of death`)
 scaleFactor <- max(deathsextra2$`COVID´s death`-min.covid) / max(deathsextra2$`Excess of death`-min.excess)
 
-  fall.serie2=ggplot(deathsextra2, aes(x=deathsextra2$Dates)) +theme_bw()+
+fall.serie2=ggplot(deathsextra2, aes(x=deathsextra2$Dates)) +theme_bw()+
   geom_line(aes(y=deathsextra2$`COVID´s death`, col="red"))+
   geom_line(aes(y=(deathsextra2$`Excess of death`-min.excess)* scaleFactor), col="blue")+
   scale_y_continuous(limits=c(0,max(deathsextra2$`COVID´s death`)*1.01),name="Number of COVID´s death", sec.axis=sec_axis(~./scaleFactor, name="Normalized excess of death"))+
   scale_x_date(date_breaks = "60 days",date_labels = "%d-%m-%Y")+
   labs(colour="",title="COVID´s Mortality time series",
        x ="Dates")+
+  theme_bw()+
   theme(legend.position="none",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"),
         axis.title.y.left=element_text(color="red"),
@@ -773,8 +842,8 @@ scaleFactor <- max(deathsextra2$`COVID´s death`-min.covid) / max(deathsextra2$`
         axis.title.y.right=element_text(color="blue"),
         axis.text.y.right=element_text(color="blue"))
 
-  ggsave("serie.tiempo.fallecidosvsexcesodemuertos2.png", dpi = 600,   width = 250,
-         height = 159,unit="mm",plot =fall.serie2)
+ggsave("serie.tiempo.fallecidosvsexcesodemuertos2.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =fall.serie2)
 
 #to amend Covid death and excess of death
 encovid$dia=as.numeric(encovid$dia)
@@ -798,8 +867,8 @@ relation$mes=factor(relation$mes,levels=month.abb)
 
 cor.test(relation$`Exceso de muertos normalizada durante 2020`,relation$`Muertos por COVID-19`,method = "spearman")#con desfase de un dia 
 
-qqnorm(relation$`Muertos por COVID-19`,type="o")+qqline(relation$`Muertos por COVID-19`,col="red")
-qqnorm(relation$`Exceso de muertos normalizada durante 2020`,type="o")+qqline(relation$`Exceso de muertos normalizada durante 2020`,col="red")
+qqnorm(relation$`Muertos por COVID-19`)+qqline(relation$`Muertos por COVID-19`,col="red")
+qqnorm(relation$`Exceso de muertos normalizada durante 2020`)+qqline(relation$`Exceso de muertos normalizada durante 2020`,col="red")
 
 library(bestNormalize)
 bestNormalize(relation$`Exceso de muertos normalizada durante 2020`)
@@ -815,7 +884,7 @@ relation$fechas=as.Date("3-3-2020",format="%d-%m-%Y")+relation$Días-1
 relation$fechas=as.Date(relation$fechas,format="%d-%m-%Y")
 
 
-relation2=relation[1:which(relation$fechas=="2021-02-10"),]#until beginning vaccitation
+relation2=relation[1:which(relation$fechas=="2022-10-12"),]#until error 12 octuber, 2022
 
 bestNormalize(relation2$`Exceso de muertos normalizada durante 2020`)
 relation2$exceso.nor=predict(orderNorm(relation2$`Exceso de muertos normalizada durante 2020`))
@@ -823,6 +892,8 @@ relation2$exceso.nor=predict(orderNorm(relation2$`Exceso de muertos normalizada 
 bestNormalize(relation2$`Muertos por COVID-19`)
 relation2$muertos.nor=predict(orderNorm(relation2$`Muertos por COVID-19`))
 relation2=as.data.frame(na.omit(relation2))
+cor.test(relation2$`Exceso de muertos normalizada durante 2020 al 2022`,relation2$`Muertos por COVID-19`,method = "spearman")#con desfase de un dia 
+
 
 write.csv(relation2,"relation2.csv",sep=",",dec=".",col.names=TRUE)
 
@@ -830,28 +901,12 @@ relation2$fechas=as.Date(relation2$fechas,format="%d-%m-%Y")
 
 reg=lm(relation2$exceso.nor~relation2$muertos.nor,data = relation2)
 
-####
-ggplotRegression <- function (fit) {
-  Label=paste0("y=",round(fit$coef[[1]],4),"+",
-              round(fit$coef[[2]], 4),"x",
-              "  r-squared=", round(summary(fit)$r.squared, 2),
-              "  n=",length(fit$fitted.values),
-              "  p-value=",round(summary(fit)$coef[2,4],4))
-  
-  ggplot(fit$model, aes_string(x = names(fit$model)[2], y = names(fit$model)[1])) + 
-    geom_point() +
-    stat_smooth(method = "lm",se=TRUE,col="black") +
-    scale_x_continuous(limits = c((-.2*abs(min(as.numeric(fit$model[[2]]),na.rm=TRUE))+min(as.numeric(fit$model[[2]]),na.rm=TRUE)),(.2*abs(max(as.numeric(fit$model[[2]]),na.rm=TRUE))+max(as.numeric(fit$model[[2]]),na.rm=TRUE))),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
-    scale_y_continuous(limits = c((-.2*abs(min(as.numeric(fit$model[[1]]),na.rm=TRUE))+min(as.numeric(fit$model[[1]]),na.rm=TRUE)),(.2*abs(max(as.numeric(fit$model[[1]]),na.rm=TRUE))+max(as.numeric(fit$model[[1]]),na.rm=TRUE))),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
-    annotate(geom = 'text', x =(.5*abs(min(as.numeric(fit$model[[2]]),na.rm=TRUE))+min(as.numeric(fit$model[[2]]),na.rm=TRUE)), y =(.1*abs(max(as.numeric(fit$model[[1]]),na.rm=TRUE))+max(as.numeric(fit$model[[1]]),na.rm=TRUE)), label =Label, parse=FALSE)
-}
 
 p=ggplotRegression(reg)+
   geom_point(aes(fill=relation2$mes), shape = 21, alpha = 0.99,size=3)+
   scale_color_viridis(discrete = TRUE, option = "C",direction = -1)+
   scale_fill_viridis(discrete = TRUE,direction = -1)+
-  theme_gray()+
-  labs(colour="",title="Covid-19´s deaths vs Excess of deaths before Vaccination",
+  labs(colour="",title="Covid-19´s deaths vs Excess of deaths before 12 Octuber, 2022",
        x ="Number of normalized Covid-19´s deaths", 
        y = "Excess of normalized deaths")+
   theme(axis.text=element_text(size=14,colour = "black",face="bold"),
@@ -865,19 +920,20 @@ ggsave("regresion.png", dpi = 600,   width = 275,
 
 #Animation!!!XD
 
-p2=ggplot(relation,aes(x = relation$muertos.nor, y = relation$exceso.nor))+
-  geom_point(aes(fill=relation$mes), shape = 21, alpha = 0.99,size=3)+
+p2=ggplot(relation2,aes(x = relation2$muertos.nor, y = relation2$exceso.nor))+
+  geom_point(aes(fill=relation2$mes), shape = 21, alpha = 0.99,size=3)+
   scale_color_viridis(discrete = TRUE, option = "C",direction = -1)+
   scale_fill_viridis(discrete = TRUE,direction = -1)+
   theme_gray()+labs(colour="",
                     x ="Number of normalized Covid-19´s deaths", 
                     y = "Excess of normalized deaths")+
+  theme_bw()+
   theme(axis.text=element_text(size=14,colour = "black",face="bold"),
         axis.title=element_text(size=16,face="bold"),
         title = element_text(size=18,colour = "black",face="bold"),
         legend.text = element_text(color = "black", size = 14,face="bold"),
         legend.title=element_blank())+
-  transition_time(relation$fechas)+
+  transition_time(relation2$fechas)+
   shadow_mark(alpha = 0.3, size = 4)+
   labs(title = "Covid-19´s deaths vs Excess of deaths during pandemic on {frame_time}")+
   shadow_wake(wake_length = 0.1, alpha = 0.99)
@@ -904,8 +960,10 @@ rsquared=summary(reg)$r.squared
 
 subestimacion2=(muertostotales*rsquared-muertosreportados)/(muertostotales*rsquared)#subestimacion 
 subestimacion2#underestimation of r-squared of linear regression in percent
-##############################################################
-#Covid molecular test data
+
+################################################################
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ##############################################################
+#data INS de prueba moleculares
 
 ma=read.delim("pm_mar_2020.csv",sep=",",dec=".",header=TRUE)#marzo
 ab=read.delim("pm_apr_2020.csv",sep=",",dec=".",header=TRUE)#abril
@@ -921,7 +979,7 @@ di=read.delim("pm_dic_2020.csv",sep=",",dec=".",header=TRUE)#diciembre
 #feb=read.delim("pm_19feb_2021.csv",sep=",",dec=".",header=TRUE)#febrero 2021
 mar=fread("pm25Marzo2021.csv",sep="|",dec=".",header=TRUE,fill=TRUE)#marzo 2021
 
-p.m0=rbind(ma,ab,my,jn,jl,ag,st,oc,no,di)#just 2020
+p.m0=rbind(ma,ab,my,jn,jl,ag,st,oc,no,di)#solo 2020
 colnames(p.m0)[1]="FECHATOMAMUESTRA"
 p.m0$FECHATOMAMUESTRA=as.Date(as.character(p.m0$FECHATOMAMUESTRA),format="%Y-%m-%d")
 p.m0$dia=as.numeric(format(p.m0$FECHATOMAMUESTRA,format="%d"))
@@ -991,9 +1049,9 @@ step2.2=which(p.m2$año==2021)
 p.m2=p.m2[step2.2,]
 
 p.m.t2=as.data.frame(cbind(p.m2$FECHATOMAMUESTRA,p.m2$TIPO_MUESTRA,p.m2$RESULTADO,
-                          p.m2$Edad,p.m2$Sexo,p.m2$Institucion,p.m2$DEPARTAMENTO_PACIENTE,
-                          p.m2$PROVINCIA_PACIENTE,p.m2$DEPARTAMENTO_MUESTRA,p.m2$PROVINCIA_MUESTRA,
-                          p.m2$dia,p.m2$mes,p.m2$año))
+                           p.m2$Edad,p.m2$Sexo,p.m2$Institucion,p.m2$DEPARTAMENTO_PACIENTE,
+                           p.m2$PROVINCIA_PACIENTE,p.m2$DEPARTAMENTO_MUESTRA,p.m2$PROVINCIA_MUESTRA,
+                           p.m2$dia,p.m2$mes,p.m2$año))
 
 novie=fread("pm28Noviembre2021.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
 
@@ -1264,9 +1322,9 @@ step10.2=which(p.m10$año==2022)
 p.m10=p.m10[step10.2,]
 
 p.m.t10=as.data.frame(cbind(p.m10$FECHATOMAMUESTRA,p.m10$TIPO_MUESTRA,p.m10$RESULTADO,
-                           p.m10$Edad,p.m10$Sexo,p.m10$Institucion,p.m10$DEPARTAMENTO_PACIENTE,
-                           p.m10$PROVINCIA_PACIENTE,p.m10$DEPARTAMENTO_MUESTRA,p.m10$PROVINCIA_MUESTRA,
-                           p.m10$dia,p.m10$mes,p.m10$año))
+                            p.m10$Edad,p.m10$Sexo,p.m10$Institucion,p.m10$DEPARTAMENTO_PACIENTE,
+                            p.m10$PROVINCIA_PACIENTE,p.m10$DEPARTAMENTO_MUESTRA,p.m10$PROVINCIA_MUESTRA,
+                            p.m10$dia,p.m10$mes,p.m10$año))
 
 
 #################################################
@@ -1303,8 +1361,7 @@ p.m.t11=as.data.frame(cbind(p.m11$FECHATOMAMUESTRA,p.m11$TIPO_MUESTRA,p.m11$RESU
                             p.m11$dia,p.m11$mes,p.m11$año))
 
 #################################################
-noviembre2=fread("pm29Nov2022.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
-
+noviembre2=fread("pm31Dic2022.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
 p.m=noviembre2
 colnames(p.m)[3]="FECHATOMAMUESTRA"
 #p.m$ï..FECHA_CORTE=NULL
@@ -1317,15 +1374,16 @@ p.m$FECHATOMAMUESTRA=as.Date(as.character(p.m$FECHATOMAMUESTRA),format="%Y%m%d")
 p.m$dia=as.numeric(format(p.m$FECHATOMAMUESTRA,format="%d"))
 p.m$mes=as.numeric(format(p.m$FECHATOMAMUESTRA,format="%m"))
 p.m$año=as.numeric(format(p.m$FECHATOMAMUESTRA,format="%Y"))
+
 p.m12=p.m
 p.m12$FECHATOMAMUESTRA=paste0(p.m12$año,"-",p.m12$mes,"-",p.m12$dia)
-step12=min(which(p.m12$FECHATOMAMUESTRA=="2022-11-1")):max(which(p.m12$FECHATOMAMUESTRA=="2022-11-29"))
-p.m12=p.m12[step12,]#01/11/2022 a 29/11/2022
-step12.1=which(p.m12$mes==11)
+step12=min(which(p.m12$FECHATOMAMUESTRA=="2022-11-1")):max(which(p.m12$FECHATOMAMUESTRA=="2022-12-31"))
+p.m12=p.m12[step12,]#01/11/2022 a 04/01/2023
+step12.1=which(p.m12$mes>10|p.m12$mes<=12)
 p.m12=p.m12[step12.1,]
 p.m12$año[which(p.m12$año==2002)]=2022
 p.m12$año[which(p.m12$año==2012)]=2022
-p.m12$año[which(p.m12$año==2022&p.m12$mes==11)]=2022
+p.m12$año[which(p.m12$año==2022)]=2022
 step12.2=which(p.m12$año==2022)
 p.m12=p.m12[step12.2,]
 
@@ -1334,6 +1392,35 @@ p.m.t12=as.data.frame(cbind(p.m12$FECHATOMAMUESTRA,p.m12$TIPO_MUESTRA,p.m12$RESU
                             p.m12$PROVINCIA_PACIENTE,p.m12$DEPARTAMENTO_MUESTRA,p.m12$PROVINCIA_MUESTRA,
                             p.m12$dia,p.m12$mes,p.m12$año))
 
+#################################################
+ene23=fread("pm04Abr2023.csv",sep="|",dec=".",header=TRUE,fill=TRUE)
+
+p.m=ene23
+colnames(p.m)[3]="FECHATOMAMUESTRA"
+#p.m$ï..FECHA_CORTE=NULL
+p.m$UUID=NULL
+#p.m$UBIGEO_PACIENTE=NULL
+#p.m$DISTRITO_MUESTRA=NULL
+#p.m$DISTRITO_PACIENTE=NULL
+
+p.m$FECHATOMAMUESTRA=as.Date(as.character(p.m$FECHATOMAMUESTRA),format="%Y%m%d")
+p.m$dia=as.numeric(format(p.m$FECHATOMAMUESTRA,format="%d"))
+p.m$mes=as.numeric(format(p.m$FECHATOMAMUESTRA,format="%m"))
+p.m$año=as.numeric(format(p.m$FECHATOMAMUESTRA,format="%Y"))
+
+p.m13=p.m
+p.m13$FECHATOMAMUESTRA=paste0(p.m13$año,"-",p.m13$mes,"-",p.m13$dia)
+step13=min(which(p.m13$FECHATOMAMUESTRA=="2023-1-1")):max(which(p.m13$FECHATOMAMUESTRA=="2023-4-3"))
+p.m13=p.m13[step13,]#01/01/2023 a 4/04/2023
+step13.1=which(p.m13$mes<5)
+p.m13=p.m13[step13.1,]
+step13.2=which(p.m13$año==2023)
+p.m13=p.m13[step13.2,]
+
+p.m.t13=as.data.frame(cbind(p.m13$FECHATOMAMUESTRA,p.m13$TIPO_MUESTRA,p.m13$RESULTADO,
+                            p.m13$Edad,p.m13$Sexo,p.m13$Institucion,p.m13$DEPARTAMENTO_PACIENTE,
+                            p.m13$PROVINCIA_PACIENTE,p.m13$DEPARTAMENTO_MUESTRA,p.m13$PROVINCIA_MUESTRA,
+                            p.m13$dia,p.m13$mes,p.m13$año))
 
 ############
 
@@ -1358,8 +1445,9 @@ colnames(p.m.t9)=names.pm
 colnames(p.m.t10)=names.pm
 colnames(p.m.t11)=names.pm
 colnames(p.m.t12)=names.pm
+colnames(p.m.t13)=names.pm
 
-pm=rbind(p.m0,p.m.t1,p.m.t2,p.m.t3,p.m.t4,p.m.t5,p.m.t6,p.m.t7,p.m.t8,p.m.t9,p.m.t10,p.m.t11,p.m.t12)#grupo de datos
+pm=rbind(p.m0,p.m.t1,p.m.t2,p.m.t3,p.m.t4,p.m.t5,p.m.t6,p.m.t7,p.m.t8,p.m.t9,p.m.t10,p.m.t11,p.m.t12,p.m.t13)#grupo de datos
 pm=as.data.frame(pm)
 
 #Limpiando data
@@ -1393,10 +1481,10 @@ unique(pm2$RESULTADO)
 pm2$fecha=as.Date(as.character(paste0(pm2$año,"-",pm2$mes,"-",pm2$dia)),format="%Y-%m-%d")
 
 data.pm=pm2%>%count(fecha
-                  ,RESULTADO
-                  ,dia
-                  ,mes
-                  ,año)
+                    ,RESULTADO
+                    ,dia
+                    ,mes
+                    ,año)
 data.pm$fecha=as.Date(data.pm$fecha,format="%Y-%m-%d")
 data.pm$n=as.numeric(data.pm$n)
 data.pm$RESULTADO=factor(data.pm$RESULTADO,levels=unique(data.pm$RESULTADO))
@@ -1410,6 +1498,7 @@ resul.mol=ggplot(data=data.pm, aes(x=data.pm$fecha, y=data.pm$n, group=data.pm$R
   labs(colour="",title="Covid-19´s molecular test time serie",
        x ="Dates", 
        y = "Number of Molecular tests")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),
         axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
@@ -1419,25 +1508,68 @@ resul.mol=ggplot(data=data.pm, aes(x=data.pm$fecha, y=data.pm$n, group=data.pm$R
 ggsave("serie.tiempo.resultados.moleculares.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =resul.mol)
 
-razon=as.data.frame(cbind(as.Date(data.pm$fecha[2*(1:(length(data.pm$fecha)*0.5))],format="%Y-%m-%d"),rep(NA,length(data.pm$fecha)*0.5)))
+
+#data.pm=read.csv("data.pm.csv",sep=",",dec=".",header = T)
+
+date_1=data.pm$fecha[1]
+date_2=data.pm$fecha[length(data.pm$fecha)]
+
+between_days=as.numeric(difftime(date_2, date_1, units = "days"))
+fechas_pos=0:between_days+as.Date(date_1,format="%Y-%m-%d")
+
+razon=as.data.frame(cbind(as.Date(fechas_pos,format="%Y-%m-%d"),rep(NA,length(fechas_pos))))
 colnames(razon)=c("fecha","positividad")
 
-razon$fecha=as.Date(data.pm$fecha[2*(1:(length(data.pm$fecha)*0.5))],format="%Y-%m-%d")
-razon$dia=as.numeric(format(as.Date(data.pm$fecha[2*(1:(length(data.pm$fecha)*0.5))],format="%Y-%m-%d"), format = "%d"))
-razon$mes=as.numeric(format(as.Date(data.pm$fecha[2*(1:(length(data.pm$fecha)*0.5))],format="%Y-%m-%d"), format = "%m"))
-razon$año=as.numeric(format(as.Date(data.pm$fecha[2*(1:(length(data.pm$fecha)*0.5))],format="%Y-%m-%d"), format = "%Y"))
+razon$dia=as.numeric(format(as.Date(razon$fecha,format="%Y-%m-%d"), format = "%d"))
+razon$mes=as.numeric(format(as.Date(razon$fecha,format="%Y-%m-%d"), format = "%m"))
+razon$año=as.numeric(format(as.Date(razon$fecha,format="%Y-%m-%d"), format = "%Y"))
+razon$fecha=as.Date(razon$fecha,format="%Y-%m-%d")
 
-mes.abb=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dec")
+mes.abb=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
 razon$Mes=NULL
+
 for(i in 1:length(razon$fecha)){
   razon$Mes[i]=month.abb[razon$mes[i]]
-}  
+}
+razon$Mes=factor(razon$Mes,levels=mes.abb)
 
-for(i in 1:(length(data.pm$fecha)*0.5)){
-  razon$positividad[i]=round(data.pm$n[2*i]*100/(data.pm$n[2*i]+data.pm$n[2*i-1]),2)
+is.integer0 <- function(x)
+{
+  is.integer(x) && length(x) == 0L
 }
 
-razon$Mes=factor(razon$Mes,levels=month.abb)
+a=NULL
+b=NULL
+
+for(i in 1:length(razon$fecha)){
+  
+  if(is.integer0(which(data.pm$fecha==razon$fecha[i]&data.pm$RESULTADO=="POSITIVO"))){
+    a[i]=mean(c(a[i-4],a[i-3],a[i-2],a[i-1]),na.rm=T)+sd(c(a[i-4],a[i-3],a[i-2],a[i-1]),na.rm=T)
+  }else{
+    a[i]=data.pm$n[which(data.pm$fecha==razon$fecha[i]&data.pm$RESULTADO=="POSITIVO")]
+  }
+  
+  if(is.integer0(which(data.pm$fecha==razon$fecha[i]&data.pm$RESULTADO=="NEGATIVO"))){
+    b[i]=mean(c(b[i-4],b[i-3],b[i-2],b[i-1]),na.rm=T)+sd(c(b[i-1],b[i-2],b[i-3],b[i-4]),na.rm=T)
+  }else{
+    b[i]=data.pm$n[which(data.pm$fecha==razon$fecha[i]&data.pm$RESULTADO=="NEGATIVO")]
+  }
+  
+  razon$positividad[i]=a[i]/(a[i]+b[i])
+  
+  if(razon$positividad[i]<0){
+    razon$positividad[i]=0 
+  }
+  
+  
+  
+}
+
+plot(razon$fecha[(length(razon$fecha)-90):length(razon$fecha)],razon$positividad[(length(razon$fecha)-90):length(razon$fecha)],type="o")
+
+#View(razon)
+
+razon$positividad[which(is.na(razon$positividad))]=razon$positividad[which(is.na(razon$positividad))-1]*.5+razon$positividad[which(is.na(razon$positividad))+1]*.5
 
 pos.mol=ggplot(data=razon, aes(x=razon$fecha, y=razon$positividad))+
   scale_x_date(date_breaks = "30 days",date_labels = "%d-%m-%Y")+
@@ -1447,6 +1579,7 @@ pos.mol=ggplot(data=razon, aes(x=razon$fecha, y=razon$positividad))+
   labs(colour="",title="Covid-19´s molecular positivity rate",
        x ="Dates", 
        y = "Percent %")+
+  theme_bw()+
   theme(legend.position="top",legend.title=element_blank(),legend.text = element_text(color = "black", size = 14,face="bold"), axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -1460,9 +1593,10 @@ data.esfuerzo=as.data.frame(pm%>%count(fecha
 
 write.csv(data.esfuerzo,"data.esfuerzo.csv",sep=",",dec=".",col.names=TRUE)
 write.csv(razon,"razon.csv",sep=",",dec=".",col.names=TRUE)
+write.csv(data.pm,"data.pm.csv",sep=",",dec=".",col.names=TRUE)
 
 ###################################################
-#OPENCOVIDPERU data
+#Data OPENCOVIDPERU
 defase=read.delim("DESFASE CIFRAS - MAIN.csv",sep=",",dec=".")#fallecidos segun SINADEF
 pruebas=read.delim("PRUEBAS - Data Peru.csv",sep=",",dec=".")
 uci=read.delim("UCI HOSP SUSALUD - UCI Beds.csv",sep=",",dec=".")
@@ -1475,10 +1609,10 @@ pruebas=as.data.frame(pruebas)
 uci=as.data.frame(uci)
 UCI.MINSA=as.data.frame(UCI.MINSA)
 
-camitass=as.data.frame(UCI.MINSA[,c(1,12,21,22,31,32,41,42,51,52,61,62,70,71,79,80,88,89,97,98,106,107,116,117)])
+camitass=as.data.frame(UCI.MINSA[,c(2,14,21,22,31,32,41,42,51,52,61,62,70,71,79,80,88,89,97,98,106,107,116,117)])
 
 for(i in 3:ncol(camitass)){
-camitass[which(is.na(camitass[,i])),i]=0
+  camitass[which(is.na(camitass[,i])),i]=0
 }
 
 camitas=camitass[,1:5]
@@ -1488,7 +1622,7 @@ camitas[,5]=rowSums(camitass[,seq(4,ncol(camitass),2)])
 camitas[,3]=camitas[,4]+camitas[,5]
 
 camitas$fecha2=as.character(camitas$FECHACORTE)
-camitas$fecha2=as.Date(camitas$fecha2,format="%Y%m%d")
+camitas$fecha2=as.Date(camitas$fecha2,format="%Y-%m-%d")
 camitas$FECHACORTE=NULL
 
 colnames(camitas)=c("provincia","total","disponible","ocupada","fecha")
@@ -1539,30 +1673,30 @@ depa=c("Amazonas",
 
 
 mdepa=c("AMAZONAS",
-       "ANCASH",
-       "APURIMAC",
-       "AREQUIPA",
-       "AYACUCHO",
-       "CAJAMARCA",
-       "CALLAO",
-       "CUZCO",
-       "HUANCAVELICA",
-       "HUANUCO",
-       "ICA",
-       "JUNIN",
-       "LA LIBERTAD",
-       "LAMBAYAQUE",
-       "LIMA",
-       "LORETO",
-       "MADRE DE DIOS",
-       "MOQUEGUA",
-       "PASCO",
-       "PIURA",
-       "PUNO",
-       "SAN MARTIN",
-       "TACNA",
-       "TUMBES",
-       "UCAYALI")
+        "ANCASH",
+        "APURIMAC",
+        "AREQUIPA",
+        "AYACUCHO",
+        "CAJAMARCA",
+        "CALLAO",
+        "CUZCO",
+        "HUANCAVELICA",
+        "HUANUCO",
+        "ICA",
+        "JUNIN",
+        "LA LIBERTAD",
+        "LAMBAYAQUE",
+        "LIMA",
+        "LORETO",
+        "MADRE DE DIOS",
+        "MOQUEGUA",
+        "PASCO",
+        "PIURA",
+        "PUNO",
+        "SAN MARTIN",
+        "TACNA",
+        "TUMBES",
+        "UCAYALI")
 
 prov=mdepa
 ccam$provincia=factor(ccam$provincia,levels=mdepa)
@@ -1612,8 +1746,7 @@ desfase=as.data.frame(cbind(rep(defase$fecha,(length(depa)+length(depylima)))
 colnames(desfase)=c("Fecha","Zona","Fuente","Casos","Fallecidos")
 desfase$Fecha=as.Date(rep(defase$fecha,length(depa)+length(depylima)),format="%Y-%m-%d")
 
-#for diresa cases
-library("tidyr")
+#Para la casos covid diresa
 diresa=defase[,27:51]
 for(i in 1:25){
   diresa[,i]=as.numeric(gsub(",","",defase[,26+i]))
@@ -1625,7 +1758,7 @@ write.csv(diresa,"diresa.csv",sep="")
 Diresa=read.delim("diresa.csv",sep=",",header = TRUE)
 Diresa$fuente="diresa"
 
-#for minsa cases
+#Para la casos covid minsa
 minsa=defase[,53:78]
 for(i in 1:26){
   minsa[,i]=as.numeric(gsub(",","",defase[,52+i]))
@@ -1637,7 +1770,7 @@ write.csv(minsa,"minsa.csv",sep="")
 Minsa=read.delim("minsa.csv",sep=",",header = TRUE)
 Minsa$fuente="minsa"
 
-#for diresa covid deaths
+#Para la fallecidos covid diresa
 diresa.f=defase[,131:155]
 for(i in 1:25){
   diresa.f[,i]=as.numeric(gsub(",","",defase[,130+i]))
@@ -1649,7 +1782,7 @@ write.csv(diresa.f,"diresa.f.csv",sep="")
 Diresa.f=read.csv("diresa.f.csv",sep=",",header = TRUE)
 Diresa.f$fuente="diresa"
 
-#for minsa covid deaths
+#Para la fallecidos covid minsa
 minsa.f=defase[,157:182]
 for(i in 1:26){
   minsa.f[,i]=as.numeric(gsub(",","",defase[,156+i]))
@@ -1661,7 +1794,7 @@ write.csv(minsa.f,"minsa.f.csv",sep="")
 Minsa.f=read.delim("minsa.f.csv",sep=",",header = TRUE)
 Minsa.f$fuente="minsa"
 
-#for diris covid deaths
+#Para la casos covid diris
 DIRIS=c("CENTRO","NORTE","SUR","ESTE")
 diris=defase[,85:88]
 for(i in 1:4){
@@ -1678,7 +1811,7 @@ Diris=as.data.frame(Diris)
 colnames(Diris)=c("Fecha","Zona","Casos", "fuente")
 Diris$Fecha=rep(fecha,4)
 
-#for minsa zones
+#Para la casos covid MINSA zonas
 MINSA=c("CENTRO","NORTE","SUR","ESTE")
 minsaz=defase[,90:93]
 for(i in 1:4){
@@ -1695,7 +1828,7 @@ Minsaz=as.data.frame(Minsaz)
 colnames(Minsaz)=c("Fecha","Zona","Casos", "fuente")
 Minsaz$Fecha=rep(fecha,4)
 
-#to merge diresa, diris and minsa datas
+#uniendo la  data diresa, diris y minsa 
 desfase$Zona=c(Diresa$Departamento,
                Minsa$Departamento)
 desfase$Fuente=c(Diresa$fuente,
@@ -1766,6 +1899,7 @@ infect=ggplot(data=infe, aes(x=infe$fecha, y=infe$infec))+
        x ="Dates", 
        y = "Patients (Millons)")+
   scale_y_continuous(limits = c(0,max(infe$infec)*1.05),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+  theme_bw()+
   theme(legend.position="top",legend.title=element_blank(),legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
@@ -1773,7 +1907,7 @@ infect=ggplot(data=infe, aes(x=infe$fecha, y=infe$infec))+
 ggsave("infectados.diresa.diris.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =infect)
 
-####Minsa data
+####Solo Minsa
 
 solo.minsa=todo.casos[which(todo.casos$Fuente=="minsa"&todo.casos$Casos!=0),]
 
@@ -1808,6 +1942,7 @@ infecm=ggplot(data=infm, aes(x=infm$fecha, y=infm$infec))+
        x ="Dates", 
        y = "Patients (Millons)")+
   scale_y_continuous(limits = c(0,max(infm$infec)*1.01),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+  theme_bw()+
   theme(legend.position="top",legend.title=element_blank(),legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
@@ -1815,7 +1950,7 @@ infecm=ggplot(data=infm, aes(x=infm$fecha, y=infm$infec))+
 ggsave("infectados.minsa.acumulado.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =infecm)
 
-############ moleculares y serology test
+############pruebas unidas moleculares y rapidas
 
 prueba=pruebas[,c(2,3,4,5,7,8,9)]
 colnames(prueba)=c("fechas","M+","R+","A+","TM","TR","TA")
@@ -1869,12 +2004,15 @@ pos$esfuerzo=c((pos$`total de pruebas`[2:round(length(pos$`total de pruebas`))]-
                   pos$`total de pruebas`[1:round(length(pos$`total de pruebas`)-1)]),NA)
 
 
+pos$fechas=as.Date(pos$fechas,format="%Y-%m-%d")
+
 posi=ggplot(data=pos, aes(x = pos$fechas, y =pos$p,group=pos$tipo))+
   geom_line(aes(color=pos$tipo))+
-  scale_x_date(date_breaks = "30 days",date_labels = "%d-%b%Y")+
+  scale_x_date(date_breaks = "30 days",date_labels = "%b-%Y")+
   labs(colour="",title="Accumulated COVID´s positivity",
        x ="Dates", 
        y = "Positivity(%)")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -1889,6 +2027,7 @@ posi.r=ggplot(data=pos, aes(x = pos$fechas, y =pos$p.dia,group=pos$tipo))+
   labs(colour="",title="Covid-19´s positivity rate per day",
        x ="Dates", 
        y = "Positivity(%)")+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
         axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
 
@@ -1896,7 +2035,11 @@ ggsave("serie.tiempo.positividad.dia.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =posi.r)
 
 #traslape de infectados inferidos prueba molecular: rojo (positivos/(negativos + indefinidos)) y negro(positivos/negativos)
-x11();plot(razon$positividad[1:(length(razon$fecha)-1)],type="l")
+
+razon=read.csv("razon.csv",sep=",",dec=".",header = T)
+data.esfuerzo=read.csv("data.esfuerzo.csv",sep=",",dec=".",header = T)
+
+plot(razon$positividad[1:(length(razon$fecha)-1)],type="l")
 points(pos$p.dia[5:(length(pos$p.dia)/3)],type="l",col="red")
 
 #length(razon$fecha)+inicio.pandemia
@@ -1904,7 +2047,7 @@ sum(pos$`total de pruebas`[3:(length(data.esfuerzo$fecha)+2)]>data.esfuerzo$n)#d
 
 write.csv(pos,"pos.csv",sep=",",dec=".",col.names = TRUE)
 #######################################################################################################
-#Bed of UCI
+#Camas UCI
 UCI=as.data.frame(row_to_names(uci,row_number = 1, remove_row = TRUE, remove_rows_above = TRUE))
 UCI[,81]=NULL
 UCI[,80]=NULL
@@ -1918,11 +2061,8 @@ for (i in 1:length(depa.per)){
   colnames(UCI)[(3*i-1):(3*i+1)]=paste0(depa.per[i],"-",nombre[(3*i-1):(3*i+1)])
 }
 
-fecha.error=as.Date(paste0(UCI$DATE[1],"."),"%d-%b")
-fecha.inicio=as.Date(fecha.error-730,format="%Y-%m-%d")
-#fecha.inicio=as.Date(gsub("2021","2020","2022",fecha.inicio),format="%Y-%m-%d")
-fecha.final=as.Date(fecha.inicio+length(UCI$DATE)-1,format="%Y-%m-%d")
-UCI$DATE=seq(as.Date(fecha.inicio), as.Date(fecha.final), by="days")
+fecha.inicio=as.Date("2020-4-7",format="%Y-%m-%d")
+UCI$DATE=as.Date(0:(length(UCI$DATE)-1)+fecha.inicio,format="%Y-%m-%d")
 
 begin=UCI$DATE[length(UCI$DATE)]+1
 bbb=which(fechasss==begin)
@@ -1937,15 +2077,15 @@ datesss=UCI.update$DATE
 UCI.u=as.data.frame(matrix(NA,ncol=ncol(UCI),nrow= length(fechasss[bbb:lll])))
 
 for(i in 1: length(fechasss[bbb:lll])){
-for(j in 1:length(prov)){
-UCI.u[i,3*j]=sum(as.numeric(ccam$dis[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])]))
-UCI.u[i,(3*j-1)]=sum(as.numeric(ccam$ocu[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])]))
-UCI.u[i,(3*j+1)]=sum(c(ccam$ocu[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])],ccam$dis[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])]))
-}
+  for(j in 1:length(prov)){
+    UCI.u[i,3*j]=sum(as.numeric(ccam$dis[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])]))
+    UCI.u[i,(3*j-1)]=sum(as.numeric(ccam$ocu[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])]))
+    UCI.u[i,(3*j+1)]=sum(c(ccam$ocu[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])],ccam$dis[which(ccam$provincia==prov[j]&ccam$fecha==fechasss[55+i])]))
+  }
 }
 
 for(i in 1: length(fechasss[bbb:lll])){
-
+  
   UCI.u[i,77]=sum(as.numeric(UCI.u[i,c(seq(3,76,3)-1)]))
   UCI.u[i,78]=sum(as.numeric(UCI.u[i,c(seq(3,76,3))]))
   UCI.u[i,79]=sum(as.numeric(UCI.u[i,c(seq(3,76,3)+1)]))
@@ -1968,8 +2108,7 @@ camas.libres$Estado=rep("free %",length(UCI$DATE))
 #plot(camas.libres$fecha[(length(camas.libres$fecha)-50):length(camas.libres$fecha)],camas.libres$`Números de Camas`[(length(camas.libres$fecha)-50):length(camas.libres$fecha)])
 #plot(camas.ocupadas$fecha[(length(camas.ocupadas$fecha)-50):length(camas.ocupadas$fecha)],camas.ocupadas$`Números de Camas`[(length(camas.ocupadas$fecha)-50):length(camas.ocupadas$fecha)])
 
-#errors in data
-#source:
+#error de data
 link="https://www.dge.gob.pe/portalnuevo/informacion-publica/disponibilidad-de-camas-covid-19/" #segun dge.gob.pe 01/04/2021 al 19/04/2022
 c.error=read.delim("camas.uci.segun.dge.pe.txt",sep=",",dec=".")
 c.error2=read.csv(file = "camas ocupada dge 29.11.22.csv",sep=";",dec=".",header = TRUE)
@@ -1995,13 +2134,13 @@ corregido=read.csv("corregido.csv",sep=";",dec=".",header = TRUE)
 camas.libres$`Números de Camas`=as.numeric(camas.libres$`Números de Camas`)
 camas.ocupadas$`Números de Camas`=as.numeric(camas.ocupadas$`Números de Camas`)
 
-#to save data before which will amend 
+#guardando data antes de la correción
 
 camas.data=data.frame(as.Date(UCI$DATE,format="%Y-%m-%d"),camas.ocupadas$`Números de Camas`,camas.libres$`Números de Camas`)
 colnames(camas.data)=c("fecha","ocupadas","libres")
 write.csv(camas.data,"cama.data.csv",sep=",",dec=".",col.names=TRUE)
 
-#to amend since 01/04/2021 to 08/11/2021 to both datas
+#para corregir desde 01/04/2021 al 08/11/2021 para ambas datas
 
 camas.c=data.frame(as.Date(UCI$DATE,format="%Y-%m-%d"),camas.ocupadas$`Números de Camas`,camas.libres$`Números de Camas`)
 colnames(camas.c)=c("fecha","ocupadas","libres")
@@ -2012,13 +2151,16 @@ ax=corregido$X.[1:which(corregido$fecha=="8/11/2021")]
 bx=camas.c$o.per[which(camas.c$fecha=="2021-04-01"):which(camas.c$fecha=="2021-11-08")]
 d.c=data.frame(ax,bx)
 reg.c=lm(bx~ax,d.c)
-ggplotRegression(reg.c)#good
+ggplotRegression(reg.c)#perfecto corregido
 
 cx=corregido$X.[which(corregido$fecha=="9/11/2021"):which(corregido$fecha=="18/04/2022")]
 dx=camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-04-18")]
 ex=cx*reg.c$coefficients[2]+reg.c$coefficients[1]
 reg.c2=lm(ex~dx)
-ggplotRegression(reg.c2)#good since 18/04/2022
+ggplotRegression(reg.c2)#perfecto corregido hasta 18/04/2022
+
+#fx=camas.c$o.per[which(camas.c$fecha=="2022-04-19"):length(camas.c$fecha)]
+#razon.correcion=fx*fx/(fx[1]*fx[1])
 
 ###############################################################################
 
@@ -2052,7 +2194,7 @@ fx1=camas.c$o.per[which(camas.c$fecha=="2022-06-19"):length(camas.c$fecha)]
 gx1=fx1*reg.c2$coefficients[2]+reg.c2$coefficients[1]
 
 ######################################                              
-#to repare data
+#to delete issue
 camas.c$o.per[which(camas.c$fecha=="2021-11-09"):which(camas.c$fecha=="2022-06-18")]=ex1
 camas.c$o.per[which(camas.c$fecha=="2022-06-19"):length(camas.c$fecha)]=gx1
 
@@ -2073,6 +2215,7 @@ cama=ggplot(data=camas, aes(x = camas$fecha, y =camas$`Números de Camas`,group=
        x ="Dates", 
        y = "number of bed in percent")+
   scale_y_continuous(limits = c(0,1.01*max(camas$`Números de Camas`,na.rm = TRUE)),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),
         axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
@@ -2081,8 +2224,27 @@ cama=ggplot(data=camas, aes(x = camas$fecha, y =camas$`Números de Camas`,group=
 ggsave("serie.tiempo.UCI.png", dpi = 600,   width = 250,
        height = 159,unit="mm",plot =cama)
 
-################################################################################
-#Covid vaccinatation in progress
+camas2=as.data.frame(camas[which(camas$Estado=="non-free %"),])
+camas2$Estado=NULL
+
+cama2=ggplot(data=camas2, aes(x = camas2$fecha, y =camas2$`Números de Camas`))+
+  geom_line(color="red")+
+  scale_x_date(date_breaks = "60 days",date_labels = "%d-%m-%Y")+
+  labs(colour="",title="UCI´s bed",
+       x ="Dates", 
+       y = "Number of non-free bed %")+
+  scale_y_continuous(limits = c(0,1.01*max(camas2$`Números de Camas`,na.rm = TRUE)),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+  theme_bw()+
+  theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),
+        axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),
+        axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("serie.tiempo.UCI2.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =cama2)
+
+################################################################################3
+#Vaccinatation in progress
 
 vac=fread("vacunas_covid.csv",sep=",",dec=".",header = TRUE,fill=TRUE)
 vac=as.data.frame(cbind(vac$FECHA_VACUNACION,vac$EDAD,vac$DOSIS,vac$DEPARTAMENTO))
@@ -2093,8 +2255,14 @@ vac$fecha=as.Date(vac$fecha,format="%Y%m%d")
 #vvv=as.data.frame(count(vac,c("fecha","Edad","Dosis","Departamento")))
 #v.prov=as.data.frame(count(vac,c("fecha","Edad","Dosis","Departamento")))
 v.peru=as.data.frame(vac%>%count(fecha,Dosis))
-dosis=unique(v.peru$Dosis)
-v.peru$Dosis=factor(v.peru$Dosis,levels =dosis)
+dosis=1:max(as.numeric(vac$Dosis))
+v.peru$Dosis=factor(v.peru$Dosis,levels=dosis)
+
+write.csv(v.peru,"v.peru.csv",sep=",",dec=".",col.names=T)
+v.peru=read.csv("v.peru.csv",sep=",",dec=".",header = T)
+
+v.peru$fecha=as.Date(v.peru$fecha,format="%Y-%m-%d")
+v.peru$Dosis=factor(v.peru$Dosis,levels=dosis)
 
 vacuna=ggplot(data=v.peru, aes(x = v.peru$fecha, y =v.peru$n,group=v.peru$Dosis))+
   geom_line(aes(color=v.peru$Dosis),size=.5)+
@@ -2103,6 +2271,7 @@ vacuna=ggplot(data=v.peru, aes(x = v.peru$fecha, y =v.peru$n,group=v.peru$Dosis)
        x ="Dates", 
        y = "Number of vaccinated people")+
   scale_y_continuous(limits = c(0,1.01*max(v.peru$n,na.rm = TRUE)),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+  theme_bw()+
   theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),
         axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),
         axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
@@ -2117,18 +2286,18 @@ hoy=format(today, format="%Y-%m-%d")
 Dates=seq(as.Date(inicio.pandemia,format="%Y-%m-%d"), as.Date(hoy, format="%Y-%m-%d"), by="days")
 Dates=as.Date(Dates,format="%Y-%m-%d")
 
-vacunados=as.data.frame(matrix(0,ncol=7,nrow=length(Dates)))
-colnames(vacunados)=c("Fecha","1ra","2da","3ra","4ta","5ta","6ta")
+vacunados=as.data.frame(matrix(0,ncol=12,nrow=length(Dates)))
+colnames(vacunados)=c("Fecha","1ra","2da","3ra","4ta","5ta","6ta","7ta","8vo","9no","10mo","11ro")
 vacunados$Fecha=Dates
 
 for( i in 1:length(v.peru$fecha)){
-if(v.peru$Dosis[i]=="1"){
-  vacunados$`1ra`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  if(v.peru$Dosis[i]=="1"){
+    vacunados$`1ra`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
   }
-if(v.peru$Dosis[i]=="2"){
-  vacunados$`2da`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  if(v.peru$Dosis[i]=="2"){
+    vacunados$`2da`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
   }
-if(v.peru$Dosis[i]=="3"){
+  if(v.peru$Dosis[i]=="3"){
     vacunados$`3ra`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
   }
   if(v.peru$Dosis[i]=="4"){
@@ -2140,11 +2309,46 @@ if(v.peru$Dosis[i]=="3"){
   if(v.peru$Dosis[i]=="6"){
     vacunados$`6ta`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
   }
+  if(v.peru$Dosis[i]=="7"){
+    vacunados$`7ta`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  }
+  if(v.peru$Dosis[i]=="8"){
+    vacunados$`8vo`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  }
+  if(v.peru$Dosis[i]=="9"){
+    vacunados$`9no`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  }
+  if(v.peru$Dosis[i]=="10"){
+    vacunados$`10mo`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  }
+  if(v.peru$Dosis[i]=="11"){
+    vacunados$`11ro`[which(vacunados$Fecha==v.peru$fecha[i])]=v.peru$n[i]
+  }
 }
 
 write.csv(vacunados,"vacunados.csv",sep=",",dec=".",col.names=TRUE)
+vacunados=read.csv("vacunados.csv",sep=",",dec=".",header = T)
+vacunados2=cbind(vacunados$Fecha,rowSums(vacunados[,3:5]),rowSums(vacunados[,6:(ncol(vacunados)-1)]))
+vac2=data.frame(c(vacunados2[,1],vacunados2[,1]),c(vacunados2[,2],vacunados2[,3]),c(rep("1 to 3 doses of vaccination",length(vacunados2[,1])),rep("more 4 doses of vaccination",length(vacunados2[,1]))))
+colnames(vac2)=c("fecha","vac","doses")
 
-###########
+vac2$doses=as.factor(vac2$doses)
+vac2$fecha=as.Date(c(vacunados2[,1],vacunados2[,1]), format="%Y-%m-%d")
 
+vacuna2=ggplot(data=vac2, aes(x = vac2$fecha, y =as.numeric(vac2$vac),group=vac2$doses))+
+  geom_line(aes(color=vac2$doses),size=.5)+
+  scale_x_date(date_breaks = "60 days",date_labels = "%d-%m-%Y")+
+  labs(colour="",title="Vaccination rate per day according to minus/more 3 doses of vaccination",
+       x ="Dates", 
+       y = "Number of vaccinated people")+
+  scale_y_continuous(limits = c(0,1.01*max(as.numeric(vac2$vac),na.rm = TRUE)),labels = scales::comma,breaks =scales::pretty_breaks(n = 5))+
+  theme_bw()+
+  theme(legend.position="top",legend.text = element_text(color = "black", size = 14,face="bold"),
+        axis.text.x=element_text(size=11,colour = "black",face="bold",angle=45, hjust=1),
+        axis.text.y=element_text(size=11,colour = "black",face="bold",hjust=1),
+        axis.title=element_text(size=14,face="bold"),title = element_text(size=16,colour = "black",face="bold"))
+
+ggsave("serie.tiempo.vacunados2.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =vacuna2)
 ################################################################################
 ```
