@@ -30,16 +30,20 @@ SINADEF's data is compiled as the number of deaths per day which are managed by 
 
 ## Natural mortality
 
+Natural mortality refers to the number of deaths that occur due to natural causes, such as diseases and age-related conditions, but excludes deaths caused by accidents, homicides, and suicides.
 
 |[![Figure .2](plotting/fallecidos.todos.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.todos.png?raw=true)|
 |:----------------------------------------------------------------------------:|
 | *Figure 2. Natural mortality according to SINADEF*|
 
-
+In [(fig. 2)](#natural-mortality), the number of natural deaths is shown to be clustered by month. It is found that the same abrupt pattern is observed in October 2022 is found to be lower than that all months prior to the COVID-19 pandemic in 2020.
 
 |[![Figure .3](plotting/fallecidos.provincias2.png)](https://github.com/jasb3110/COVIDPERU/blob/59d8989645448d2234cef2782befec6e611299e8/plotting/fallecidos.provincias2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 3. Natural mortality by regions*|
+|*Figure 3. Natural mortality per regions*|
+
+Similarly, I plotted the number of natural deaths per region and found an issue in October 2022 that was not consistent across all regions. The issue in October 2022 appears to be more pronounced in certain regions with larger populations (fig. 3).
+
 
 ## Covid positivity
 
