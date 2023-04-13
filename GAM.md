@@ -22,16 +22,16 @@ One advantage of GAMs is that they can handle non-linear relationships between t
 
 
 ### GAM on MINSA´s deaths
-
-
 |[![Figure 1.](plotting/MINSA.4var.covid.gam.all.png)](https://github.com/jasb3110/COVIDPERU/blob/5377a555cd47975a35802003c1453d5f49c2335c/plotting/MINSA.4var.covid.gam.all.png?raw=true)|
 |:------------------------------------------------------:|
 |*Figure 1. MINSA's deaths  inferred for GAM: time, Molecular positivity, free ICU´s bed, and Vaccinated people*| 
 
 
+
+
 |[![Figure 2.](plotting/MINSA.gam.model.compare.all.png)](https://github.com/jasb3110/COVIDPERU/blob/5377a555cd47975a35802003c1453d5f49c2335c/plotting/MINSA.gam.model.compare.all.png?raw=true)|
 |:------------------------------------------------------:|
-|*Figure 2. MINSA's deaths  real vs MINSA's deaths  virtual inferred for GAM*| 
+|*Figure 2. MINSA's deaths  real versus MINSA's deaths  virtual inferred for GAM*| 
 
 
 
