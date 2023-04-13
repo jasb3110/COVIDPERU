@@ -1,6 +1,5 @@
 # to clean and sort Covid data-set
 
-
 ## Contents
 -   [Introduction](#introduction)
 -   [Exploratory plotting](#exploratory-plotting)
@@ -73,7 +72,7 @@ During the COVID-19 pandemic, a large number of deaths likely led to a shortage 
 
 |[![Figure .8](plotting/serie.tiempo.UCI2.png)](https://github.com/jasb3110/COVIDPERU/blob/94c2fd6b2429b4f645d293f475734a3b6690e360/plotting/serie.tiempo.UCI2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 8. free beds of ICU in percent*|
+|*Figure 8. Non-free beds of ICU in percent*|
 
 Fig. 8 shows that the percentage of available ICU´s beds is modulated by increasing/decreasing COVID-19 positivity rates, with high and low signals observed previously.
 
