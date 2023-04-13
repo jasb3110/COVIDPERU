@@ -34,7 +34,107 @@ Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) h
 ################################################################################
 #to start
 
+library("magrittr")
+library("plyr")
+library("dplyr")
+library("janitor")#paquetes que se deben instalar
+library("ggplot2")
+library("viridis")  
+library("scales")
+library("stringr")
+library("gganimate")
+library("transformr")
+library("gifski")
+library("data.table")
+library("pracma")
+library("tidyr")
+library("bestNormalize")
+library("FactoMineR")
+library("vegan")
+library("vars")
+library("forecast")
+library("mgcv")
+library("mgcViz")
+library("itsadug")
+library("visreg")
+library("gridExtra")
+library("magrittr")
+library("devtools")
+library("gamm4")
+library("tidymv")
 
+d=read.csv("d.csv",sep=",",dec=".",header=TRUE)
+
+colnames(d)=c("X","dates",                              
+              "Molecular positivity","Molecular&Antigen samples", 
+              "Serological positivity","Serological samples",                
+              "SINADEF excess of death","MINSA death",                   
+              "DIRESA & DIRIS death","DIRESA & DIRIS infected",            
+              "free ICU´s bed %",           
+              "Vaccinated-1st","Vaccinated-2nd",                      
+              "Vaccinated-3rd","Vaccinated-4th",
+              "Vaccinated-5th","Vaccinated-6th",
+              "Vaccinated-7th","Vaccinated-8th",
+              "Vaccinated-9th","Vaccinated-10th",
+              "Vaccinated-11th")
+
+#d$`Molecular positivity`[c(which(d$dates=="2022-07-26")+1):length(d$`Molecular positivity`)]=NA
+View(d)
+dd=d[1:1125,] #03-04-2023
+
+Positivity=dd[,c(3,4,5,6)]
+fallecidos=dd[,7:8]
+ICU=dd[,c(11)]*100
+vaccination=dd[,c(12:22)]
+
+tab<- data.frame(Positivity,fallecidos,ICU,vaccination)
+tab=na.omit(tab)
+gr<- c(ncol(Positivity),ncol(fallecidos),1,ncol(vaccination))
+
+
+# Compute the MFA without multiple plots
+t.mfa <- MFA(tab,
+             group = gr,
+             type = c("c","s","s","c"),
+             ncp =,
+             name.group = c("Covid infected people","Covid death","free ICU´s bed %","Covid vaccination"),
+             graph =FALSE)
+
+# Plot the results
+MFA1=plot(t.mfa,
+          choix = "axes",
+          habillage = "group",
+          shadowtext = TRUE)
+
+ggsave("AMV.dimesiones.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =MFA1)
+
+#x11();plot(
+#t.mfa,
+#choix = "ind",
+#partial = "all",
+#habillage = "group")
+
+MFA2=plot(t.mfa,
+          choix = "var",
+          habillage = "group",
+          shadowtext =TRUE)
+
+ggsave("AMV.biplot.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =MFA2)
+
+MFA3=plot(t.mfa, choix = "group")
+ggsave("AMV.grupos.png", dpi = 600,   width = 250,
+       height = 159,unit="mm",plot =MFA3)
+# Eigenvalues, scree plot and broken stick model
+#ev<- t.mfa$eig[, 1]
+#names(ev) <- paste("MFA", 1 : length(ev))
+#x11();screestick(ev, las = 3)
+
+# RV coefficients with tests (p-values above the diagonal of
+# the matrix)
+pvalue <- t.mfa$group$RV
+pvalue
 
 ################################################################################
 ```

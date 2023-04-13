@@ -98,9 +98,8 @@ Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) h
 
 ``` markdown
 ################################################################################
-memory.size(max=99999)
-setwd("~/COVID19/")#directory
 
+setwd("~/COVID19/")#directory
 
 library("magrittr")
 library("plyr")
