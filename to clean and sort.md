@@ -6,7 +6,7 @@
 -   [Natural mortality](#natural-mortality)
 -   [Covid positivity](#covid-positivy)
 -   [Covid mortality](#covid-mortality)
--   [Available bed of UCI](#available-bed-of-uci)
+-   [Available bed of ICU](#available-bed-of-uci)
 -   [Covid vaccination](#covid-vaccination)
 -   [Conclusions](#conclusions)
 -   [R code](#r-code)
@@ -66,15 +66,15 @@ Next, I examined the relationship between COVID-19 deaths and excess natural dea
 |:----------------------------------------------------------------------------:|
 |*Figure 7. Linear regression of excess of deaths versus number of COVID-19 deaths which reported by MINSA before to gap on 12th Octuber, 2022*|
 
-## Available bed of UCI
+## Available bed of ICU
 
 During the COVID-19 pandemic, a large number of deaths likely led to a shortage of intensive care unit beds, which had a detrimental effect on COVID-19 patients."Unidad de Cuidados Intensivos (UCI)" in Spanish, which translates to Intensive Care Unit (ICU) in English.
 
 |[![Figure .8](plotting/serie.tiempo.UCI2.png)](https://github.com/jasb3110/COVIDPERU/blob/94c2fd6b2429b4f645d293f475734a3b6690e360/plotting/serie.tiempo.UCI2.png?raw=true) |
 |:----------------------------------------------------------------------------:|
-|*Figure 8. free beds of UCI in percent*|
+|*Figure 8. free beds of ICU in percent*|
 
-Fig. 8 shows that the percentage of available UCI beds is modulated by increasing/decreasing COVID-19 positivity rates, with high and low signals observed previously.
+Fig. 8 shows that the percentage of available ICU´s beds is modulated by increasing/decreasing COVID-19 positivity rates, with high and low signals observed previously.
 
 ## COVID-19 vaccination
 
