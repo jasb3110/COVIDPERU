@@ -15,6 +15,7 @@ Here, I merged four groups of variables: Covid infected people, Covid death, ava
 Generalized additive model(GAM) is one best way to discover non-linear relationship between many variables. So that, I relate Covid mortality normalized how dependence variable and Time(days),Covid positivy(%), available beds of ICU(%), Covid vaccination how independence variables, [click here](https://github.com/jasb3110/COVIDPERU/blob/9ef00bc56553571b0910769353e16eba32d375ef/GAM.md).
 
 ## Source
+-   [OPENCOVID-PERÚ](https://www.tagacat.com/covid/links)
 -   [Covid vaccination](https://www.datosabiertos.gob.pe/dataset/vacunaci%C3%B3n-contra-covid-19-ministerio-de-salud-minsa)
 -   [Covid positivy](https://www.datosabiertos.gob.pe/dataset/casos-positivos-por-covid-19-ministerio-de-salud-minsa)
 -   [Covid mortality](https://www.datosabiertos.gob.pe/dataset/fallecidos-por-covid-19-ministerio-de-salud-minsa)
