@@ -63,6 +63,8 @@ library("devtools")
 library("gamm4")
 library("tidymv")
 
+setwd("~/COVID19/")#directory
+
 d=read.csv("d.csv",sep=",",dec=".",header=TRUE)
 
 colnames(d)=c("X","dates",                              
