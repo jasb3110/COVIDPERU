@@ -18,5 +18,5 @@ I merged 20 variables, including date, molecular positivity, number of samples f
 |:----------------------------------------------------------------------------:|
 |*Figure 1.Analysis factorial of COVID-19:infected people, deaths, free bed(%) and vaccinated people *|
 
-DIM1 (∼64%) is interpreted as signal of COVID-19 infected & mortality effect on people in ICU. DIM1 has the highest loading for free ICU beds %, COVID-19 deaths, and COVID-19 infected people. DIM2 (∼22%) is interpreted as a signal of COVID-19 mortality effect decreasing for vaccination. DIM2 has the highest loading for free vaccinated people, and COVID-19. deaths.
+The first principal component, DIM1, which explains approximately 64% of the variance in the data, is interpreted as a signal of the effect of COVID-19 infection and mortality on people in intensive care units (ICUs). DIM1 has the highest loading for variables such as the percentage of free ICU beds, the number of COVID-19 deaths, and the number of COVID-19 infected people. The second principal component, DIM2, which explains approximately 22% of the variance in the data, is interpreted as a signal of the decreasing effect of COVID-19 mortality due to vaccination. DIM2 has the highest loading for variables such as the number of free vaccinated people and the number of COVID-19 deaths.
 
