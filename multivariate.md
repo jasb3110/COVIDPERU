@@ -20,3 +20,22 @@ I merged 20 variables, including date, molecular positivity, number of samples f
 
 The first principal component, DIM1, which explains approximately 64% of the variance in the data, is interpreted as a signal of the effect of COVID-19 mortality on people in intensive care units (ICUs). DIM1 has the highest loading for variables such as the percentage of free ICU beds, the number of COVID-19 deaths, and the number of COVID-19 infected people. The second principal component, DIM2, which explains approximately 22% of the variance in the data, is interpreted as a signal of the decreasing effect of COVID-19 mortality due to vaccination. DIM2 has the highest loading for variables such as the number of free vaccinated people and the number of COVID-19 deaths.
 
+### Discussion
+In fig.1, it is highlighted that there is an inverse relationship between the number of COVID-19 deaths and the number of free ICU beds, as well as between COVID-19 positivity and the number of vaccinated people. This suggests that the number of COVID-19 deaths and positivity is modulated by the number of free ICU beds and vaccination, respectively. In other words, the more free ICU beds there are, the lower the number of COVID-19 deaths, and the higher the number of vaccinated people, the lower the COVID-19 positivity.
+
+### Conclusions
+
+FPCs represents 87% of data and reducing number of variables in four which allow to improve interpretation of data.
+
+## R code
+Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) here, if you consider to give opinions, suggestions and questions.
+
+``` markdown
+################################################################################
+#to start
+
+
+
+################################################################################
+```
+
