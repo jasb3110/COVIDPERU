@@ -16,7 +16,7 @@ I merged 20 variables, including date, molecular positivity, number of samples f
 ### Factorial Principal components (FPCs)
 |[![Figure .1](plotting/AMV.biplot.png)](https://github.com/jasb3110/COVIDPERU/blob/1ee55684f2eadadde76548a45d09be429252cf5f/plotting/AMV.biplot.png?raw=true)|
 |:----------------------------------------------------------------------------:|
-|*Figure 1.Analysis factorial of COVID-19:infected people, deaths, free bed(%) and vaccinated people*|
+|*Figure 1. Factorial analysis of COVID-19:infected people, deaths, free bed(%) and vaccinated people*|
 
 The first principal component, DIM1, which explains approximately 64% of the variance in the data, is interpreted as a signal of the effect of COVID-19 mortality on people in intensive care units (ICUs). DIM1 has the highest loading for variables such as the percentage of free ICU beds, the number of COVID-19 deaths, and the number of COVID-19 infected people. The second principal component, DIM2, which explains approximately 22% of the variance in the data, is interpreted as a signal of the decreasing effect of COVID-19 mortality due to vaccination. DIM2 has the highest loading for variables such as the number of free vaccinated people and the number of COVID-19 deaths.
 
@@ -25,7 +25,7 @@ In fig.1, it is highlighted that there is an inverse relationship between the nu
 
 ### Conclusions
 
-FPCs represents 87% of data and reducing number of variables in four which allow to improve interpretation of data.
+The four principal components (FPCs) account for 87% of the data variance and help to reduce the number of variables, improving the interpretation of the data.
 
 ## R code
 Bellow I attached a R-script. [Contact Us](mailto:solisbenites.jose@gmail.com) here, if you consider to give opinions, suggestions and questions.
