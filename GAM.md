@@ -36,7 +36,7 @@ In Fig. 2, I attempted to reconstruct the COVID-19 mortality rate up to the pres
 
 ## Conclusions
 
-It has been possible to successfully fit MINSA's deaths in an autoregressive GAM model.It suggests that the increase in the number of free ICU beds and the number of vaccinated people has a positive impact on the health of Peruvians and can help reduce COVID-19 mortality rates. This information could be valuable for the government in promoting vaccination campaigns and improving the healthcare infrastructure.
+It has been possible to successfully fit MINSA's deaths in an autoregressive GAM model. It suggests that the increase in the number of free ICU beds and the number of vaccinated people has a positive impact on the health of Peruvians and can help reduce COVID-19 mortality rates. This information could be valuable for the government in promoting vaccination campaigns and improving the healthcare infrastructure.
 
 ## References
 
