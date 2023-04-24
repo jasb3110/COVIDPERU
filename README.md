@@ -8,7 +8,7 @@ This part, I show that how to do in R script. my assumption is beginning date is
 Here, I merged four groups of variables: Covid infected people, Covid death, available beds oF intensive care unit (ICU) and Covid vaccination, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/multivariate.md).
 
 ## GAM model
-Generalized additive model(GAM) is one best way to discover non-linear relationship between many variables. So that, I relate Covid mortality normalized how dependence variable and Time(days),Covid positivy(%), available beds of ICU(%), Covid vaccination how independence variables, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/GAM.md).
+Generalized additive model(GAM) is one best way to discover non-linear relationship between many variables. So that, I relate Covid mortality normalized how dependence variable and Time(days),Covid positivy(%), available beds of ICU(%), Covid vaccinated people(%) how independence variables, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/GAM.md).
 
 ## Source
 -   [OPENCOVID-PERÚ](https://www.tagacat.com/covid/links)
