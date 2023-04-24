@@ -2,7 +2,7 @@
 This project is trying of improving quality and order of COVID-19 of Peru. First, I managed to order and clean conflict and bug due to fail type and others issues.
 
 ## To clean and sort
-This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 3rd April, 2023 [click here](https://github.com/jasb3110/COVIDPERU/blob/8bcb0eecec38dd7fd2cddc7d678ce8c93c8a7718/to%20clean%20and%20sort.md).
+This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 3rd April, 2023, [click here](https://github.com/jasb3110/COVIDPERU/blob/8bcb0eecec38dd7fd2cddc7d678ce8c93c8a7718/to%20clean%20and%20sort.md).
 
 ## Multivariate analyze
 Here, I merged four groups of variables, namely COVID-19 infected people, COVID-19 deaths, available beds of intensive care unit (ICU), and COVID-19 vaccinated people. This data was used as input for Factorial multivariate analysis, which is a special kind of multivariate analysis, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/multivariate.md).
