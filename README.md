@@ -5,10 +5,10 @@ This project is trying of improving quality and order of COVID-19 of Peru. First
 This part, I show that how to do in R script. my assumption is beginning date is 4th March, 2020 and last update is 3rd April, 2023 [click here](https://github.com/jasb3110/COVIDPERU/blob/7d45ce76cc625757856c1cd3a60a7890105a2756/to%20clean%20and%20sort.md).
 
 ## Multivariate analyze
-Here, I merged four groups of variables: Covid infected people, Covid death, available beds oF intensive care unit (ICU) and Covid vaccination, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/multivariate.md).
+Here, I merged four groups of variables, namely COVID-19 infected people, COVID-19 deaths, available beds of intensive care unit (ICU), and COVID-19 vaccinated people. This data was used as input for Factorial multivariate analysis, which is a special kind of multivariate analysis [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/multivariate.md).
 
 ## GAM model
-Generalized additive model(GAM) is one best way to discover non-linear relationship between many variables. So that, I relate Covid mortality normalized how dependence variable and Time(days),Covid positivy(%), available beds of ICU(%), Covid vaccinated people(%) how independence variables, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/GAM.md).
+Generalized additive model(GAM) is one best way to discover non-linear relationship between many variables. So that, I relate Covid mortality normalized how dependence variable and Time(days),COVID-19  positivy(%), available beds of ICU(%), COVID-19 vaccinated people(%) how independence variables, [click here](https://github.com/jasb3110/COVIDPERU/blob/d0ee33689df6331148b31f079913527f4aa75f55/GAM.md).
 
 ## Source
 -   [OPENCOVID-PERÚ](https://www.tagacat.com/covid/links)
