@@ -16,10 +16,7 @@ Here, I merged four groups of variables, namely COVID-19 infected people, COVID-
 Generalized additive model(GAM) is one best way to discover non-linear relationship between many variables. So that, I relate Covid mortality normalized how dependence variable and Time(days),COVID-19  positivy(%), available beds of ICU(%), COVID-19 vaccinated people(%) how independence variables, [click here](https://github.com/jasb3110/COVIDPERU/blob/68db1536a241104782918a7946672550af5740b1/GAM.md).
 
 ## Epidemiological Forecasting based on machine learning
-Epidemiological forecasting using machine learning (ML)involves using computational models to predict the spread of diseases or other health-related events. In this section, we employ ML to infer the COVID-19 mortality and excess mortality, essentially creating a COVID-19 mortality index. Our approach relies on key independent variables such as Time (days), COVID-19 Positivity (%), ICU Bed Availability (%), and COVID-19 Vaccinated Population (%). 
-
-
-[click here](https://github.com/jasb3110/COVIDPERU/blob/68db1536a241104782918a7946672550af5740b1/GAM.md).
+Epidemiological forecasting using machine learning (ML)involves using computational models to predict the spread of diseases or other health-related events. In this section, we employ ML to infer the COVID-19 mortality and excess mortality, essentially creating a COVID-19 mortality index. Our approach relies on key independent variables such as Time (days), COVID-19 Positivity (%), ICU Bed Availability (%), and COVID-19 Vaccinated Population (%),[click here](https://github.com/jasb3110/COVIDPERU/blob/8c5654ad5b542995f2b022e3eb77e7a032af4e32/COVIDPERU.ML.md).
 
 ## Source
 -   [OPENCOVID-PERÚ](https://www.tagacat.com/covid/links)
