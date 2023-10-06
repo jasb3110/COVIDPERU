@@ -1,7 +1,7 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 # COVIDPERU
 This project is trying of improving quality and order of COVID-19 of Peru. First, I managed to order and clean conflict and bug due to fail type and others issues.
