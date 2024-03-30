@@ -1,3 +1,8 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
 # to clean and sort Covid data-set
 
 ## Contents
